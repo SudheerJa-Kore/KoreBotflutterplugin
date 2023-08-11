@@ -1,0 +1,4 @@
+rootProject.name = 'botkoresdk'
+//include(":korebot")
+//include(":korebotsdklib")
+//include(":MPAndroidChart-3.1.0")
