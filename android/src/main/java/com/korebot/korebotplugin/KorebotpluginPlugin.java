@@ -52,10 +52,10 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
     this.result = result;
     if(call.method.equals("getChatWindow"))
     {
-      SDKConfiguration.Client.bot_id = "st-b7cde454-5022-5f5a-80ee-e6755849a235";
-      SDKConfiguration.Client.client_secret = "pqtjXJSDBYfKehsNdbrBPxQVXvlZIMqm8hxM5gXV724=";
-      SDKConfiguration.Client.client_id = "cs-35a729ed-028d-5428-96b4-118db6f36d52";
-      SDKConfiguration.Client.bot_name = "Huntington";
+      SDKConfiguration.Client.bot_id = "st-b9889c46-218c-58f7-838f-73ae9203488c";
+      SDKConfiguration.Client.client_secret = "5OcBSQtH/k6Q/S6A3bseYfOee02YjjLLTNoT1qZDBso=";
+      SDKConfiguration.Client.client_id = "cs-1e845b00-81ad-5757-a1e7-d0f6fea227e9";
+      SDKConfiguration.Client.bot_name = "Kore Bot";
       SDKConfiguration.Client.identity = "anilkumar.routhu@kore.com";
 
 //      BotSocketConnectionManager.getInstance().setChatListener(sListener);
