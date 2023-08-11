@@ -1,0 +1,50 @@
+PODS:
+  - Alamofire (5.0.0-rc.2)
+  - AlamofireObjectMapper (6.2.0):
+    - Alamofire (= 5.0.0-rc.2)
+    - ObjectMapper (~> 3.5.1)
+  - Flutter (1.0.0)
+  - GhostTypewriter (2.1.0)
+  - korebotplugin (0.0.1):
+    - Alamofire (~> 5.0.0-beta.5)
+    - AlamofireObjectMapper
+    - Flutter
+    - GhostTypewriter
+    - MarkdownKit
+    - Starscream
+  - MarkdownKit (1.7.1)
+  - ObjectMapper (3.5.3)
+  - Starscream (4.0.4)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - korebotplugin (from `.symlinks/plugins/korebotplugin/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireObjectMapper
+    - GhostTypewriter
+    - MarkdownKit
+    - ObjectMapper
+    - Starscream
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  korebotplugin:
+    :path: ".symlinks/plugins/korebotplugin/ios"
+
+SPEC CHECKSUMS:
+  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
+  AlamofireObjectMapper: 74d1440c92c42bbcc2b5f4dc81654ac095ec669f
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  GhostTypewriter: 62540772d227fbfe633bfa728d08fe8af5b4d805
+  korebotplugin: 6b87bb9ea8f11007c9dff1979ecabe5262541661
+  MarkdownKit: 0b15195c63cf3e39387949c4bdeccde0055e252a
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+
+PODFILE CHECKSUM: 61f7f00a6fc3467a8834161d9bd64c4c266aa465
+
+COCOAPODS: 1.11.2
