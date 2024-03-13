@@ -21,6 +21,7 @@ protocol BotMessagesViewDelegate {
     func disableComposeView(isHide: Bool)
     func populateIDFCAgentDetails(with message: KREMessage?)
     func copyTextInComposeBar(text:String)
+    func sendSlientMessageTobot(text:String)
 }
 
 class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFetchedResultsControllerDelegate {
@@ -117,8 +118,8 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
         self.tableView.register(CustomDropdownTemplateCell.self, forCellReuseIdentifier:"CustomDropdownTemplateCell")
         self.tableView.register(DetailsListTemplateCell.self, forCellReuseIdentifier:"DetailsListTemplateCell")
         self.tableView.register(SearchTemplateCell.self, forCellReuseIdentifier:"SearchTemplateCell")
-
-
+        self.tableView.register(BankingFeedbackTemplateCell.self, forCellReuseIdentifier:"BankingFeedbackTemplateCell")
+        self.tableView.register(AudioBubbleCell.self, forCellReuseIdentifier:"AudioBubbleCell")
     }
     
     override func layoutSubviews() {
@@ -169,8 +170,11 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
             case .text:
                 cellIdentifier = "TextBubbleCell"
                 break
-            case .image:
+            case .image, .video:
                 cellIdentifier = "ImageBubbleCell"
+                break
+            case .audio:
+                cellIdentifier = "AudioBubbleCell"
                 break
             case .options:
                 cellIdentifier = "OptionsBubbleCell"
@@ -295,6 +299,9 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
             case .search_template:
                 cellIdentifier = "SearchTemplateCell"
                 break
+            case .bankingFeedbackTemplate:
+                cellIdentifier = "BankingFeedbackTemplateCell"
+                break
             }
             
         }
@@ -333,7 +340,7 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
 //            }
             cell.bubbleView.drawBorder = true
             break
-        case .image:
+        case .image, .video, .audio:
             break
         case .options:
             let bubbleView: OptionsBubbleView = cell.bubbleView as! OptionsBubbleView
@@ -349,8 +356,8 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
             break
         case .list:
             let bubbleView: ListBubbleView = cell.bubbleView as! ListBubbleView
-            bubbleView.optionsAction = {[weak self] (text) in
-                self?.viewDelegate?.optionsButtonTapAction(text: text!)
+            bubbleView.optionsAction = {[weak self] (text, payload) in
+                self?.viewDelegate?.optionsButtonTapNewAction(text: text!, payload: payload ?? text!)
             }
             bubbleView.linkAction = {[weak self] (text) in
                 self?.viewDelegate?.linkButtonTapAction(urlString: text!)
@@ -693,6 +700,26 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
                 self?.viewDelegate?.linkButtonTapAction(urlString: text ?? "")
             }
             cell.bubbleView.drawBorder = true
+            break
+        case .bankingFeedbackTemplate:
+            let bubbleView: BankingFeedbackBubbleView = cell.bubbleView as! BankingFeedbackBubbleView
+            bubbleView.optionsAction = {[weak self] (text, payload) in
+                self?.viewDelegate?.optionsButtonTapNewAction(text: text ?? "", payload: payload ?? "")
+            }
+            bubbleView.optionsSlientAction = {[weak self] (payload) in
+                self?.viewDelegate?.sendSlientMessageTobot(text: payload ?? "")
+            }
+            bubbleView.linkAction = {[weak self] (text) in
+                self?.viewDelegate?.linkButtonTapAction(urlString: text ?? "")
+            }
+            cell.bubbleView.drawBorder = true
+            let firstIndexPath:NSIndexPath = NSIndexPath.init(row: rowIndex, section: 0)
+            //let secondIndexPath:NSIndexPath = NSIndexPath.init(row: 1, section: 0)
+            if firstIndexPath.isEqual(indexPath) {
+                bubbleView.maskview.isHidden = true
+            }else{
+                bubbleView.maskview.isHidden = false
+            }
             break
         }
         let firstIndexPath:NSIndexPath = NSIndexPath.init(row: 0, section: 0)

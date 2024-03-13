@@ -84,6 +84,10 @@ open class KREQuickSelectView: UIView {
     let cellHeight: CGFloat = 40.0
     let contentHeight: CGFloat = 44.0
     let prototypeCell = KRETokenCollectionViewCell()
+    public var bgColor = ""
+    public var textColor = ""
+    public var boarderColor = ""
+    public var fontName = ""
     
     public var isLaguage: String?
     public var sendQuickReplyAction: ((_ text: String?, _ payload: String?) -> Void)?
@@ -177,13 +181,14 @@ extension KREQuickSelectView: UICollectionViewDelegate, UICollectionViewDataSour
         if let cell = collectionViewCell as? KRETokenCollectionViewCell,
             let word = words?[indexPath.row] {
             cell.labelText = word.title
+            cell.labelText = word.title
             cell.imageURL = word.imageURL
-            let borderColor =  UserDefaults.standard.value(forKey: "ButtonBgColor") as? String
-            cell.layer.borderColor = UIColor.init(hexString: borderColor ?? "ff5e00").cgColor
+            cell.layer.borderColor = UIColor.init(hexString: boarderColor).cgColor
+            cell.backgroundColor = UIColor.init(hexString: bgColor)
+            cell.textColor = textColor
+            cell.fontName = fontName
             cell.layer.borderWidth = 1.5
-            cell.layer.cornerRadius = 8
-            let bgColor =  UserDefaults.standard.value(forKey: "ButtonTextColor") as? String
-            cell.backgroundColor = UIColor.init(hexString: bgColor ?? "ffffff") //.clear //kk
+            cell.layer.cornerRadius = 5
             cell.krefocused = false
             if isLaguage == "AR"{
                 cell.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -220,7 +225,7 @@ extension KREQuickSelectView: UICollectionViewDelegate, UICollectionViewDataSour
         var width: CGFloat = 1.0
         if let words = words, words.count > 0  {
             let word = words[indexPath.row]
-            width = prototypeCell.widthForCell(string: word.title, withImage: (word.imageURL?.count ?? 0 > 0), height: cellHeight) ?? 1.0
+            width = prototypeCell.widthForCell(string: word.title, withImage: (word.imageURL?.count ?? 0 > 0), height: cellHeight,fontName : fontName)
         }
         return CGSize(width: min(maxContentWidth(), width), height: cellHeight)
     }

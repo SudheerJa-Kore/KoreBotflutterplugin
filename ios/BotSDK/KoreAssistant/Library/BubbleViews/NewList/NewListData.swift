@@ -56,6 +56,14 @@ public class Componentss: NSObject, Decodable {
     public var graph_answer: SearchGraphAnswers?
     public var results: SearchResults?
     
+    public var feedbackListHeading: String?
+    public var experienceContent: [ExperienceContent]?
+    public var feedbackList: [FeedbackList]?
+    
+    public var url: String?
+    public var videoUrl: String?
+    public var audioUrl: String?
+    
     enum ColorCodeKeys: String, CodingKey {
         case template_type = "template_type"
         case text = "text"
@@ -103,6 +111,14 @@ public class Componentss: NSObject, Decodable {
         
         case graph_answer = "graph_answer"
         case results = "results"
+        
+        case url = "url"
+        case videoUrl = "videoUrl"
+        case audioUrl = "audioUrl"
+        
+        case feedbackListHeading = "feedbackListHeading"
+        case experienceContent = "experienceContent"
+        case feedbackList = "feedbackList"
     }
     
     // MARK: - init
@@ -157,6 +173,14 @@ public class Componentss: NSObject, Decodable {
         
         graph_answer = try? container.decode(SearchGraphAnswers.self, forKey: .graph_answer)
         results = try? container.decode(SearchResults.self, forKey: .results)
+        
+        url = try? container.decode(String.self, forKey: .url)
+        videoUrl = try? container.decode(String.self, forKey: .videoUrl)
+        audioUrl = try? container.decode(String.self, forKey: .audioUrl)
+        
+        feedbackListHeading = try? container.decode(String.self, forKey: .feedbackListHeading)
+        experienceContent = try? container.decode([ExperienceContent].self, forKey: .experienceContent)
+        feedbackList = try? container.decode([FeedbackList].self, forKey: .feedbackList)
     }
 }
 // MARK: - Elements
@@ -999,3 +1023,50 @@ public class WebData: NSObject, Decodable {
         page_url = try? container.decode(String.self, forKey: .page_url)
     }
 }
+
+public class ExperienceContent: NSObject, Decodable {
+    public var id: String?
+    public var value: String?
+    
+    
+    enum ColorCodeKeys: String, CodingKey {
+        case id = "id"
+        case value = "value"
+       
+    }
+    
+    // MARK: - init
+    public override init() {
+        super.init()
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ColorCodeKeys.self)
+        id = try? container.decode(String.self, forKey: .id)
+        value = try? container.decode(String.self, forKey: .value)
+    }
+}
+
+public class FeedbackList: NSObject, Decodable {
+    public var id: String?
+    public var value: String?
+    
+    
+    enum ColorCodeKeys: String, CodingKey {
+        case id = "id"
+        case value = "value"
+       
+    }
+    
+    // MARK: - init
+    public override init() {
+        super.init()
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ColorCodeKeys.self)
+        id = try? container.decode(String.self, forKey: .id)
+        value = try? container.decode(String.self, forKey: .value)
+    }
+}
+

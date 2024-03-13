@@ -293,14 +293,14 @@ extension QuickReplyWelcomeBubbleView : UICollectionViewDelegate, UICollectionVi
         
         if isQuickReplies{
             let elements = arrayOfElements[indexPath.row]
-            if elements.type == "web_url"{
+            if elements.type == "web_url" || elements.type == "url"{
                     self.linkAction?(elements.url)
             }else{
                 self.optionsAction(elements.title, elements.payload)
             }
         }else{
             let elements = arrayOfButtons[indexPath.row]
-            if elements.type == "web_url"{
+            if elements.type == "web_url" || elements.type == "url"{
                 self.linkAction?(elements.url)
             }else{
                 self.optionsAction(elements.title, elements.payload)

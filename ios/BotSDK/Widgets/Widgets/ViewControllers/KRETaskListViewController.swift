@@ -454,7 +454,7 @@ extension KRETaskListViewController: UITableViewDataSource, UITableViewDelegate 
     
     // MARK: - table view delegate methods
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        return 
+        //return 
         if showButton {
             let widgetActionViewController = KREWidgetActionViewController()
             widgetActionViewController.modalPresentationStyle = .fullScreen
@@ -466,7 +466,7 @@ extension KRETaskListViewController: UITableViewDataSource, UITableViewDelegate 
             self.present(widgetActionViewController, animated: false, completion: nil)
             return
         }
-        if var taskListItem = self.objects[indexPath.row] as? KRETaskListItem {
+        if let taskListItem = self.objects[indexPath.row] as? KRETaskListItem {
             if let status = taskListItem.status {
                 switch status.lowercased() {
                 case "close":
@@ -489,12 +489,12 @@ extension KRETaskListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        var cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
         cell?.contentView.backgroundColor = UIColor(red: 252/255, green: 234/255, blue: 236/255, alpha: 1)
     }
     
     public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        var cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
         cell?.contentView.backgroundColor = UIColor.white
     }
     

@@ -147,8 +147,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        linerProgressBar.frame = CGRect(x: 0, y: 35 , width: UIScreen.main.bounds.size.width, height:1)
-        self.view.addSubview(linerProgressBar)
+        linerProgressBar.frame = CGRect(x: 0, y: 0 , width: UIScreen.main.bounds.size.width, height:1)
+        self.headerView.addSubview(linerProgressBar)
         
         ReactNativeEventMsg = ["event_code": "USER_CANCELLED", "event_message": "User Cancelled Event Occurred"]
         
@@ -500,51 +500,69 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     
     func configureQuickReplyView() {
         
-        quickReplySuggesstionLbl = UILabel(frame: CGRect.zero)
-        quickReplySuggesstionLbl.textColor = BubbleViewBotChatTextColor
-        quickReplySuggesstionLbl.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
-        quickReplySuggesstionLbl.numberOfLines = 0
-        quickReplySuggesstionLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
-        quickReplySuggesstionLbl.isUserInteractionEnabled = true
-        quickReplySuggesstionLbl.contentMode = UIView.ContentMode.topLeft
-        quickReplySuggesstionLbl.translatesAutoresizingMaskIntoConstraints = false
-        self.quickSelectContainerView.addSubview(quickReplySuggesstionLbl)
-        quickReplySuggesstionLbl.adjustsFontSizeToFitWidth = true
-        quickReplySuggesstionLbl.backgroundColor = .clear
-        quickReplySuggesstionLbl.layer.cornerRadius = 6.0
-        quickReplySuggesstionLbl.clipsToBounds = true
-        quickReplySuggesstionLbl.sizeToFit()
-        quickReplySuggesstionLbl.text = ""
+//        quickReplySuggesstionLbl = UILabel(frame: CGRect.zero)
+//        quickReplySuggesstionLbl.textColor = BubbleViewBotChatTextColor
+//        quickReplySuggesstionLbl.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
+//        quickReplySuggesstionLbl.numberOfLines = 0
+//        quickReplySuggesstionLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        quickReplySuggesstionLbl.isUserInteractionEnabled = true
+//        quickReplySuggesstionLbl.contentMode = UIView.ContentMode.topLeft
+//        quickReplySuggesstionLbl.translatesAutoresizingMaskIntoConstraints = false
+//        self.quickSelectContainerView.addSubview(quickReplySuggesstionLbl)
+//        quickReplySuggesstionLbl.adjustsFontSizeToFitWidth = true
+//        quickReplySuggesstionLbl.backgroundColor = .clear
+//        quickReplySuggesstionLbl.layer.cornerRadius = 6.0
+//        quickReplySuggesstionLbl.clipsToBounds = true
+//        quickReplySuggesstionLbl.sizeToFit()
+//        quickReplySuggesstionLbl.text = ""
+//        
+//        self.quickReplyView = KREQuickSelectView()
+//        self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
+//        self.quickSelectContainerView.addSubview(self.quickReplyView)
+//        let views: [String: UIView] = ["quickReplySuggesstionLbl": quickReplySuggesstionLbl, "quickReplyView": quickReplyView]
+//        
+//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[quickReplyView]-15-|", options:[], metrics:nil, views:views))
+//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[quickReplySuggesstionLbl]-15-|", options:[], metrics:nil, views:views))
+//        // self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView]))
+//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplySuggesstionLbl(16)]-16-[quickReplyView]|", options:[], metrics:nil, views:views))
+//        
+//        quickReplySuggesstionLblHeightConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
+//        self.quickSelectContainerView.addConstraint(quickReplySuggesstionLblHeightConstraint)
+//        
+//        
+//        quickReplyViewTopConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .top, relatedBy: .equal, toItem: quickReplySuggesstionLbl, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+//        self.quickSelectContainerView.addConstraint(quickReplyViewTopConstraint)
+//        
+//        self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
+//            if let text = text, let payload = payload {
+//                self?.sendTextMessage(text, options: ["body": payload])
+//            }
+//        }
+//        
+//        self.quickReplyView.sendQuickReplyLinkAction = { [weak self] (url) in
+//            if let url = url {
+//                self?.linkButtonTapAction(urlString: url)
+//            }
+//        }
+//        
         
-        self.quickReplyView = KREQuickSelectView()
-        self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
-        self.quickSelectContainerView.addSubview(self.quickReplyView)
-        let views: [String: UIView] = ["quickReplySuggesstionLbl": quickReplySuggesstionLbl, "quickReplyView": quickReplyView]
-        
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[quickReplyView]-15-|", options:[], metrics:nil, views:views))
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[quickReplySuggesstionLbl]-15-|", options:[], metrics:nil, views:views))
-        // self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView]))
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplySuggesstionLbl(16)]-16-[quickReplyView]|", options:[], metrics:nil, views:views))
-        
-        quickReplySuggesstionLblHeightConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
-        self.quickSelectContainerView.addConstraint(quickReplySuggesstionLblHeightConstraint)
-        
-        
-        quickReplyViewTopConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .top, relatedBy: .equal, toItem: quickReplySuggesstionLbl, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        self.quickSelectContainerView.addConstraint(quickReplyViewTopConstraint)
-        
-        self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
-            if let text = text, let payload = payload {
-                self?.sendTextMessage(text, options: ["body": payload])
+            self.quickReplyView = KREQuickSelectView()
+            self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
+            self.quickSelectContainerView.addSubview(self.quickReplyView)
+            let bgColor = (brandingShared.brandingInfoModel?.buttonActiveBgColor) ?? "#f3f3f5"
+            let textColor = (brandingShared.brandingInfoModel?.buttonActiveTextColor) ?? "#2881DF"
+            self.quickReplyView.bgColor = bgColor
+            self.quickReplyView.textColor = textColor
+            self.quickReplyView.boarderColor = textColor
+            self.quickReplyView.fontName = mediumCustomFont
+            self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[quickReplyView]|", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView as Any]))
+            self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView as Any]))
+            
+            self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
+                if let text = text, let payload = payload {
+                    self?.sendTextMessage(text, options: ["body": payload])
+                }
             }
-        }
-        
-        self.quickReplyView.sendQuickReplyLinkAction = { [weak self] (url) in
-            if let url = url {
-                self?.linkButtonTapAction(urlString: url)
-            }
-        }
-        
         
     }
     
@@ -628,7 +646,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         self.typingStatusView?.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.typingStatusView!)
         
-        let views: [String: Any] = ["typingStatusView" : self.typingStatusView, "composeBarContainerView" : self.composeBarContainerView]
+        let views: [String: Any] = ["typingStatusView" : self.typingStatusView, "composeBarContainerView" : self.composeBarContainerView as Any]
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[typingStatusView]|", options:[], metrics:nil, views: views))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[typingStatusView(40)][composeBarContainerView]", options:[], metrics:nil, views: views))
     }
@@ -793,6 +811,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             return .details_list_template
         }else if (templateType == "search"){
             return .search_template
+        }else if (templateType == "bankingFeedbackTemplate"){
+            return .bankingFeedbackTemplate
         }
         return .text
     }
@@ -940,7 +960,49 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                         message.addComponent(optionsComponent)
                     }
                     
-                } else if (type == "error") {
+                } else if (type == "image"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let optionsComponent: Component = Component(.image)
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "message"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let  componentType = dictionary["audioUrl"] != nil ? Component(.audio) : Component(.video)
+                        let optionsComponent: Component = componentType
+                        if let speechText = dictionary["text"] as? String{
+                            ttsBody = speechText
+                        }
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "video"){
+                    
+                    if let _ = payload["payload"] as? [String: Any] {
+                        let  componentType = Component(.video)
+                        let optionsComponent: Component = componentType
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: payload)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "audio"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let  componentType = Component(.audio)
+                        let optionsComponent: Component = componentType
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "error") {
                     let dictionary: NSDictionary = payload["payload"] as! NSDictionary
                     let errorComponent: Component = Component(.error)
                     errorComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
@@ -1558,8 +1620,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     func populateQuickReplyCards(with message: KREMessage?) {
         quickreplyContainerViewTopConstraint.constant = 0.0
         quickReplySuggesstionLblHeight = 32
-        quickReplySuggesstionLblHeightConstraint.constant = 0
-        quickReplyViewTopConstraint.constant = 0
+        //quickReplySuggesstionLblHeightConstraint.constant = 0
+       // quickReplyViewTopConstraint.constant = 0
         if message?.templateType == (ComponentType.quickReply.rawValue as NSNumber) {
             let component: KREComponent = message!.components![0] as! KREComponent
             if (!component.isKind(of: KREComponent.self)) {
@@ -1579,7 +1641,12 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                 
                 for dictionary in quickReplies {
                     let title: String = (dictionary["title"] != nil ? dictionary["title"] as? String : "") ?? String(dictionary["title"] as! Int)
-                    let payload: String = (dictionary["payload"] != nil ? dictionary["payload"] as? String : "") ?? String(dictionary["payload"] as! Int)
+                    var payload = ""
+                    if let payloadStr = dictionary["payload"] as? [String: Any]{
+                        payload = payloadStr["name"] as? String ?? ""
+                    }else{
+                        payload = dictionary["payload"] as? String ?? ""
+                    }
                     let imageURL: String = (dictionary["image_url"] != nil ? dictionary["image_url"] as? String : "") ?? String(dictionary["image_url"] as! Int)
                     
                     let showMoreMessages: String = (dictionary["showMoreMessages"] != nil ? dictionary["showMoreMessages"] as? String : "") ?? String(dictionary["showMoreMessages"] as! Int)
@@ -1619,11 +1686,11 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                 }else{
                     quickReplies = jsonObject["quick_replies"] as? Array<Dictionary<String, AnyObject>> ?? []
                     if let suggestionText = jsonObject["quick_reply_title"] as? String{
-                        quickReplySuggesstionLbl.text = suggestionText
-                        quickReplySuggesstionLblHeight = 50
-                        quickReplySuggesstionLblHeightConstraint.constant = 16.0
-                        quickReplyViewTopConstraint.constant = 16.0
-                        quickreplyContainerViewTopConstraint.constant = 32.0
+//                        quickReplySuggesstionLbl.text = suggestionText
+//                        quickReplySuggesstionLblHeight = 50
+//                        quickReplySuggesstionLblHeightConstraint.constant = 16.0
+//                        quickReplyViewTopConstraint.constant = 16.0
+//                        quickreplyContainerViewTopConstraint.constant = 32.0
                     }
                 }
                 

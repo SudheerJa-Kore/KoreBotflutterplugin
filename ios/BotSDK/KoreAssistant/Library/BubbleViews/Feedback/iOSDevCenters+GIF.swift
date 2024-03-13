@@ -21,7 +21,15 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
+func getImage(url: URL, completion: @escaping (Data?) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data{
+                completion(data)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    }
 
 extension UIImage {
     
@@ -34,19 +42,32 @@ extension UIImage {
         return UIImage.animatedImageWithSource(source)
     }
     
-    public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL:URL? = URL(string: gifUrl)
-            else {
-                print("image named \"\(gifUrl)\" doesn't exist")
+    public class func gifImageWithBase64(_ base64String: String) -> UIImage? {
+            if (base64String.isEmpty) {
                 return nil
+            }else {
+                // Separation part is optional, depends on your Base64String !
+                let tempImage = base64String.components(separatedBy: ",")
+                let dataDecoded : Data = Data(base64Encoded: tempImage[0], options: .ignoreUnknownCharacters)!
+                return gifImageWithData(dataDecoded)
+            }
         }
-        guard let imageData = try? Data(contentsOf: bundleURL!) else {
-            print("image named \"\(gifUrl)\" into NSData")
-            return nil
+
+    
+    public class func gifImageWithURL(_ gifUrl:String, completion: @escaping (UIImage?) -> Void) {
+        if let bundleURL:URL = URL(string: gifUrl){
+            getImage(url: bundleURL) { imageData in
+                if let imageData = imageData{
+                    completion(gifImageWithData(imageData))
+                }else{
+                    completion(nil)
+                }
+                
+            }
+            
         }
-        
-        return gifImageWithData(imageData)
     }
+    
     
     public class func gifImageWithName(_ name: String) -> UIImage? {
         guard let bundleURL = Bundle.main
@@ -60,24 +81,6 @@ extension UIImage {
         }
         
         return gifImageWithData(imageData)
-    }
-    
-    public class func gifImageWithBase64(_ base64String: String) -> UIImage? {
-        if (base64String.isEmpty) {
-            return nil
-        }else {
-            // Separation part is optional, depends on your Base64String !
-            let tempImage = base64String.components(separatedBy: ",")
-            let dataDecoded : Data = Data(base64Encoded: tempImage[0], options: .ignoreUnknownCharacters)!
-            return gifImageWithData(dataDecoded)
-        }
-    }
-    
-    public class func gif(asset: String) -> UIImage? {
-        if let asset = NSDataAsset(name: asset) {
-            return UIImage.gifImageWithData(asset.data)
-        }
-        return nil
     }
     
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
@@ -169,16 +172,14 @@ extension UIImage {
         }
         
         let duration: Int = {
-            var sum:Double = 0
-
+            var sum = 0
+            
             for val: Int in delays {
-                let newVal =    Double(val) - (Double(val)/1.5)//Modified calculation to speed up the animtion in gif
-                //sum += val :default calculation
-                sum += newVal
+                sum += val
             }
-
-            return Int(sum)
-            }()
+            
+            return sum
+        }()
         
         let gcd = gcdForArray(delays)
         var frames = [UIImage]()

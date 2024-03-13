@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSL-rF-aUa">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="177"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ax1-By-fD4" customClass="ImageComponentView" customModule="KoreBotSDKDemo" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ax1-By-fD4" customClass="ImageComponentView" customModule="KoreBotSDK" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="177"/>
                             </imageView>
                             <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sNI-jG-ABg" userLabel="DimmingView">
@@ -32,11 +34,19 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEK-gd-URu">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="177"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ax1-By-fD4" secondAttribute="bottom" id="0bV-OK-PB9"/>
+                            <constraint firstItem="kEK-gd-URu" firstAttribute="top" secondItem="GSL-rF-aUa" secondAttribute="top" id="1j4-60-ZJv"/>
+                            <constraint firstItem="kEK-gd-URu" firstAttribute="leading" secondItem="GSL-rF-aUa" secondAttribute="leading" id="6Dt-60-wCK"/>
                             <constraint firstItem="ax1-By-fD4" firstAttribute="top" secondItem="GSL-rF-aUa" secondAttribute="top" id="8RN-vo-DVr"/>
+                            <constraint firstAttribute="bottom" secondItem="kEK-gd-URu" secondAttribute="bottom" id="ChH-Y6-9nQ"/>
+                            <constraint firstAttribute="trailing" secondItem="kEK-gd-URu" secondAttribute="trailing" id="FHc-Tb-IUB"/>
                             <constraint firstItem="jhz-61-V37" firstAttribute="centerY" secondItem="GSL-rF-aUa" secondAttribute="centerY" id="Htw-1v-2Fh"/>
                             <constraint firstAttribute="trailing" secondItem="ax1-By-fD4" secondAttribute="trailing" id="Tuj-bX-rKZ"/>
                             <constraint firstItem="sNI-jG-ABg" firstAttribute="top" secondItem="GSL-rF-aUa" secondAttribute="top" id="YBE-VU-F1h"/>
@@ -60,8 +70,14 @@
                 <outlet property="displayView" destination="GSL-rF-aUa" id="7Ov-iI-ak2"/>
                 <outlet property="imageComponent" destination="ax1-By-fD4" id="Z4K-bf-kuA"/>
                 <outlet property="plusCountLabel" destination="jhz-61-V37" id="h7u-lN-D1s"/>
+                <outlet property="videoPlayerView" destination="kEK-gd-URu" id="Yei-cr-c7l"/>
             </connections>
-            <point key="canvasLocation" x="18" y="-18"/>
+            <point key="canvasLocation" x="33.333333333333336" y="116.85267857142857"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

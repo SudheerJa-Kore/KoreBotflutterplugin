@@ -18,14 +18,15 @@ public class KRETokenCollectionViewCell: UICollectionViewCell {
                 self.label.textColor = UIColor(hex: 0x485260)
                 self.label.backgroundColor = UIColor(hex: 0x485260)
             } else {
-                self.label.font = UIFont(name: "29LTBukra-Semibold", size: 12.0)
-                let textColor =  UserDefaults.standard.value(forKey: "ButtonBgColor") as? String
-                self.label.textColor = UIColor.init(hexString: textColor ?? "ff5e00")
-                //self.label.backgroundColor = UIColor(hex: 0xEDEDEF)
+                self.label.font = UIFont(name: fontName, size: 12.0)
+                self.label.textColor = UIColor.init(hexString: textColor)
+                self.label.backgroundColor = .clear
             }
         }
     }
 
+    var textColor = ""
+    var fontName = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -84,9 +85,9 @@ public class KRETokenCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor(hex: 0xEDEDEF)
         
         let views = ["label":label!, "image":imageView!] as [String : Any]
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-4-[image]-(12)-[label]-(16)-|", options:[], metrics:nil, views:views))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-4-[image]-(8)-[label]-(12)-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[image]-4-|", options:[], metrics:nil, views:views))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label]-0-|", options:[], metrics:nil, views:views))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label]-2-|", options:[], metrics:nil, views:views))
     }
     
     override public func awakeFromNib() {
@@ -103,11 +104,11 @@ public class KRETokenCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: -
-    func widthForCell(string: String?, withImage: Bool, height: CGFloat) -> CGFloat {
-        self.label.font = UIFont(name: "29LTBukra-Semibold", size: 12.0)
+    func widthForCell(string: String?, withImage: Bool, height: CGFloat, fontName: String) -> CGFloat {
+        self.label.font = UIFont(name: fontName, size: 12.0)
         self.label.text = string
         let width = self.label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: height)).width
-        return width + 32.0 + (withImage ? 32.0 : 0.0)
+        return width + 24.0 + (withImage ? 32.0 : 0.0)
     }
 }
 

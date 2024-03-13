@@ -249,7 +249,7 @@ open class KABotClient: NSObject {
             
         }
         
-        botClient.onUserMessageReceived = { [weak self] (object) in
+        botClient.onUserMessageReceived = {  (object) in
             if let message = object["message"] as? [String:Any]{
                 if let agentTyping = message["type"] as? String{
                     if agentTyping == "typing"{
@@ -310,7 +310,7 @@ open class KABotClient: NSObject {
     }
     
     func getComponentType(_ templateType: String,_ tabledesign:String) -> ComponentType {
-        if (templateType == "quick_repliess") {
+        if (templateType == "quick_replies") {
             return .quickReply
         } else if (templateType == "buttonn") {
             return .options
@@ -341,7 +341,7 @@ open class KABotClient: NSObject {
         else if (templateType == "daterange" || templateType == "dateTemplate") {
             return .calendarView
         }
-        else if (templateType == "quick_replies_welcome" || templateType == "button" || templateType == "quick_replies"){
+        else if (templateType == "quick_replies_welcome" || templateType == "button" || templateType == "quick_repliess"){
             return .quick_replies_welcome
         }
         else if (templateType == "Notification") {
@@ -410,6 +410,8 @@ open class KABotClient: NSObject {
             return .details_list_template
         }else if (templateType == "search"){
             return .search_template
+        }else if (templateType == "bankingFeedbackTemplate"){
+            return .bankingFeedbackTemplate
         }
         return .text
     }
@@ -475,9 +477,6 @@ open class KABotClient: NSObject {
             case "text":
                 if let payload = componentModel.payload as? [String: Any],
                    let text = payload["text"] as? String {
-                    //                    if text == "Login Form is successfully submitted."{ 
-                    //                        text = "Thank you!"
-                    //                    }
                     let textComponent = Component()
                     textComponent.payload = text
                     ttsBody = text
@@ -519,6 +518,16 @@ open class KABotClient: NSObject {
                     }
                     
                     return (message, ttsBody)
+                }
+            case "image":
+                if let payload = componentModel.payload as? [String: Any] {
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let optionsComponent: Component = Component(.image)
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                        return (message, ttsBody)
+                    }
                 }
             case "template":
                 if let payload = componentModel.payload as? [String: Any] {
@@ -720,6 +729,40 @@ open class KABotClient: NSObject {
                                 }
                             }
                             
+                        }
+                    case "image":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let optionsComponent: Component = Component(.image)
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "message":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let  componentType = dictionary["audioUrl"] != nil ? Component(.audio) : Component(.video)
+                            let optionsComponent: Component = componentType
+                            if let speechText = dictionary["text"] as? String{
+                                ttsBody = speechText
+                            }
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "video":
+                        if let _ = payload["payload"] as? [String: Any] {
+                            let  componentType = Component(.video)
+                            let optionsComponent: Component = componentType
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: payload)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "audio":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let  componentType = Component(.audio)
+                            let optionsComponent: Component = componentType
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
                         }
                     case "error":
                         if let dictionary = payload["payload"] as? [String: Any] {

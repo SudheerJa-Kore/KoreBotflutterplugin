@@ -49,7 +49,7 @@ var customDropDownSeletct = ""
 
 var isSpeakingEnabled = false
 var selectedTheme = "Theme 1"
-public var mediumCustomFont = UIFont(name: "Gilroy-Medium", size: 17.0)
+
 
 let userColor: UIColor = UIColor(red: 38 / 255.0, green: 52 / 255.0, blue: 74 / 255.0, alpha: 1)
 let botColor: UIColor = UIColor(red: 237 / 255.0, green: 238 / 255.0, blue: 241 / 255.0, alpha: 1)
@@ -121,6 +121,12 @@ var randomID  = String(format: "email%ld%@", date.timeIntervalSince1970, "@domai
 var recentSearchArray = [String]()
 
 var customDropDownShowText = false
+
+var regularCustomFont = "HelveticaNeue"
+var mediumCustomFont = "HelveticaNeue-Medium"
+var boldCustomFont = "HelveticaNeue-Bold"
+var semiBoldCustomFont = "HelveticaNeue-Semibold"
+var italicCustomFont =  "HelveticaNeue-Italic"
 
 var frameworkBundle:Bundle? {
     let bundleId = "com.kore.rtc"

@@ -49,6 +49,11 @@
 		95A5FF0A272C2B8100CC3F13 /* InfoTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A5FF08272C2B8100CC3F13 /* InfoTableviewCell.swift */; };
 		95A9A50728E57F9200E4FA14 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9A50628E57F9200E4FA14 /* LanguageViewController.swift */; };
 		95A9A50B28E57FCA00E4FA14 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9A50A28E57FCA00E4FA14 /* LeftMenuCell.swift */; };
+		95B4F83B2BA06ED900417FDF /* CustomFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F8342BA06ED900417FDF /* CustomFeedbackViewController.swift */; };
+		95B4F83C2BA06ED900417FDF /* CustomFeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F8352BA06ED900417FDF /* CustomFeedbackCell.swift */; };
+		95B4F83D2BA06ED900417FDF /* BankingFeedbackBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F8362BA06ED900417FDF /* BankingFeedbackBubbleView.swift */; };
+		95B4F83E2BA06ED900417FDF /* BankingFeedbackExpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F8392BA06ED900417FDF /* BankingFeedbackExpCell.swift */; };
+		95B4F83F2BA06ED900417FDF /* BankingFeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F83A2BA06ED900417FDF /* BankingFeedbackCell.swift */; };
 		95B6193F2A52D4AD000AD9F1 /* SearchBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B6193D2A52D4AD000AD9F1 /* SearchBubbleView.swift */; };
 		95B619402A52D4AD000AD9F1 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B6193E2A52D4AD000AD9F1 /* SearchListCell.swift */; };
 		95C7C6BC28A3BE9800D3655E /* SalaamElemetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C7C6B728A3BE9300D3655E /* SalaamElemetsCell.swift */; };
@@ -465,6 +470,15 @@
 		95A9A50928E57FC900E4FA14 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuCell.xib; sourceTree = "<group>"; };
 		95A9A50A28E57FCA00E4FA14 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		95AFEA722A0CC26E00AE465D /* KoreBotSdk.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KoreBotSdk.xcassets; sourceTree = "<group>"; };
+		95B4F8322BA06ED900417FDF /* CustomFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomFeedbackViewController.xib; sourceTree = "<group>"; };
+		95B4F8332BA06ED900417FDF /* CustomFeedbackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomFeedbackCell.xib; sourceTree = "<group>"; };
+		95B4F8342BA06ED900417FDF /* CustomFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFeedbackViewController.swift; sourceTree = "<group>"; };
+		95B4F8352BA06ED900417FDF /* CustomFeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFeedbackCell.swift; sourceTree = "<group>"; };
+		95B4F8362BA06ED900417FDF /* BankingFeedbackBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankingFeedbackBubbleView.swift; sourceTree = "<group>"; };
+		95B4F8372BA06ED900417FDF /* BankingFeedbackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankingFeedbackCell.xib; sourceTree = "<group>"; };
+		95B4F8382BA06ED900417FDF /* BankingFeedbackExpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankingFeedbackExpCell.xib; sourceTree = "<group>"; };
+		95B4F8392BA06ED900417FDF /* BankingFeedbackExpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankingFeedbackExpCell.swift; sourceTree = "<group>"; };
+		95B4F83A2BA06ED900417FDF /* BankingFeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankingFeedbackCell.swift; sourceTree = "<group>"; };
 		95B6193C2A52D4AD000AD9F1 /* SearchListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchListCell.xib; sourceTree = "<group>"; };
 		95B6193D2A52D4AD000AD9F1 /* SearchBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBubbleView.swift; sourceTree = "<group>"; };
 		95B6193E2A52D4AD000AD9F1 /* SearchListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
@@ -1124,6 +1138,22 @@
 			path = DotsView;
 			sourceTree = "<group>";
 		};
+		95B4F8312BA06ED900417FDF /* BankingFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				95B4F8322BA06ED900417FDF /* CustomFeedbackViewController.xib */,
+				95B4F8332BA06ED900417FDF /* CustomFeedbackCell.xib */,
+				95B4F8342BA06ED900417FDF /* CustomFeedbackViewController.swift */,
+				95B4F8352BA06ED900417FDF /* CustomFeedbackCell.swift */,
+				95B4F8362BA06ED900417FDF /* BankingFeedbackBubbleView.swift */,
+				95B4F8372BA06ED900417FDF /* BankingFeedbackCell.xib */,
+				95B4F8382BA06ED900417FDF /* BankingFeedbackExpCell.xib */,
+				95B4F8392BA06ED900417FDF /* BankingFeedbackExpCell.swift */,
+				95B4F83A2BA06ED900417FDF /* BankingFeedbackCell.swift */,
+			);
+			path = BankingFeedback;
+			sourceTree = "<group>";
+		};
 		95B6193B2A52D476000AD9F1 /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1392,6 +1422,7 @@
 		D19298A6270444D7000257D5 /* BubbleViews */ = {
 			isa = PBXGroup;
 			children = (
+				95B4F8312BA06ED900417FDF /* BankingFeedback */,
 				D19298A7270444D7000257D5 /* Options */,
 				D19298A9270444D7000257D5 /* TableList */,
 				D19298AC270444D7000257D5 /* List Widget */,
@@ -2558,6 +2589,7 @@
 				D1929B6A27049B14000257D5 /* KREDriveFileTemplateView.swift in Sources */,
 				95A9A50B28E57FCA00E4FA14 /* LeftMenuCell.swift in Sources */,
 				D1929AD227049B13000257D5 /* NSManagedObject+JSON.swift in Sources */,
+				95B4F83D2BA06ED900417FDF /* BankingFeedbackBubbleView.swift in Sources */,
 				D1929B6127049B14000257D5 /* KRESummaryWidgetViewCell.swift in Sources */,
 				D1929994270444D8000257D5 /* KoraNotification.swift in Sources */,
 				D1929B4027049B13000257D5 /* KRECalendarWidgetViewCell.swift in Sources */,
@@ -2653,6 +2685,7 @@
 				D1929985270444D8000257D5 /* MultiSelectNewBubbleView.swift in Sources */,
 				D1929977270444D8000257D5 /* QuickRepliesData.swift in Sources */,
 				D1929B5C27049B14000257D5 /* KREWidgetView.swift in Sources */,
+				95B4F83B2BA06ED900417FDF /* CustomFeedbackViewController.swift in Sources */,
 				D1929969270444D8000257D5 /* ListViewDetailsViewController.swift in Sources */,
 				D1929988270444D8000257D5 /* CalenderViewController.swift in Sources */,
 				D1929ADB27049B13000257D5 /* KREImagesCollectionView.swift in Sources */,
@@ -2674,6 +2707,7 @@
 				D1929971270444D8000257D5 /* FeedbackBubbleView.swift in Sources */,
 				D1929B5F27049B14000257D5 /* KREMeetingNotesView.swift in Sources */,
 				D1929AE527049B13000257D5 /* KREKnowledgeElementViewCell.swift in Sources */,
+				95B4F83E2BA06ED900417FDF /* BankingFeedbackExpCell.swift in Sources */,
 				D1929AD627049B13000257D5 /* KRETokenCollectionViewCell.swift in Sources */,
 				D192999B270444D8000257D5 /* ChatMessagesViewController+Widgets.swift in Sources */,
 				D1929B0E27049B13000257D5 /* KREBarChartData.swift in Sources */,
@@ -2717,6 +2751,7 @@
 				D1929B7127049B14000257D5 /* KREDriveListViewController.swift in Sources */,
 				D1929AE027049B13000257D5 /* KRECarouselView.swift in Sources */,
 				D1929AEA27049B13000257D5 /* KREDriveFileElementViewCell.swift in Sources */,
+				95B4F83C2BA06ED900417FDF /* CustomFeedbackCell.swift in Sources */,
 				D1929987270444D8000257D5 /* CalenderBubbleView.swift in Sources */,
 				D1929967270444D8000257D5 /* NewListTableViewCell.swift in Sources */,
 				D1929B6B27049B14000257D5 /* KREKnowledgeTemplateView.swift in Sources */,
@@ -2896,6 +2931,7 @@
 				D1929B5627049B13000257D5 /* KREWidgetNoDataTableViewCell.swift in Sources */,
 				D192997D270444D8000257D5 /* TableBubbleView.swift in Sources */,
 				D1929B7727049B14000257D5 /* KREWidgetsViewController.swift in Sources */,
+				95B4F83F2BA06ED900417FDF /* BankingFeedbackCell.swift in Sources */,
 				D1929979270444D8000257D5 /* ResponsiveTableBubbleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -61,7 +61,7 @@ class CongratulationsBubbleView: BubbleView {
         
         //Base64 Image
         let base64GifImage = ""
-        let jeremyGif = UIImage.gifImageWithBase64(base64GifImage)
+        let jeremyGif = UIImage()// UIImage.gifImageWithBase64(base64GifImage)
         
         gifImgV.image = jeremyGif
         gifImgV.contentMode = .scaleAspectFill

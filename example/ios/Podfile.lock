@@ -14,7 +14,7 @@ PODS:
     - Starscream
   - MarkdownKit (1.7.1)
   - ObjectMapper (3.5.3)
-  - Starscream (4.0.4)
+  - Starscream (4.0.6)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -43,7 +43,7 @@ SPEC CHECKSUMS:
   korebotplugin: 6b87bb9ea8f11007c9dff1979ecabe5262541661
   MarkdownKit: 0b15195c63cf3e39387949c4bdeccde0055e252a
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
-  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  Starscream: fb2c4510bebf908c62bd383bcf05e673720e91fd
 
 PODFILE CHECKSUM: 61f7f00a6fc3467a8834161d9bd64c4c266aa465
 

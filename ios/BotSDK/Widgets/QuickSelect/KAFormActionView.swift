@@ -210,7 +210,7 @@ public class KAFormActionView: UIView, UICollectionViewDelegate, UICollectionVie
     // MARK: - UICollectionViewDelegateContactFlowLayout
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let formAction = formActionList[(indexPath as NSIndexPath).row]
-        let widthForItem: CGFloat = self.prototypeCell.widthForCell(string: formAction.title!, withImage: false, height: cellHeight)
+        let widthForItem: CGFloat = self.prototypeCell.widthForCell(string: formAction.title!, withImage: false, height: cellHeight, fontName : regularCustomFont)
         return CGSize(width: min(self.maxContentWidth(), widthForItem), height: cellHeight)
     }
     

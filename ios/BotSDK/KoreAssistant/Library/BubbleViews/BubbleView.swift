@@ -65,9 +65,13 @@ class BubbleView: UIView {
         case .text:
             bubbleView = TextBubbleView()
             break
-        case .image:
+        case .image, .video:
             let bundle = KREResourceLoader.shared.resourceBundle()
             bubbleView = bundle.loadNibNamed("MultiImageBubbleView", owner: self, options: nil)![0] as? BubbleView
+            break
+        case .audio:
+            let bundle = KREResourceLoader.shared.resourceBundle()
+            bubbleView =  bundle.loadNibNamed("AudioBubbleView", owner: self, options: nil)![0] as? BubbleView
             break
         case .options:
             bubbleView = OptionsBubbleView()
@@ -195,6 +199,9 @@ class BubbleView: UIView {
             break
         case .search_template:
             bubbleView = SearchBubbleView()
+            break
+        case .bankingFeedbackTemplate:
+            bubbleView = BankingFeedbackBubbleView()
             break
         }
         bubbleView.bubbleType = bubbleType

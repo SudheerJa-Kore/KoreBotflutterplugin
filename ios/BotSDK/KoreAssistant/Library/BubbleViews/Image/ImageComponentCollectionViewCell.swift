@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 class ImageComponentView : UIImageView {
 
@@ -42,11 +44,26 @@ class ImageComponentCollectionViewCell : UICollectionViewCell {
     @IBOutlet weak var plusCountLabel: UILabel!
     @IBOutlet weak var dimmingView: UIView!
     @IBOutlet weak var displayView: UIView!
+    @IBOutlet weak var videoPlayerView: UIView!
+    
+    lazy var menuBtn: UIButton = {
+    let menuBtn = UIButton(frame: CGRect(x: 60, y: 8, width: 45, height: 30))
+    menuBtn.backgroundColor = .black
+    menuBtn.alpha = 0.4
+    menuBtn.layer.cornerRadius = 5.0
+    menuBtn.setImage(UIImage(named: "more"), for: .normal)
+    
+    menuBtn.imageEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+    return menuBtn
+    }()
+    
+    var player: AVPlayer!
+    var playerViewController: AVPlayerViewController!
     
     var index: NSNumber!
     var component: Component! {
         didSet {
-            self.imageComponent.setupImageView(component) { 
+            self.imageComponent.setupImageView(component) {
                 
             }
             self.backgroundColor = UIColor.clear
@@ -83,5 +100,9 @@ class ImageComponentCollectionViewCell : UICollectionViewCell {
         self.plusCountLabel.isHidden = true
         self.dimmingView.isHidden = true
         self.displayView.isHidden = false
+        
+       //player
+       // playerViewController
+        
     }
 }

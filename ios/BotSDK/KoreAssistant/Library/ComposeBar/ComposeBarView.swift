@@ -154,8 +154,8 @@ class ComposeBarView: UIView {
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[growingTextView]-8-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[sendButton]-12-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[menuButton]-12-|", options:[], metrics:nil, views:views))
-        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton, attribute: .centerY, relatedBy: .equal, toItem: self.speechToTextButton, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton, attribute: .height, relatedBy: .equal, toItem: self.speechToTextButton, attribute: .height, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton as Any, attribute: .centerY, relatedBy: .equal, toItem: self.speechToTextButton as Any, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton as Any, attribute: .height, relatedBy: .equal, toItem: self.speechToTextButton as Any, attribute: .height, multiplier: 1.0, constant: 0.0))
         self.speechToTextButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
         self.speechToTextButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
         self.speechToTextButton.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
@@ -243,12 +243,10 @@ class ComposeBarView: UIView {
         //self.sendButton.isEnabled = hasText //kk
         if hasText{
             topLineView.backgroundColor = .black
-            var sendImage = UIImage.init(named: "")
+            var sendImage = UIImage.init(named: "sendS")
             if preferred_language_Type == preferredLanguage{
-                //self.sendButton.setImage(UIImage(named: "SendSAr", in: bundle, compatibleWith: nil), for: .normal)
                  sendImage = UIImage(named: "SendSAr", in: bundle, compatibleWith: nil)
             }else{
-                //self.sendButton.setImage(UIImage(named: "sendS", in: bundle, compatibleWith: nil), for: .normal)
                  sendImage = UIImage(named: "sendS", in: bundle, compatibleWith: nil)
             }
             let tintedsendImage = sendImage?.withRenderingMode(.alwaysTemplate)
@@ -261,7 +259,7 @@ class ComposeBarView: UIView {
             if preferred_language_Type == preferredLanguage{
                 self.sendButton.setImage(UIImage(named: "sendAr", in: bundle, compatibleWith: nil), for: .normal)
             }else{
-            self.sendButton.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
+                self.sendButton.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
             }
         }
         
