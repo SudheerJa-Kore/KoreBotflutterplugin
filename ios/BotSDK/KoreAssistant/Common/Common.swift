@@ -57,7 +57,7 @@ let botColor: UIColor = UIColor(red: 237 / 255.0, green: 238 / 255.0, blue: 241 
 let defaultLoaderColorStr = "#26344A"
 var themeColor: UIColor = UIColor.init(hexString: defaultLoaderColorStr)
 var textlinkColor: UIColor = UIColor.init(hexString: "#591efd")
-var reciverIcon:String?
+var botHistoryIcon:String?
 
 var uniqueUserId: String?
 var userInfoUserId: String?
@@ -169,6 +169,8 @@ var sessionHardExpiryGraceTime = 0
 var isOTPValidationTemplate = false
 var OTPValidationRemoveCount = 0
 var customDropDownText = ""
+
+
 
 open class Common : NSObject {
     public static func UIColorRGB(_ rgb: Int) -> UIColor {

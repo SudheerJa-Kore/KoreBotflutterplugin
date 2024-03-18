@@ -646,8 +646,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         self.typingStatusView?.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.typingStatusView!)
         
-        let views: [String: Any] = ["typingStatusView" : self.typingStatusView, "composeBarContainerView" : self.composeBarContainerView as Any]
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[typingStatusView]|", options:[], metrics:nil, views: views))
+        let views: [String: Any] = ["typingStatusView" : self.typingStatusView as Any, "composeBarContainerView" : self.composeBarContainerView as Any]
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[typingStatusView]", options:[], metrics:nil, views: views)) //-20
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[typingStatusView(40)][composeBarContainerView]", options:[], metrics:nil, views: views))
     }
     
@@ -1958,9 +1958,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         let botId:String = "u-40d2bdc2-822a-51a2-bdcd-95bdf4po8331c9";
         let info:NSMutableDictionary = NSMutableDictionary.init()
         info.setValue(botId, forKey: "botId");
-        info.setValue("kora", forKey: "imageName");
-        self.typingStatusView?.isLanguage = default_language
-        self.typingStatusView?.addTypingStatus(forContact: info, forTimeInterval: 2.0)
+        info.setValue("kore", forKey: "imageName");
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     // MARK: show TableTemplateView
@@ -2387,13 +2386,13 @@ extension ChatMessagesViewController {
 }
 extension ChatMessagesViewController: KABotClientDelegate {
     func showTypingStatusForBot() {
-        self.typingStatusView?.addTypingStatus(forContact: [:], forTimeInterval: 0.5)
+        self.typingStatusView?.isHidden = true
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     // MARK: - KABotlientDelegate methods
     open func botConnection(with connectionState: BotClientConnectionState) {
         updateNavBarPrompt()
-        
     }
     
     @objc func startTypingStatusForBot() {
@@ -2404,11 +2403,11 @@ extension ChatMessagesViewController: KABotClientDelegate {
         let urlString = brandingShared.brandingInfoModel?.bankLogo
         info.setValue(urlString ?? "kora", forKey: "imageName");
         self.typingStatusView?.isLanguage = default_language
-        self.typingStatusView?.addTypingStatus(forContact: info, forTimeInterval: 0.5)
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     @objc func stopTypingStatusForBot(){
-        self.typingStatusView?.timerFired(toRemoveTypingStatus: nil)
+        self.typingStatusView?.stopTypingStatus()
     }
 }
 // MARK: - requests

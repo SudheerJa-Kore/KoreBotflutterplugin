@@ -456,7 +456,7 @@ open class KABotClient: NSObject {
         
         if let iconUrl = object?.iconUrl {
             message.iconUrl = iconUrl
-            //reciverIcon = iconUrl
+            botHistoryIcon = iconUrl
         }
         
         if let fromAgent = object?.fromAgent, fromAgent == true{
@@ -1008,7 +1008,7 @@ open class KABotClient: NSObject {
         //getHistory - fetch all the history that the bot has previously
         botClient.getHistory(offset: offset, limit: limit, success: { [weak self] (responseObj) in
             if let responseObject = responseObj as? [String: Any], let messages = responseObject["messages"] as? Array<[String: Any]> {
-                //self?.insertOrUpdateHistoryMessages(messages)
+                botHistoryIcon = responseObject["icon"] as? String
                 print("History messges \(messages.count) \(messages)")
                 let reverse: Array<[String: Any]> = messages.reversed()
                 if showWelcomeMsg != "Yes"{
