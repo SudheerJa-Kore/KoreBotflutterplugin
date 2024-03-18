@@ -668,8 +668,9 @@ class BotMessagesView: UIView, UITableViewDelegate, UITableViewDataSource, KREFe
             }
             break
         case .boldtextTemplate:
-            let _: BoldTextBubbleView = cell.bubbleView as! BoldTextBubbleView
+            let bubbleView: BoldTextBubbleView = cell.bubbleView as! BoldTextBubbleView
             cell.bubbleView.drawBorder = true
+            self.textViewLinkDetection(textLabel: bubbleView.titleLbl)
             break
         case .emptyBubbleTemplate:
           isQuickReply = true

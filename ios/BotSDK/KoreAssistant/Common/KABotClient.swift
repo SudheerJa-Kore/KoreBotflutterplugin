@@ -503,7 +503,7 @@ open class KABotClient: NSObject {
                     
                     let string = text
                     let character: Character = "*"
-                    if string.contains(character) {
+                    if string.contains(character) ||  string.contains("http"){
                         print("\(string) contains \(character)")
                         if message.messageType == .default{
                             message.addComponent(textComponent)
