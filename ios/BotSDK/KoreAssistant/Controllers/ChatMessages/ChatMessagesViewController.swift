@@ -1392,7 +1392,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view?.isDescendant(of: botMessagesView.tableView) == true || touch.view?.isDescendant(of: leftMenuView.tableView) == true{
+        if touch.view?.isDescendant(of: botMessagesView.tableView) == true || touch.view?.isDescendant(of: leftMenuView.tableView) == true || touch.view?.isDescendant(of: quickReplyView) == true{
             return false
         }
         return true
