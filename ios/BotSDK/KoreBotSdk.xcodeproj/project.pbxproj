@@ -151,9 +151,6 @@
 		D192999B270444D8000257D5 /* ChatMessagesViewController+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1929918270444D7000257D5 /* ChatMessagesViewController+Widgets.swift */; };
 		D192999C270444D8000257D5 /* KAPanelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1929919270444D7000257D5 /* KAPanelHeaderView.swift */; };
 		D192999E270444D8000257D5 /* InputTOWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192991E270444D7000257D5 /* InputTOWebViewController.swift */; };
-		D192999F270444D8000257D5 /* KRETypingActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = D1929920270444D7000257D5 /* KRETypingActivityIndicator.m */; };
-		D19299A0270444D8000257D5 /* KRETypingStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1929924270444D7000257D5 /* KRETypingStatusView.m */; };
-		D19299A1270444D8000257D5 /* KRETypingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1929925270444D7000257D5 /* KRETypingCollectionViewCell.m */; };
 		D19299A2270444D8000257D5 /* BotMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1929928270444D7000257D5 /* BotMessagesView.swift */; };
 		D19299A4270444D8000257D5 /* MessageBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192992A270444D7000257D5 /* MessageBubbleCell.swift */; };
 		D19299A5270444D8000257D5 /* BrandingSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D192992D270444D7000257D5 /* BrandingSingleton.swift */; };
@@ -600,13 +597,6 @@
 		D1929919270444D7000257D5 /* KAPanelHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KAPanelHeaderView.swift; sourceTree = "<group>"; };
 		D192991A270444D7000257D5 /* ChatMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessagesViewController.xib; sourceTree = "<group>"; };
 		D192991E270444D7000257D5 /* InputTOWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTOWebViewController.swift; sourceTree = "<group>"; };
-		D1929920270444D7000257D5 /* KRETypingActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRETypingActivityIndicator.m; sourceTree = "<group>"; };
-		D1929921270444D7000257D5 /* KRETypingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KRETypingCollectionViewCell.xib; sourceTree = "<group>"; };
-		D1929922270444D7000257D5 /* KRETypingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRETypingCollectionViewCell.h; sourceTree = "<group>"; };
-		D1929923270444D7000257D5 /* KRETypingStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRETypingStatusView.h; sourceTree = "<group>"; };
-		D1929924270444D7000257D5 /* KRETypingStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRETypingStatusView.m; sourceTree = "<group>"; };
-		D1929925270444D7000257D5 /* KRETypingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRETypingCollectionViewCell.m; sourceTree = "<group>"; };
-		D1929926270444D7000257D5 /* KRETypingActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRETypingActivityIndicator.h; sourceTree = "<group>"; };
 		D1929928270444D7000257D5 /* BotMessagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotMessagesView.swift; sourceTree = "<group>"; };
 		D192992A270444D7000257D5 /* MessageBubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageBubbleCell.swift; sourceTree = "<group>"; };
 		D192992D270444D7000257D5 /* BrandingSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandingSingleton.swift; sourceTree = "<group>"; };
@@ -1692,13 +1682,6 @@
 		D192991F270444D7000257D5 /* TypingStatus */ = {
 			isa = PBXGroup;
 			children = (
-				D1929920270444D7000257D5 /* KRETypingActivityIndicator.m */,
-				D1929921270444D7000257D5 /* KRETypingCollectionViewCell.xib */,
-				D1929922270444D7000257D5 /* KRETypingCollectionViewCell.h */,
-				D1929923270444D7000257D5 /* KRETypingStatusView.h */,
-				D1929924270444D7000257D5 /* KRETypingStatusView.m */,
-				D1929925270444D7000257D5 /* KRETypingCollectionViewCell.m */,
-				D1929926270444D7000257D5 /* KRETypingActivityIndicator.h */,
 			);
 			path = TypingStatus;
 			sourceTree = "<group>";
@@ -2706,7 +2689,6 @@
 				D1929B3527049B13000257D5 /* KREChartWidgetView.swift in Sources */,
 				D1929B5027049B13000257D5 /* KREWidgetComponentView.swift in Sources */,
 				D1929B2627049B13000257D5 /* UIFont+Constants.swift in Sources */,
-				D19299A1270444D8000257D5 /* KRETypingCollectionViewCell.m in Sources */,
 				95F3304F2760621B00AF9312 /* ServiceListBubbleView.swift in Sources */,
 				D1929B2127049B13000257D5 /* KREDeepLinkingUtility.swift in Sources */,
 				D1929B5A27049B14000257D5 /* KRECustomWidgetDashboardTableViewCell.swift in Sources */,
@@ -2745,14 +2727,12 @@
 				959C16BA28ABC3DB008751C8 /* ButtonLinkNCell.swift in Sources */,
 				D1929B7827049B14000257D5 /* KREMeetingDetailsTableViewCell.swift in Sources */,
 				D1929AD827049B13000257D5 /* KRECollectionView.swift in Sources */,
-				D19299A0270444D8000257D5 /* KRETypingStatusView.m in Sources */,
 				D1929B2227049B13000257D5 /* UIViewController+KoreBotSDK.swift in Sources */,
 				D1929B7927049B14000257D5 /* KREMeetingNotesWidgetViewController.swift in Sources */,
 				D1929B8327049B14000257D5 /* UITextView+SLKAdditions.m in Sources */,
 				D1929B6F27049B14000257D5 /* KREWidgetActionViewController.swift in Sources */,
 				D1929AF727049B13000257D5 /* KREListItemView.swift in Sources */,
 				D1929B4F27049B13000257D5 /* KALoginPanelViewController.swift in Sources */,
-				D192999F270444D8000257D5 /* KRETypingActivityIndicator.m in Sources */,
 				D1929B3F27049B13000257D5 /* KREUtterancesListWidgetViewCell.swift in Sources */,
 				95F330632760627600AF9312 /* ButtonLinkCell.swift in Sources */,
 				D1929B8527049B14000257D5 /* KREGrowingTextView.swift in Sources */,
