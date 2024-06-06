@@ -60,9 +60,9 @@ class FeedbackSliderViewController: UIViewController, UITextViewDelegate {
         descriptionTextView.textColor = UIColor.lightGray
         
         floatRatingView.backgroundColor = .clear
-        floatRatingView.delegate = self
+        //floatRatingView.delegate = self
         floatRatingView.contentMode = UIView.ContentMode.scaleAspectFit
-        floatRatingView.type = .wholeRatings
+        //floatRatingView.type = .wholeRatings
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatMessagesViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatMessagesViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -204,10 +204,10 @@ extension FeedbackSliderViewController : UICollectionViewDelegate, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customCellIdentifier, for: indexPath) as! FeedbackCell
         cell.backgroundColor = .clear
         if indexPath.item == selectedEmojiIndex{
-            let jeremyGif = UIImage.gifImageWithName("ratingselect_\(indexPath.item+1)")
+            let jeremyGif = UIImage(named: "ratingselect_\(indexPath.item+1)", in: bundle, compatibleWith: nil)
             cell.imageView.image = jeremyGif
         }else{
-            cell.imageView.image = UIImage(named: "rating_\(indexPath.item+1)")
+            cell.imageView.image = UIImage(named: "rating_\(indexPath.item+1)", in: bundle, compatibleWith: nil)
         }
         return cell
     }

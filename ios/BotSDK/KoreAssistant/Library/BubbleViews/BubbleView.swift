@@ -14,14 +14,14 @@ enum BubbleMaskTailPosition : Int {
 
 let brandingShared = BrandingSingleton.shared
 
-var BubbleViewRightTint: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.userchatBgColor) ?? "#37474f")
-//var BubbleViewLeftTint: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.botchatBgColor) ?? "#fce9e6")
+var BubbleViewRightTint: UIColor = UIColor.init(hexString: (brandingShared.userchatBgColor) ?? "#37474f")
+//var BubbleViewLeftTint: UIColor = UIColor.init(hexString: (brandingShared.botchatBgColor) ?? "#fce9e6")
 var BubbleViewLeftTint: UIColor = UIColor.init(hexString: secondaryColor) 
-var BubbleViewUserChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.userchatTextColor) ?? "#000000")
-var BubbleViewBotChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.botchatTextColor) ?? "#313131")
-var bubbleViewBotChatButtonTextColor: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.buttonActiveTextColor) ?? "#ffffff")
-var bubbleViewBotChatButtonBgColor: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.buttonActiveBgColor) ?? "#ff5e00")
-var bubbleViewBotChatButtonInactiveTextColor: UIColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.buttonInactiveTextColor) ?? "#ff5e00")
+var BubbleViewUserChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.userchatTextColor) ?? "#000000")
+var BubbleViewBotChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.botchatTextColor) ?? "#313131")
+var bubbleViewBotChatButtonTextColor: UIColor = UIColor.init(hexString: (brandingShared.buttonActiveTextColor) ?? "#ffffff")
+var bubbleViewBotChatButtonBgColor: UIColor = UIColor.init(hexString: (brandingShared.buttonActiveBgColor) ?? "#ff5e00")
+var bubbleViewBotChatButtonInactiveTextColor: UIColor = UIColor.init(hexString: (brandingShared.buttonInactiveTextColor) ?? "#ff5e00")
 
 var BubbleViewRightContrastTint: UIColor = Common.UIColorRGB(0xFFFFFF)
 let BubbleViewLeftContrastTint: UIColor = Common.UIColorRGB(0xBCBCBC)
@@ -91,9 +91,6 @@ class BubbleView: UIView {
         case .chart:
             //bubbleView = ChartBubbleView()
             bubbleView = ErrorBubbleView()
-            break
-        case  .minitable, .responsiveTable:
-            bubbleView = BubbleView()
             break
         case .table:
             bubbleView = TableBubbleView()

@@ -444,17 +444,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 
                 cell.dateHeightConstraint.constant = 17.0
                 cell.dateTopConstaint.constant = 16.0
-    //            if indexPath.row == 0 {
-    //                dateCompareStr = elements.subtitle
-    //            }else{
-    //                if dateCompareStr == elements.subtitle{
-    //                    cell.dateHeightConstraint.constant = 0.0
-    //                    cell.dateTopConstaint.constant = 8.0
-    //                }else{
-    //                    dateCompareStr = elements.subtitle
-    //                }
-    //            }
-                
+    
                 if duplicateDates[indexPath.row] == true{
                     cell.dateHeightConstraint.constant = 0.0
                     cell.dateTopConstaint.constant = 4.0
@@ -464,13 +454,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 dateFormatterUK.dateFormat = "MM/dd/yy"
                 let stringDate = elements.transactionDate ?? "date"
                 if let date = dateFormatterUK.date(from: stringDate) {
-                    //               if let sentOn = date as Date? {
-                    //                    let dateFormatter = DateFormatter()
-                    //                    dateFormatter.dateFormat = "d MMMM YYYY"
-                    //                    cell.dateLbl.text = dateFormatter.string(from: sentOn)
-                    //                }
-                    
-                    
+                   
                     // Use this to add st, nd, th, to the day
                     let numberFormatter = NumberFormatter()
                     numberFormatter.numberStyle = .ordinal
@@ -532,17 +516,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 
                 cell.dateHeightConstraint.constant = 17.0
                 cell.dateTopConstaint.constant = 16.0
-    //            if indexPath.row == 0 {
-    //                dateCompareStr = elements.subtitle
-    //            }else{
-    //                if dateCompareStr == elements.subtitle{
-    //                    cell.dateHeightConstraint.constant = 0.0
-    //                    cell.dateTopConstaint.constant = 8.0
-    //                }else{
-    //                    dateCompareStr = elements.subtitle
-    //                }
-    //            }
-                
+   
                 if duplicateDates[indexPath.row] == true{
                     cell.dateHeightConstraint.constant = 0.0
                     cell.dateTopConstaint.constant = 4.0
@@ -552,13 +526,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 dateFormatterUK.dateFormat = "MM/dd/yy"
                 let stringDate = elements.transactionDate ?? "date"
                 if let date = dateFormatterUK.date(from: stringDate) {
-                    //               if let sentOn = date as Date? {
-                    //                    let dateFormatter = DateFormatter()
-                    //                    dateFormatter.dateFormat = "d MMMM YYYY"
-                    //                    cell.dateLbl.text = dateFormatter.string(from: sentOn)
-                    //                }
-                    
-                    
+                   
                     // Use this to add st, nd, th, to the day
                     let numberFormatter = NumberFormatter()
                     numberFormatter.numberStyle = .ordinal
@@ -604,7 +572,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
              let cell : NewListTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: listCellIdentifier) as! NewListTableViewCell
                     cell.backgroundColor = UIColor.clear
                     cell.selectionStyle = .none
-                    cell.bgView.backgroundColor =  UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor)!)//bubbleViewBotChatButtonBgColor
+                    cell.bgView.backgroundColor =  UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
                     
                     let elements = arrayOfComponents[indexPath.row]
                     if elements.imageURL == nil{

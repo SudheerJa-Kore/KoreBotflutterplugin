@@ -50,7 +50,7 @@ class ComposeBarView: UIView {
         self.addSubview(self.growingTextView)
         self.growingTextView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
         
-        let composeBarTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        let composeBarTextColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         self.growingTextView.textView.tintColor = composeBarTextColor
         self.growingTextView.textView.textColor = composeBarTextColor
         self.growingTextView.textView.textAlignment = .right
@@ -88,7 +88,7 @@ class ComposeBarView: UIView {
         self.menuButton.clipsToBounds = true
         self.addSubview(self.menuButton)
         
-        let buttonBg = (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#2881DF" == "#FFFFFF" ? "#2881DF" : (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#2881DF"
+        let buttonBg = (brandingShared.widgetHeaderColor) ?? "#2881DF" == "#FFFFFF" ? "#2881DF" : (brandingShared.widgetHeaderColor) ?? "#2881DF"
         
         //let widgetHeaderColor = UIColor.init(hexString: buttonBg)
         self.sendButton = UIButton.init(frame: CGRect.zero)

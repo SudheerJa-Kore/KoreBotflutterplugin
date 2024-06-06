@@ -99,7 +99,7 @@ class FeedbackBubbleView: BubbleView {
         self.cardView = UIView(frame:.zero)
         self.cardView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.cardView)
-        cardView.backgroundColor =  UIColor.white
+        cardView.backgroundColor =  BubbleViewLeftTint
         if #available(iOS 11.0, *) {
             self.cardView.roundCorners([ .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner], radius: 15.0, borderColor: UIColor.clear, borderWidth: 1.5)
         }

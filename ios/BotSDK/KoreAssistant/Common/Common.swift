@@ -133,11 +133,6 @@ var frameworkBundle:Bundle? {
     return Bundle(identifier: bundleId)
 }
 
-let widgetTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
-let widgetHeaderColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#ffffff")
-let widgetFooterColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetFooterColor) ?? "#FFFFFF")
-let widgetBodyColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#f3f3f5")
-let widgetDividerColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetDividerColor) ?? "#E5E8EC")
 
 var isExpandTableBubbleView = false
 var isExpandRadioTableBubbleView = false

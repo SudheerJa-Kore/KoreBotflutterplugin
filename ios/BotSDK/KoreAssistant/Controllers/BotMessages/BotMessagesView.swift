@@ -870,7 +870,6 @@ extension BotMessagesView: UIScrollViewDelegate{
                 let contentYoffset = scrollView.contentOffset.y
                 let distanceFromBottom = scrollView.contentSize.height - contentYoffset
                 if distanceFromBottom < height || Int(distanceFromBottom) == Int(height) {
-                    print(" you reached end of the table")
                    self.viewDelegate?.tableviewScrollDidEnd()
                 }
             })

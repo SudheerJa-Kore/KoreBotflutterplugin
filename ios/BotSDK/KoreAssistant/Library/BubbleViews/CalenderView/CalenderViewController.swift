@@ -75,7 +75,7 @@ class CalenderViewController: UIViewController {
         fromDateRangeLabel.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
         toDateRangeLabel.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
         
-        headingLabel.textColor =  UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        headingLabel.textColor =  UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         confirmButton.backgroundColor = themeColor
         if preferred_language_Type == preferredLanguage{
             headingLabel.textAlignment = .right

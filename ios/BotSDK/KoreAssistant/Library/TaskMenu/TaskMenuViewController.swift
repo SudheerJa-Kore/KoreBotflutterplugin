@@ -49,8 +49,8 @@ class TaskMenuViewController: UIViewController {
         
         headersArray.append("More Options")
         
-        subView.backgroundColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#FFFFFF")
-        titleLabel.textColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        subView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
+        titleLabel.textColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         subView.layer.masksToBounds = false
         subView?.layer.shadowColor = UIColor.lightGray.cgColor
         subView?.layer.shadowOffset =  CGSize.zero
@@ -205,8 +205,8 @@ extension TaskMenuViewController: UITableViewDelegate,UITableViewDataSource{
             cell.titleLabel.text = moreOptions[indexPath.row]
             cell.imgView.image = UIImage.init(named: "moreOption", in: bundle, compatibleWith: nil)
         }
-        cell.bgView.backgroundColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#FFFFFF")
-        cell.titleLabel.textColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        cell.bgView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
+        cell.titleLabel.textColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         if preferredLanguage == preferred_language_Type{
             cell.bgView.semanticContentAttribute = .forceRightToLeft
             cell.titleLabel.textAlignment = .right

@@ -59,8 +59,8 @@ class SalaamPointsDetailsViewController: UIViewController {
         self.tableview.register(UINib(nibName: listCellIdentifier, bundle: bundle), forCellReuseIdentifier: listCellIdentifier)
         self.tableview.register(UINib(nibName: listCellICarddentifier, bundle: bundle), forCellReuseIdentifier: listCellICarddentifier)
         
-        subView.backgroundColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#FFFFFF")
-        headingLabel.textColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor)!)
+        subView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
+        headingLabel.textColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#000000")
         getData()
     }
     func getData(){

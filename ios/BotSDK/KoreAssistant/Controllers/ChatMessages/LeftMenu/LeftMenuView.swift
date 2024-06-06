@@ -140,7 +140,7 @@ extension LeftMenuView: UITableViewDelegate,UITableViewDataSource{
         }
         
         cell.bgView.backgroundColor = UIColor.init(hexString: "#FFFFFF")
-        cell.titleLabel.textColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        cell.titleLabel.textColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         if preferred_language_Type == preferredLanguage{
             cell.bgView.semanticContentAttribute = .forceRightToLeft
             cell.titleLabel.textAlignment = .right
