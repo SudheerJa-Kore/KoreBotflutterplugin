@@ -149,8 +149,7 @@ class ComposeBarView: UIView {
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomLineView(0.5)]|", options:[], metrics:nil, views:views))
         
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[menuButton(30)]-10-[growingTextView]-10-[sendButton(30)]-0-[speechToTextButton(30)]-15-|", options:[], metrics:nil, views:views))
-        //self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[growingTextView]-5-[speechToTextButton]-5-|", options:[], metrics:nil, views:views))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[menuButton(0)]-10-[growingTextView]-10-[sendButton(30)]-0-[speechToTextButton(30)]-15-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[growingTextView]-8-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[sendButton]-12-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[menuButton]-12-|", options:[], metrics:nil, views:views))

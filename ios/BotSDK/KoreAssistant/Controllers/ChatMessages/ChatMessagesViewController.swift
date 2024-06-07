@@ -155,7 +155,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        botConnectingMethod()
+        
+        self.monitoringForReachability()
         
         isSessionExpire = false
         //Initialize elements
@@ -183,6 +184,28 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             overrideUserInterfaceStyle = .light
         }
         self.languageChangeNotification()
+    }
+    
+    @objc func monitoringForReachability() {
+        let networkReachabilityManager = NetworkReachabilityManager.default
+        networkReachabilityManager?.startListening(onUpdatePerforming: { (status) in
+            print("reachability: \(status)")
+            switch status {
+            case .reachable(.ethernetOrWiFi), .reachable(.cellular):
+                self.botConnectingMethod()
+                break
+            case .notReachable:
+                let alertController = UIAlertController(title: alertName, message: "Internet Connection not Available", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    self.monitoringForReachability()
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                fallthrough
+            default:
+                break
+            }
+        })
     }
     
     
@@ -503,53 +526,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func configureQuickReplyView() {
-        
-//        quickReplySuggesstionLbl = UILabel(frame: CGRect.zero)
-//        quickReplySuggesstionLbl.textColor = BubbleViewBotChatTextColor
-//        quickReplySuggesstionLbl.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
-//        quickReplySuggesstionLbl.numberOfLines = 0
-//        quickReplySuggesstionLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        quickReplySuggesstionLbl.isUserInteractionEnabled = true
-//        quickReplySuggesstionLbl.contentMode = UIView.ContentMode.topLeft
-//        quickReplySuggesstionLbl.translatesAutoresizingMaskIntoConstraints = false
-//        self.quickSelectContainerView.addSubview(quickReplySuggesstionLbl)
-//        quickReplySuggesstionLbl.adjustsFontSizeToFitWidth = true
-//        quickReplySuggesstionLbl.backgroundColor = .clear
-//        quickReplySuggesstionLbl.layer.cornerRadius = 6.0
-//        quickReplySuggesstionLbl.clipsToBounds = true
-//        quickReplySuggesstionLbl.sizeToFit()
-//        quickReplySuggesstionLbl.text = ""
-//        
-//        self.quickReplyView = KREQuickSelectView()
-//        self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
-//        self.quickSelectContainerView.addSubview(self.quickReplyView)
-//        let views: [String: UIView] = ["quickReplySuggesstionLbl": quickReplySuggesstionLbl, "quickReplyView": quickReplyView]
-//        
-//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[quickReplyView]-15-|", options:[], metrics:nil, views:views))
-//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[quickReplySuggesstionLbl]-15-|", options:[], metrics:nil, views:views))
-//        // self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView]))
-//        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplySuggesstionLbl(16)]-16-[quickReplyView]|", options:[], metrics:nil, views:views))
-//        
-//        quickReplySuggesstionLblHeightConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
-//        self.quickSelectContainerView.addConstraint(quickReplySuggesstionLblHeightConstraint)
-//        
-//        
-//        quickReplyViewTopConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .top, relatedBy: .equal, toItem: quickReplySuggesstionLbl, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-//        self.quickSelectContainerView.addConstraint(quickReplyViewTopConstraint)
-//        
-//        self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
-//            if let text = text, let payload = payload {
-//                self?.sendTextMessage(text, options: ["body": payload])
-//            }
-//        }
-//        
-//        self.quickReplyView.sendQuickReplyLinkAction = { [weak self] (url) in
-//            if let url = url {
-//                self?.linkButtonTapAction(urlString: url)
-//            }
-//        }
-//        
-        
             self.quickReplyView = KREQuickSelectView()
             self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
             self.quickSelectContainerView.addSubview(self.quickReplyView)
@@ -567,7 +543,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                     self?.sendTextMessage(text, options: ["body": payload])
                 }
             }
-        
     }
     
     func configurePanelCollectionView() {
@@ -1347,7 +1322,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             print("Network reachability: \(status)")
             switch status {
             case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                // self.establishBotConnection() //kk
+                 self.establishBotConnection() //kk
                 break
             case .notReachable:
                 fallthrough
@@ -1621,8 +1596,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     func populateQuickReplyCards(with message: KREMessage?) {
         quickreplyContainerViewTopConstraint.constant = 0.0
         quickReplySuggesstionLblHeight = 32
-        //quickReplySuggesstionLblHeightConstraint.constant = 0
-       // quickReplyViewTopConstraint.constant = 0
         if message?.templateType == (ComponentType.quickReply.rawValue as NSNumber) {
             let component: KREComponent = message!.components![0] as! KREComponent
             if (!component.isKind(of: KREComponent.self)) {
@@ -1660,6 +1633,12 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                     words.append(word)
                 }
                 self.quickReplyView.isLaguage = preferredLanguage
+                let bgColor = (brandingShared.buttonActiveBgColor) ?? "#f3f3f5"
+                let textColor = (brandingShared.buttonActiveTextColor) ?? "#2881DF"
+                self.quickReplyView.bgColor = bgColor
+                self.quickReplyView.textColor = textColor
+                self.quickReplyView.boarderColor = textColor
+                self.quickReplyView.fontName = mediumCustomFont
                 if preferred_language_Type  == preferredLanguage{
                     self.quickReplyView.collectionView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
                 }else{
@@ -2051,24 +2030,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     @objc func tokenExpiry(notification:Notification){
         
         if isErrorType == "STS"{
-//            let alertController = UIAlertController(title: alertName, message: "STS call failed", preferredStyle: .alert)
-//            // Create the actions
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                UIAlertAction in
-//
-//                let dic = ["event_code": "Error_STS", "event_message": "STS call failed"]
-//                let jsonString = Utilities.stringFromJSONObject(object: dic)
-//                NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
-//
-//                isSessionExpire = true
-//                //self.tapsOnBackBtnAction(self)
-//                //self.botClosed()
-//            }
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            // Present the controller
-//            self.present(alertController, animated: true, completion: nil)
-            
             let dic = ["event_code": "Error_STS", "event_message": "STS call failed"]
             let jsonString = Utilities.stringFromJSONObject(object: dic)
             NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
@@ -2076,25 +2037,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             isSessionExpire = true
             
         }else{
-//            let alertController = UIAlertController(title: alertName, message: "Jwt grant failed", preferredStyle: .alert)
-//            // Create the actions
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                UIAlertAction in
-//
-//                let dic = ["event_code": "Error_JWT", "event_message": "Jwt grant failed"]
-//                let jsonString = Utilities.stringFromJSONObject(object: dic)
-//                NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
-//                //self.botClosed()
-//
-//                isSessionExpire = true
-//                //self.tapsOnBackBtnAction(self)
-//                //self.botClosed()
-//            }
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            // Present the controller
-//            self.present(alertController, animated: true, completion: nil)
-            
             let dic = ["event_code": "Error_Socket", "event_message": "Socket connection failed"]
             let jsonString = Utilities.stringFromJSONObject(object: dic)
             NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
@@ -2103,13 +2045,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     @objc func autoDirectingToWebV(notification:Notification) {
-        
-        //        self.bottomConstraint.constant = 0
-        //        self.taskMenuContainerHeightConstant.constant = 0
-        //        if (self.composeView.isFirstResponder) {
-        //            _ = self.composeView.resignFirstResponder()
-        //        }
-        
         if let urlString  = notification.object as? String{
             if (urlString.count > 0) {
                 Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in

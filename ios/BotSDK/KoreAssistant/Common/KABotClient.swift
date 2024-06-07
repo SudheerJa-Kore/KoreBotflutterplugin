@@ -164,12 +164,7 @@ open class KABotClient: NSObject {
                         self?.isConnecting = false
                         self?.isConnected = false
                         
-                        //self?.tryConnect()
-                        if weakSelf.retryCount <= 4{
-                            self?.tryConnect()
-                        }else{
-                            NotificationCenter.default.post(name: Notification.Name(tokenExipryNotification), object: nil)
-                        }
+                        self?.tryConnect()
                     })
                 }
             }
@@ -457,6 +452,8 @@ open class KABotClient: NSObject {
         if let iconUrl = object?.iconUrl {
             message.iconUrl = iconUrl
             botHistoryIcon = iconUrl
+        }else{
+            message.iconUrl = botHistoryIcon
         }
         
         if let fromAgent = object?.fromAgent, fromAgent == true{

@@ -76,13 +76,13 @@ class CalenderViewController: UIViewController {
         toDateRangeLabel.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
         
         headingLabel.textColor =  UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
-        confirmButton.backgroundColor = themeColor
+        confirmButton.backgroundColor = UIColor.init(hexString: (brandingShared.buttonActiveBgColor) ?? "#26344A")
         if preferred_language_Type == preferredLanguage{
             headingLabel.textAlignment = .right
             confirmButton.setTitle("تؤكد", for: .normal)
         }
         
-        confirmButton.setTitleColor(UIColor.white, for: .normal)
+        confirmButton.setTitleColor(UIColor.init(hexString: (brandingShared.buttonActiveTextColor) ?? "#FFFFFF"), for: .normal)
         if #available(iOS 14, *) {
             datePicker.preferredDatePickerStyle = .wheels
             datePicker.backgroundColor = .white
