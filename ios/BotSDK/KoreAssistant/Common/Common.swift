@@ -133,7 +133,7 @@ var frameworkBundle:Bundle? {
     return Bundle(identifier: bundleId)
 }
 
-
+var isAlreadyConnectedBot = false
 var isExpandTableBubbleView = false
 var isExpandRadioTableBubbleView = false
 var radioTableSelectedIndex = 1000

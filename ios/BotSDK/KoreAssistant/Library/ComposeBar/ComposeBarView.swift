@@ -25,7 +25,7 @@ class ComposeBarView: UIView {
     
     fileprivate var textViewTrailingConstraint: NSLayoutConstraint!
     fileprivate(set) public var isKeyboardEnabled: Bool = false
-    let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
+    var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
     
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -50,7 +50,7 @@ class ComposeBarView: UIView {
         self.addSubview(self.growingTextView)
         self.growingTextView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
         
-        let composeBarTextColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
+        let composeBarTextColor = UIColor.init(hexString: (brandingShared.widgetFooterTextColor) ?? "#26344A")
         self.growingTextView.textView.tintColor = composeBarTextColor
         self.growingTextView.textView.textColor = composeBarTextColor
         self.growingTextView.textView.textAlignment = .right
@@ -63,6 +63,7 @@ class ComposeBarView: UIView {
         self.growingTextView.layer.cornerRadius = 10.0
         self.growingTextView.isUserInteractionEnabled = false
         
+        attributes = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString: (brandingShared.widgetDividerColor) ?? "#7C7C7C")]
         
         self.growingTextView.placeholderAttributedText = NSAttributedString(string: "Type your Message here", attributes:attributes)
         
@@ -88,9 +89,7 @@ class ComposeBarView: UIView {
         self.menuButton.clipsToBounds = true
         self.addSubview(self.menuButton)
         
-        let buttonBg = (brandingShared.widgetHeaderColor) ?? "#2881DF" == "#FFFFFF" ? "#2881DF" : (brandingShared.widgetHeaderColor) ?? "#2881DF"
         
-        //let widgetHeaderColor = UIColor.init(hexString: buttonBg)
         self.sendButton = UIButton.init(frame: CGRect.zero)
         //self.sendButton.setTitle("Send", for: .normal)
         self.sendButton.translatesAutoresizingMaskIntoConstraints = false

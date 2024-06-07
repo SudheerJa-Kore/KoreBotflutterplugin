@@ -155,8 +155,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        
-        self.monitoringForReachability()
+        isAlreadyConnectedBot = false
+        self.botConnectingMethod()
         
         isSessionExpire = false
         //Initialize elements
@@ -192,7 +192,9 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             print("reachability: \(status)")
             switch status {
             case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                self.botConnectingMethod()
+                if !isAlreadyConnectedBot{
+                    self.botConnectingMethod()
+                }
                 break
             case .notReachable:
                 let alertController = UIAlertController(title: alertName, message: "Internet Connection not Available", preferredStyle: .alert)
@@ -285,13 +287,16 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         BubbleViewUserChatTextColor = UIColor.init(hexString: (brandingShared.userchatTextColor) ?? "#000000")
         let BotChatTextColor = (brandingShared.botchatTextColor) ?? "#313131"
         BubbleViewBotChatTextColor = UIColor.init(hexString: BotChatTextColor)
-        bubbleViewBotChatButtonTextColor = UIColor.init(hexString: (brandingShared.buttonActiveTextColor) ?? "#26344A")
+        
+        let btnActiveTextColor = (brandingShared.buttonActiveTextColor) ?? "#26344A"
+        bubbleViewBotChatButtonTextColor = UIColor.init(hexString: btnActiveTextColor)
+        
         
         bubbleViewBotChatButtonBgColor = UIColor.init(hexString: brandingShared.buttonActiveBgColor ?? "#FFFFFF")
         bubbleViewBotChatButtonInactiveTextColor = UIColor.init(hexString: (brandingShared.buttonInactiveTextColor) ?? "#ff5e00")
         
-        UserDefaults.standard.set(BotChatTextColor, forKey: "ThemeColor")
-        themeColor = UIColor.init(hexString: BotChatTextColor)
+        UserDefaults.standard.set(btnActiveTextColor, forKey: "ThemeColor")
+        themeColor = UIColor.init(hexString: btnActiveTextColor)
         
         let chatHisImg = UIImage.init(named: "chatHistory", in: bundle, compatibleWith: nil)
         chatHistoryImg.image = chatHisImg?.withRenderingMode(.alwaysTemplate)
@@ -2582,6 +2587,8 @@ extension ChatMessagesViewController{
             let widgetFooterColor = activeTheme.widgetFooter?.backGroundColor
             let widgetHeaderColor = activeTheme.widgetHeader?.backGroundColor
             
+            let widgetFooterTextColor = activeTheme.widgetFooter?.fontcolor
+            let widgetFooterPlaceholderColor = activeTheme.widgetFooter?.placeHolder
             
             let brandingShared = BrandingSingleton.shared
             brandingShared.widgetBorderColor = widgetBorderColor
@@ -2603,6 +2610,9 @@ extension ChatMessagesViewController{
             brandingShared.widgetBodyColor = widgetBodyColor
             brandingShared.widgetFooterColor = widgetFooterColor
             brandingShared.widgetHeaderColor = widgetHeaderColor
+            brandingShared.widgetFooterTextColor = widgetFooterTextColor
+            brandingShared.widgetFooterPlaceholderColor = widgetFooterPlaceholderColor
+            
             self?.sucessMethod(client: client, thread: thread)
         }, failure: { (error) in
             print(error.localizedDescription)
@@ -2648,6 +2658,8 @@ extension ChatMessagesViewController{
                 brandingShared.widgetBodyColor = brandingShared.brandingInfoModel?.widgetBodyColor
                 brandingShared.widgetFooterColor = brandingShared.brandingInfoModel?.widgetFooterColor
                 brandingShared.widgetHeaderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
+                brandingShared.widgetFooterTextColor = brandingShared.brandingInfoModel?.widgetFooterColor
+                brandingShared.widgetFooterPlaceholderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
                 self.sucessMethod(client: client, thread: thread)
             }
             
@@ -2656,7 +2668,7 @@ extension ChatMessagesViewController{
     
     // MARK: Sucess Chat Window
     func sucessMethod(client: BotClient?, thread: KREThread?){
-        
+        isAlreadyConnectedBot = true
         let dic = ["event_code": "BotConnected", "event_message": "Bot connected successfully"]
         let jsonString = Utilities.stringFromJSONObject(object: dic)
         NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
