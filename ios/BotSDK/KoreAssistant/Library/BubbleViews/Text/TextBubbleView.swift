@@ -41,7 +41,7 @@ class TextBubbleView : BubbleView {
         
         let views: [String: UIView] = ["textLabel": textLabel]
         let metrics: [String: NSNumber] = ["textLabelMaxWidth": NSNumber(value: Float(kMaxTextWidth)), "textLabelMinWidth": NSNumber(value: Float(kMinTextWidth))]
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[textLabel]-16-|", options: [], metrics: metrics, views: views))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[textLabel]-14-|", options: [], metrics: metrics, views: views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[textLabel(>=textLabelMinWidth,<=textLabelMaxWidth)]-16-|", options: [], metrics: metrics, views: views))
         if preferred_language_Type == preferredLanguage{
             textLabel.semanticContentAttribute = .forceRightToLeft
@@ -107,7 +107,7 @@ class TextBubbleView : BubbleView {
         if textSize.height < self.textLabel.font.pointSize {
             textSize.height = self.textLabel.font.pointSize
         }
-        return CGSize(width: textSize.width + 32, height: textSize.height + 32)
+        return CGSize(width: textSize.width + 32, height: textSize.height + 30)
     }
 }
 

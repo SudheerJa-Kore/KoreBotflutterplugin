@@ -49,7 +49,7 @@ var customDropDownSeletct = ""
 
 var isSpeakingEnabled = false
 var selectedTheme = "Theme 1"
-public var mediumCustomFont = UIFont(name: "Gilroy-Medium", size: 17.0)
+
 
 let userColor: UIColor = UIColor(red: 38 / 255.0, green: 52 / 255.0, blue: 74 / 255.0, alpha: 1)
 let botColor: UIColor = UIColor(red: 237 / 255.0, green: 238 / 255.0, blue: 241 / 255.0, alpha: 1)
@@ -57,7 +57,7 @@ let botColor: UIColor = UIColor(red: 237 / 255.0, green: 238 / 255.0, blue: 241 
 let defaultLoaderColorStr = "#26344A"
 var themeColor: UIColor = UIColor.init(hexString: defaultLoaderColorStr)
 var textlinkColor: UIColor = UIColor.init(hexString: "#591efd")
-var reciverIcon:String?
+var botHistoryIcon:String?
 
 var uniqueUserId: String?
 var userInfoUserId: String?
@@ -122,17 +122,18 @@ var recentSearchArray = [String]()
 
 var customDropDownShowText = false
 
+var regularCustomFont = "HelveticaNeue"
+var mediumCustomFont = "HelveticaNeue-Medium"
+var boldCustomFont = "HelveticaNeue-Bold"
+var semiBoldCustomFont = "HelveticaNeue-Semibold"
+var italicCustomFont =  "HelveticaNeue-Italic"
+
 var frameworkBundle:Bundle? {
     let bundleId = "com.kore.rtc"
     return Bundle(identifier: bundleId)
 }
 
-let widgetTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
-let widgetHeaderColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#ffffff")
-let widgetFooterColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetFooterColor) ?? "#FFFFFF")
-let widgetBodyColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#f3f3f5")
-let widgetDividerColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetDividerColor) ?? "#E5E8EC")
-
+var isAlreadyConnectedBot = false
 var isExpandTableBubbleView = false
 var isExpandRadioTableBubbleView = false
 var radioTableSelectedIndex = 1000
@@ -163,6 +164,8 @@ var sessionHardExpiryGraceTime = 0
 var isOTPValidationTemplate = false
 var OTPValidationRemoveCount = 0
 var customDropDownText = ""
+
+
 
 open class Common : NSObject {
     public static func UIColorRGB(_ rgb: Int) -> UIColor {

@@ -147,19 +147,19 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        linerProgressBar.frame = CGRect(x: 0, y: 35 , width: UIScreen.main.bounds.size.width, height:1)
-        self.view.addSubview(linerProgressBar)
+        linerProgressBar.frame = CGRect(x: 0, y: 0 , width: UIScreen.main.bounds.size.width, height:1)
+        self.headerView.addSubview(linerProgressBar)
         
         ReactNativeEventMsg = ["event_code": "USER_CANCELLED", "event_message": "User Cancelled Event Occurred"]
         
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        botConnectingMethod()
+        isAlreadyConnectedBot = false
+        self.botConnectingMethod()
         
         isSessionExpire = false
         //Initialize elements
-        //self.configureThreadView()
         self.configureComposeBar()
         self.configureAudioComposer()
         self.configureQuickReplyView()
@@ -186,6 +186,30 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         self.languageChangeNotification()
     }
     
+    @objc func monitoringForReachability() {
+        let networkReachabilityManager = NetworkReachabilityManager.default
+        networkReachabilityManager?.startListening(onUpdatePerforming: { (status) in
+            print("reachability: \(status)")
+            switch status {
+            case .reachable(.ethernetOrWiFi), .reachable(.cellular):
+                if !isAlreadyConnectedBot{
+                    self.botConnectingMethod()
+                }
+                break
+            case .notReachable:
+                let alertController = UIAlertController(title: alertName, message: "Internet Connection not Available", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    self.monitoringForReachability()
+                }
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                fallthrough
+            default:
+                break
+            }
+        })
+    }
+    
     
     
     override open func viewWillAppear(_ animated: Bool) {
@@ -199,7 +223,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func setUpNavigationBar(){
-        let urlString = brandingShared.brandingInfoModel?.bankLogo?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let urlString = brandingShared.bankLogo?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: urlString ?? "")
         var data : Data?
         if url != nil {
@@ -225,55 +249,63 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func brandingValues(){
+        let widgetTxtColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         let font:UIFont? = UIFont(name: "29LTBukra-Semibold", size:16)
-        let titleStr = brandingShared.brandingInfoModel?.botName ?? SDKConfiguration.botConfig.chatBotName
+        let titleStr = brandingShared.botName ?? SDKConfiguration.botConfig.chatBotName
         let attString:NSMutableAttributedString = NSMutableAttributedString(string: titleStr , attributes: [.font:font!])
         let titleLabel = UILabel()
-        titleLabel.textColor = widgetTextColor
+        titleLabel.textColor = widgetTxtColor
         titleLabel.attributedText = attString
         self.title = ""
         
         topTiltlLbl.text = titleStr
         topTiltlLbl.font = font
-        topTiltlLbl.textColor = widgetTextColor
-        headerView.backgroundColor = widgetHeaderColor
+        topTiltlLbl.textColor = widgetTxtColor
+        headerView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetHeaderColor) ?? "#ffffff")
         
-        navigationController?.navigationBar.barTintColor = widgetHeaderColor
+        navigationController?.navigationBar.barTintColor = UIColor.init(hexString: (brandingShared.widgetHeaderColor) ?? "#ffffff")
         navigationController?.navigationBar.tintColor = .orange
         
-        if let bgUrlString = brandingShared.brandingInfoModel?.widgetBgImage!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
-            let bgUrl = URL(string: bgUrlString)
-            if bgUrl != nil{
-                backgroungImageView.af_setImage(withURL: bgUrl!, placeholderImage: UIImage(named: ""))
+        if let bgUrlString = brandingShared.widgetBgImage!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed){
+            if let bgUrl = URL(string: bgUrlString){
+                backgroungImageView.af_setImage(withURL: bgUrl, placeholderImage: UIImage(named: ""))
                 backgroungImageView.contentMode = .scaleAspectFit
             }else{
-                self.view.backgroundColor = widgetBodyColor
+                self.view.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#f3f3f5")
             }
         }
-        print("widgetFooterC\(widgetFooterColor)")
-        composeView.backgroundColor = widgetFooterColor
-        botMessagesView.tableView.layer.borderColor = widgetDividerColor.cgColor
+        
+        composeView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetFooterColor) ?? "#FFFFFF")
+        botMessagesView.tableView.layer.borderColor = UIColor.init(hexString: (brandingShared.widgetDividerColor) ?? "#E5E8EC").cgColor
         botMessagesView.tableView.layer.borderWidth = 0.0
-        UserDefaults.standard.set(brandingShared.brandingInfoModel?.buttonActiveTextColor, forKey: "ButtonTextColor")
-        UserDefaults.standard.set(brandingShared.brandingInfoModel?.buttonActiveBgColor, forKey: "ButtonBgColor")
-        UserDefaults.standard.set(brandingShared.brandingInfoModel?.widgetBorderColor, forKey: "widgetBorderColor")
+        UserDefaults.standard.set(brandingShared.buttonActiveTextColor, forKey: "ButtonTextColor")
+        UserDefaults.standard.set(brandingShared.buttonActiveBgColor, forKey: "ButtonBgColor")
+        UserDefaults.standard.set(brandingShared.widgetBorderColor, forKey: "widgetBorderColor")
         
-        BubbleViewRightTint = UIColor.init(hexString: (brandingShared.brandingInfoModel?.userchatBgColor) ?? "#26344A")
-        BubbleViewLeftTint = UIColor.init(hexString: (brandingShared.brandingInfoModel?.botchatBgColor) ?? "#F4F4F4")
-        BubbleViewUserChatTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.userchatTextColor) ?? "#000000")
-        let BotChatTextColor = (brandingShared.brandingInfoModel?.botchatTextColor) ?? "#313131"
+        BubbleViewRightTint = UIColor.init(hexString: (brandingShared.userchatBgColor) ?? "#26344A")
+        BubbleViewLeftTint = UIColor.init(hexString: (brandingShared.botchatBgColor) ?? "#F4F4F4")
+        BubbleViewUserChatTextColor = UIColor.init(hexString: (brandingShared.userchatTextColor) ?? "#000000")
+        let BotChatTextColor = (brandingShared.botchatTextColor) ?? "#313131"
         BubbleViewBotChatTextColor = UIColor.init(hexString: BotChatTextColor)
-        bubbleViewBotChatButtonTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.buttonActiveTextColor) ?? "#26344A")
         
-        bubbleViewBotChatButtonBgColor = UIColor.init(hexString: brandingShared.brandingInfoModel?.buttonActiveBgColor ?? "#FFFFFF")
-        bubbleViewBotChatButtonInactiveTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.buttonInactiveTextColor) ?? "#ff5e00")
+        let btnActiveTextColor = (brandingShared.buttonActiveTextColor) ?? "#26344A"
+        bubbleViewBotChatButtonTextColor = UIColor.init(hexString: btnActiveTextColor)
         
-        UserDefaults.standard.set(BotChatTextColor, forKey: "ThemeColor")
-        themeColor = UIColor.init(hexString: BotChatTextColor)
+        
+        bubbleViewBotChatButtonBgColor = UIColor.init(hexString: brandingShared.buttonActiveBgColor ?? "#FFFFFF")
+        bubbleViewBotChatButtonInactiveTextColor = UIColor.init(hexString: (brandingShared.buttonInactiveTextColor) ?? "#ff5e00")
+        
+        UserDefaults.standard.set(btnActiveTextColor, forKey: "ThemeColor")
+        themeColor = UIColor.init(hexString: btnActiveTextColor)
         
         let chatHisImg = UIImage.init(named: "chatHistory", in: bundle, compatibleWith: nil)
         chatHistoryImg.image = chatHisImg?.withRenderingMode(.alwaysTemplate)
         chatHistoryImg.tintColor = themeColor
+        
+        let backImage = UIImage(named: "keyboard-arrow-left", in: bundle, compatibleWith: nil)
+        let tintedBackImage = backImage?.withRenderingMode(.alwaysTemplate)
+        self.backBtn.setBackgroundImage(tintedBackImage, for: .normal)
+        self.backBtn.tintColor = widgetTxtColor
     }
     
     override open func viewDidAppear(_ animated: Bool) {
@@ -499,53 +531,23 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func configureQuickReplyView() {
-        
-        quickReplySuggesstionLbl = UILabel(frame: CGRect.zero)
-        quickReplySuggesstionLbl.textColor = BubbleViewBotChatTextColor
-        quickReplySuggesstionLbl.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
-        quickReplySuggesstionLbl.numberOfLines = 0
-        quickReplySuggesstionLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
-        quickReplySuggesstionLbl.isUserInteractionEnabled = true
-        quickReplySuggesstionLbl.contentMode = UIView.ContentMode.topLeft
-        quickReplySuggesstionLbl.translatesAutoresizingMaskIntoConstraints = false
-        self.quickSelectContainerView.addSubview(quickReplySuggesstionLbl)
-        quickReplySuggesstionLbl.adjustsFontSizeToFitWidth = true
-        quickReplySuggesstionLbl.backgroundColor = .clear
-        quickReplySuggesstionLbl.layer.cornerRadius = 6.0
-        quickReplySuggesstionLbl.clipsToBounds = true
-        quickReplySuggesstionLbl.sizeToFit()
-        quickReplySuggesstionLbl.text = ""
-        
-        self.quickReplyView = KREQuickSelectView()
-        self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
-        self.quickSelectContainerView.addSubview(self.quickReplyView)
-        let views: [String: UIView] = ["quickReplySuggesstionLbl": quickReplySuggesstionLbl, "quickReplyView": quickReplyView]
-        
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[quickReplyView]-15-|", options:[], metrics:nil, views:views))
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[quickReplySuggesstionLbl]-15-|", options:[], metrics:nil, views:views))
-        // self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView]))
-        self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplySuggesstionLbl(16)]-16-[quickReplyView]|", options:[], metrics:nil, views:views))
-        
-        quickReplySuggesstionLblHeightConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
-        self.quickSelectContainerView.addConstraint(quickReplySuggesstionLblHeightConstraint)
-        
-        
-        quickReplyViewTopConstraint = NSLayoutConstraint.init(item: quickReplySuggesstionLbl as Any, attribute: .top, relatedBy: .equal, toItem: quickReplySuggesstionLbl, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        self.quickSelectContainerView.addConstraint(quickReplyViewTopConstraint)
-        
-        self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
-            if let text = text, let payload = payload {
-                self?.sendTextMessage(text, options: ["body": payload])
+            self.quickReplyView = KREQuickSelectView()
+            self.quickReplyView.translatesAutoresizingMaskIntoConstraints = false
+            self.quickSelectContainerView.addSubview(self.quickReplyView)
+            let bgColor = (brandingShared.buttonActiveBgColor) ?? "#f3f3f5"
+            let textColor = (brandingShared.buttonActiveTextColor) ?? "#2881DF"
+            self.quickReplyView.bgColor = bgColor
+            self.quickReplyView.textColor = textColor
+            self.quickReplyView.boarderColor = textColor
+            self.quickReplyView.fontName = mediumCustomFont
+            self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[quickReplyView]|", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView as Any]))
+            self.quickSelectContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[quickReplyView(60)]", options:[], metrics:nil, views:["quickReplyView" : self.quickReplyView as Any]))
+            
+            self.quickReplyView.sendQuickReplyAction = { [weak self] (text, payload) in
+                if let text = text, let payload = payload {
+                    self?.sendTextMessage(text, options: ["body": payload])
+                }
             }
-        }
-        
-        self.quickReplyView.sendQuickReplyLinkAction = { [weak self] (url) in
-            if let url = url {
-                self?.linkButtonTapAction(urlString: url)
-            }
-        }
-        
-        
     }
     
     func configurePanelCollectionView() {
@@ -628,8 +630,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         self.typingStatusView?.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.typingStatusView!)
         
-        let views: [String: Any] = ["typingStatusView" : self.typingStatusView, "composeBarContainerView" : self.composeBarContainerView]
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[typingStatusView]|", options:[], metrics:nil, views: views))
+        let views: [String: Any] = ["typingStatusView" : self.typingStatusView as Any, "composeBarContainerView" : self.composeBarContainerView as Any]
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[typingStatusView]", options:[], metrics:nil, views: views)) //-20
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[typingStatusView(40)][composeBarContainerView]", options:[], metrics:nil, views: views))
     }
     
@@ -663,7 +665,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         colorDropDown.selectRow(0)
         // Action triggered on selection
         colorDropDown.selectionAction = { [weak self] (index, item) in
-            //self?.amountButton.setTitle(item, for: .normal)
             if item == "Theme Logo" {
                 selectedTheme = "Theme 1"
             }else{
@@ -671,14 +672,12 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             }
             
             if selectedTheme == "Theme 1"{
-                let urlString = brandingShared.brandingInfoModel?.widgetBgImage ?? "".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                let url = URL(string: urlString!)
-                if url != nil{
-                    //self!.backgroungImageView.setImageWith(url!, placeholderImage: UIImage(named: ""))
-                    self!.backgroungImageView.af_setImage(withURL: url!, placeholderImage: UIImage(named: ""))
+                let urlString = brandingShared.widgetBgImage ?? "".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                if let url = URL(string: urlString!){
+                    self!.backgroungImageView.af_setImage(withURL: url, placeholderImage: UIImage(named: ""))
                 }else{
                     self!.backgroungImageView.image = UIImage.init(named: "")
-                    self!.view.backgroundColor = widgetBodyColor
+                    self!.view.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#f3f3f5")
                 }
                 self!.backgroungImageView.contentMode = .scaleAspectFit
             }else{
@@ -793,6 +792,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             return .details_list_template
         }else if (templateType == "search"){
             return .search_template
+        }else if (templateType == "bankingFeedbackTemplate"){
+            return .bankingFeedbackTemplate
         }
         return .text
     }
@@ -835,15 +836,15 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                 ttsBody = text as String
                 
                 if(text.contains("use a web form")){
-                    let range: NSRange = text.range(of: "use a web form - ")
-                    let urlString: String? = text.substring(with: NSMakeRange(range.location+range.length, 44))
-                    if (urlString != nil) {
-                        let url: URL = URL(string: urlString!)!
-                        webViewController = SFSafariViewController(url: url)
-                        webViewController.modalPresentationStyle = .custom
-                        present(webViewController, animated: true, completion:nil)
-                    }
-                    ttsBody = "Ok, Please fill in the details and submit"
+//                    let range: NSRange = text.range(of: "use a web form - ")
+//                    let urlString: String? = text.substring(with: NSMakeRange(range.location+range.length, 44))
+//                    if (urlString != nil) {
+//                        let url: URL = URL(string: urlString!)!
+//                        webViewController = SFSafariViewController(url: url)
+//                        webViewController.modalPresentationStyle = .custom
+//                        present(webViewController, animated: true, completion:nil)
+//                    }
+//                    ttsBody = "Ok, Please fill in the details and submit"
                 }
                 //message.addComponent(textComponent)
                 let string = text as String
@@ -940,7 +941,49 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                         message.addComponent(optionsComponent)
                     }
                     
-                } else if (type == "error") {
+                } else if (type == "image"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let optionsComponent: Component = Component(.image)
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "message"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let  componentType = dictionary["audioUrl"] != nil ? Component(.audio) : Component(.video)
+                        let optionsComponent: Component = componentType
+                        if let speechText = dictionary["text"] as? String{
+                            ttsBody = speechText
+                        }
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "video"){
+                    
+                    if let _ = payload["payload"] as? [String: Any] {
+                        let  componentType = Component(.video)
+                        let optionsComponent: Component = componentType
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: payload)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "audio"){
+                    
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let  componentType = Component(.audio)
+                        let optionsComponent: Component = componentType
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                    }
+                }
+                else if (type == "error") {
                     let dictionary: NSDictionary = payload["payload"] as! NSDictionary
                     let errorComponent: Component = Component(.error)
                     errorComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
@@ -1284,7 +1327,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             print("Network reachability: \(status)")
             switch status {
             case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                // self.establishBotConnection() //kk
+                 self.establishBotConnection() //kk
                 break
             case .notReachable:
                 fallthrough
@@ -1330,7 +1373,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view?.isDescendant(of: botMessagesView.tableView) == true || touch.view?.isDescendant(of: leftMenuView.tableView) == true{
+        if touch.view?.isDescendant(of: botMessagesView.tableView) == true || touch.view?.isDescendant(of: leftMenuView.tableView) == true || touch.view?.isDescendant(of: quickReplyView) == true{
             return false
         }
         return true
@@ -1558,8 +1601,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     func populateQuickReplyCards(with message: KREMessage?) {
         quickreplyContainerViewTopConstraint.constant = 0.0
         quickReplySuggesstionLblHeight = 32
-        quickReplySuggesstionLblHeightConstraint.constant = 0
-        quickReplyViewTopConstraint.constant = 0
         if message?.templateType == (ComponentType.quickReply.rawValue as NSNumber) {
             let component: KREComponent = message!.components![0] as! KREComponent
             if (!component.isKind(of: KREComponent.self)) {
@@ -1579,7 +1620,12 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                 
                 for dictionary in quickReplies {
                     let title: String = (dictionary["title"] != nil ? dictionary["title"] as? String : "") ?? String(dictionary["title"] as! Int)
-                    let payload: String = (dictionary["payload"] != nil ? dictionary["payload"] as? String : "") ?? String(dictionary["payload"] as! Int)
+                    var payload = ""
+                    if let payloadStr = dictionary["payload"] as? [String: Any]{
+                        payload = payloadStr["name"] as? String ?? ""
+                    }else{
+                        payload = dictionary["payload"] as? String ?? ""
+                    }
                     let imageURL: String = (dictionary["image_url"] != nil ? dictionary["image_url"] as? String : "") ?? String(dictionary["image_url"] as! Int)
                     
                     let showMoreMessages: String = (dictionary["showMoreMessages"] != nil ? dictionary["showMoreMessages"] as? String : "") ?? String(dictionary["showMoreMessages"] as! Int)
@@ -1592,6 +1638,12 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                     words.append(word)
                 }
                 self.quickReplyView.isLaguage = preferredLanguage
+                let bgColor = (brandingShared.buttonActiveBgColor) ?? "#f3f3f5"
+                let textColor = (brandingShared.buttonActiveTextColor) ?? "#2881DF"
+                self.quickReplyView.bgColor = bgColor
+                self.quickReplyView.textColor = textColor
+                self.quickReplyView.boarderColor = textColor
+                self.quickReplyView.fontName = mediumCustomFont
                 if preferred_language_Type  == preferredLanguage{
                     self.quickReplyView.collectionView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
                 }else{
@@ -1619,11 +1671,11 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
                 }else{
                     quickReplies = jsonObject["quick_replies"] as? Array<Dictionary<String, AnyObject>> ?? []
                     if let suggestionText = jsonObject["quick_reply_title"] as? String{
-                        quickReplySuggesstionLbl.text = suggestionText
-                        quickReplySuggesstionLblHeight = 50
-                        quickReplySuggesstionLblHeightConstraint.constant = 16.0
-                        quickReplyViewTopConstraint.constant = 16.0
-                        quickreplyContainerViewTopConstraint.constant = 32.0
+//                        quickReplySuggesstionLbl.text = suggestionText
+//                        quickReplySuggesstionLblHeight = 50
+//                        quickReplySuggesstionLblHeightConstraint.constant = 16.0
+//                        quickReplyViewTopConstraint.constant = 16.0
+//                        quickreplyContainerViewTopConstraint.constant = 32.0
                     }
                 }
                 
@@ -1891,9 +1943,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         let botId:String = "u-40d2bdc2-822a-51a2-bdcd-95bdf4po8331c9";
         let info:NSMutableDictionary = NSMutableDictionary.init()
         info.setValue(botId, forKey: "botId");
-        info.setValue("kora", forKey: "imageName");
-        self.typingStatusView?.isLanguage = default_language
-        self.typingStatusView?.addTypingStatus(forContact: info, forTimeInterval: 2.0)
+        info.setValue("kore", forKey: "imageName");
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     // MARK: show TableTemplateView
@@ -1984,24 +2035,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     @objc func tokenExpiry(notification:Notification){
         
         if isErrorType == "STS"{
-//            let alertController = UIAlertController(title: alertName, message: "STS call failed", preferredStyle: .alert)
-//            // Create the actions
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                UIAlertAction in
-//
-//                let dic = ["event_code": "Error_STS", "event_message": "STS call failed"]
-//                let jsonString = Utilities.stringFromJSONObject(object: dic)
-//                NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
-//
-//                isSessionExpire = true
-//                //self.tapsOnBackBtnAction(self)
-//                //self.botClosed()
-//            }
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            // Present the controller
-//            self.present(alertController, animated: true, completion: nil)
-            
             let dic = ["event_code": "Error_STS", "event_message": "STS call failed"]
             let jsonString = Utilities.stringFromJSONObject(object: dic)
             NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
@@ -2009,25 +2042,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             isSessionExpire = true
             
         }else{
-//            let alertController = UIAlertController(title: alertName, message: "Jwt grant failed", preferredStyle: .alert)
-//            // Create the actions
-//            let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-//                UIAlertAction in
-//
-//                let dic = ["event_code": "Error_JWT", "event_message": "Jwt grant failed"]
-//                let jsonString = Utilities.stringFromJSONObject(object: dic)
-//                NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
-//                //self.botClosed()
-//
-//                isSessionExpire = true
-//                //self.tapsOnBackBtnAction(self)
-//                //self.botClosed()
-//            }
-//            // Add the actions
-//            alertController.addAction(okAction)
-//            // Present the controller
-//            self.present(alertController, animated: true, completion: nil)
-            
             let dic = ["event_code": "Error_Socket", "event_message": "Socket connection failed"]
             let jsonString = Utilities.stringFromJSONObject(object: dic)
             NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
@@ -2036,13 +2050,6 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     @objc func autoDirectingToWebV(notification:Notification) {
-        
-        //        self.bottomConstraint.constant = 0
-        //        self.taskMenuContainerHeightConstant.constant = 0
-        //        if (self.composeView.isFirstResponder) {
-        //            _ = self.composeView.resignFirstResponder()
-        //        }
-        
         if let urlString  = notification.object as? String{
             if (urlString.count > 0) {
                 Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
@@ -2315,18 +2322,18 @@ extension ChatMessagesViewController {
     }
     
     func tableviewScrollDidEnd(){
-        // fetchMessages()
+         fetchMessages()
     }
 }
 extension ChatMessagesViewController: KABotClientDelegate {
     func showTypingStatusForBot() {
-        self.typingStatusView?.addTypingStatus(forContact: [:], forTimeInterval: 0.5)
+        self.typingStatusView?.isHidden = true
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     // MARK: - KABotlientDelegate methods
     open func botConnection(with connectionState: BotClientConnectionState) {
         updateNavBarPrompt()
-        
     }
     
     @objc func startTypingStatusForBot() {
@@ -2334,14 +2341,14 @@ extension ChatMessagesViewController: KABotClientDelegate {
         let botId:String = SDKConfiguration.botConfig.botId
         let info:NSMutableDictionary = NSMutableDictionary.init()
         info.setValue(botId, forKey: "botId");
-        let urlString = brandingShared.brandingInfoModel?.bankLogo
+        let urlString = brandingShared.bankLogo
         info.setValue(urlString ?? "kora", forKey: "imageName");
         self.typingStatusView?.isLanguage = default_language
-        self.typingStatusView?.addTypingStatus(forContact: info, forTimeInterval: 0.5)
+        self.typingStatusView?.startTypingStatus(using: botHistoryIcon,dotColor: themeColor)
     }
     
     @objc func stopTypingStatusForBot(){
-        self.typingStatusView?.timerFired(toRemoveTypingStatus: nil)
+        self.typingStatusView?.stopTypingStatus()
     }
 }
 // MARK: - requests
@@ -2548,23 +2555,65 @@ extension ChatMessagesViewController{
     }
     
     func brandingApis(client: BotClient?, thread: KREThread?){
-        self.kaBotClient.brandingApiRequest(authInfoAccessToken,success: { [weak self] (brandingArray) in
-            //print("brandingArray : \(brandingArray)")
-            if brandingArray.count > 0{
-                brandingShared.hamburgerOptions = (((brandingArray as AnyObject).object(at: 0) as AnyObject).object(forKey: "hamburgermenu") as Any) as? Dictionary<String, Any>
-            }
-            if brandingArray.count>1{
-                let brandingDic = (((brandingArray as AnyObject).object(at: 1) as AnyObject).object(forKey: "brandingwidgetdesktop") as Any)
+        self.kaBotClient.brandingApiRequest(authInfoAccessToken,success: { [weak self] (brandingDic) in
+
                 let jsonDecoder = JSONDecoder()
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: brandingDic as Any , options: .prettyPrinted),
-                      let brandingValues = try? jsonDecoder.decode(BrandingModel.self, from: jsonData) else {
+                      let activeTheme = try? jsonDecoder.decode(ActiveTheme.self, from: jsonData) else {
                     return
                 }
-                let brandingShared = BrandingSingleton.shared
-                brandingShared.brandingInfoModel = brandingValues
-                self?.sucessMethod(client: client, thread: thread)
-                
-            }
+            
+            let widgetBorderColor = activeTheme.widgetHeader?.bordercolor
+            let widgetTextColor = activeTheme.widgetHeader?.fontcolor
+            let buttonInactiveBgColor = activeTheme.buttons?.onHoverButtonColor
+            let buttonInactiveTextColor = activeTheme.buttons?.onHoverFontColor
+            let buttonActiveBgColor = activeTheme.buttons?.defaultButtonColor
+            let buttonActiveTextColor = activeTheme.buttons?.defaultFontColor
+            let widgetBgColor = activeTheme.widgetHeader?.backGroundColor
+            let userchatBgColor = activeTheme.userMessage?.bubbleColor
+            let userchatTextColor = activeTheme.userMessage?.fontcolor
+            let theme = ""
+            let botName = SDKConfiguration.botConfig.chatBotName
+            let botchatBgColor = activeTheme.botMessage?.bubbleColor
+            let botchatTextColor = activeTheme.botMessage?.fontcolor
+             
+            let widgetDividerColor = activeTheme.widgetFooter?.placeHolder
+            let bankLogo = ""
+             var widgetBgImage = ""
+             if let userWidgetBgImage =  activeTheme.widgetBody?.useBackgroundImage, userWidgetBgImage == true{
+                 widgetBgImage = activeTheme.widgetBody?.backGroundImage ?? ""
+             }
+            let widgetBodyColor = activeTheme.widgetBody?.backGroundColor
+            let widgetFooterColor = activeTheme.widgetFooter?.backGroundColor
+            let widgetHeaderColor = activeTheme.widgetHeader?.backGroundColor
+            
+            let widgetFooterTextColor = activeTheme.widgetFooter?.fontcolor
+            let widgetFooterPlaceholderColor = activeTheme.widgetFooter?.placeHolder
+            
+            let brandingShared = BrandingSingleton.shared
+            brandingShared.widgetBorderColor = widgetBorderColor
+            brandingShared.widgetTextColor = widgetTextColor
+            brandingShared.buttonInactiveBgColor = buttonInactiveBgColor
+            brandingShared.buttonInactiveTextColor = buttonInactiveTextColor
+            brandingShared.widgetBgColor = widgetBgColor
+            brandingShared.botchatTextColor = botchatTextColor
+            brandingShared.buttonActiveBgColor = buttonActiveBgColor
+            brandingShared.buttonActiveTextColor = buttonActiveTextColor
+            brandingShared.userchatBgColor = userchatBgColor
+            brandingShared.theme = theme
+            brandingShared.botName = botName
+            brandingShared.botchatBgColor = botchatBgColor
+            brandingShared.userchatTextColor = userchatTextColor
+            brandingShared.widgetDividerColor = widgetDividerColor
+            brandingShared.bankLogo = bankLogo
+            brandingShared.widgetBgImage = widgetBgImage
+            brandingShared.widgetBodyColor = widgetBodyColor
+            brandingShared.widgetFooterColor = widgetFooterColor
+            brandingShared.widgetHeaderColor = widgetHeaderColor
+            brandingShared.widgetFooterTextColor = widgetFooterTextColor
+            brandingShared.widgetFooterPlaceholderColor = widgetFooterPlaceholderColor
+            
+            self?.sucessMethod(client: client, thread: thread)
         }, failure: { (error) in
             print(error.localizedDescription)
             self.getOfflineBrandingData(client: client, thread: thread)
@@ -2590,6 +2639,27 @@ extension ChatMessagesViewController{
                 }
                 
                 brandingShared.brandingInfoModel = brandingValues
+                brandingShared.widgetBorderColor = brandingShared.brandingInfoModel?.widgetBorderColor
+                brandingShared.widgetTextColor = brandingShared.brandingInfoModel?.widgetTextColor
+                brandingShared.buttonInactiveBgColor = brandingShared.brandingInfoModel?.buttonInactiveBgColor
+                brandingShared.buttonInactiveTextColor = brandingShared.brandingInfoModel?.buttonInactiveTextColor
+                brandingShared.widgetBgColor = brandingShared.brandingInfoModel?.widgetBgColor
+                brandingShared.botchatTextColor = brandingShared.brandingInfoModel?.botchatTextColor
+                brandingShared.buttonActiveBgColor = brandingShared.brandingInfoModel?.buttonActiveBgColor
+                brandingShared.buttonActiveTextColor = brandingShared.brandingInfoModel?.buttonActiveTextColor
+                brandingShared.userchatBgColor = brandingShared.brandingInfoModel?.userchatBgColor
+                brandingShared.theme = brandingShared.brandingInfoModel?.theme
+                brandingShared.botName = SDKConfiguration.botConfig.chatBotName
+                brandingShared.botchatBgColor = brandingShared.brandingInfoModel?.botchatBgColor
+                brandingShared.userchatTextColor = brandingShared.brandingInfoModel?.userchatTextColor
+                brandingShared.widgetDividerColor = brandingShared.brandingInfoModel?.widgetDividerColor
+                brandingShared.bankLogo = brandingShared.brandingInfoModel?.bankLogo
+                brandingShared.widgetBgImage = brandingShared.brandingInfoModel?.widgetBgImage
+                brandingShared.widgetBodyColor = brandingShared.brandingInfoModel?.widgetBodyColor
+                brandingShared.widgetFooterColor = brandingShared.brandingInfoModel?.widgetFooterColor
+                brandingShared.widgetHeaderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
+                brandingShared.widgetFooterTextColor = brandingShared.brandingInfoModel?.widgetFooterColor
+                brandingShared.widgetFooterPlaceholderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
                 self.sucessMethod(client: client, thread: thread)
             }
             
@@ -2598,7 +2668,7 @@ extension ChatMessagesViewController{
     
     // MARK: Sucess Chat Window
     func sucessMethod(client: BotClient?, thread: KREThread?){
-        
+        isAlreadyConnectedBot = true
         let dic = ["event_code": "BotConnected", "event_message": "Bot connected successfully"]
         let jsonString = Utilities.stringFromJSONObject(object: dic)
         NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)

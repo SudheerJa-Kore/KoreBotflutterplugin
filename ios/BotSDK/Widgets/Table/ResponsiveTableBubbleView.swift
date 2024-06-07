@@ -15,7 +15,7 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
     var tableView: UITableView!
     var showMoreButton: UIButton!
     var cardView : UIView!
-    
+    let bundle = KREResourceLoader.shared.resourceBundle()
     let cellReuseIdentifier = "CellIdentifier"
     let cellReuseIdentifier1 = "SubTableViewCell"
     var data: TableData = TableData()
@@ -45,14 +45,15 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
         self.cardView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.cardView)
         cardView.layer.rasterizationScale =  UIScreen.main.scale
-        cardView.layer.shadowColor = UIColor(red: 232/255, green: 232/255, blue: 230/255, alpha: 1).cgColor
-        cardView.layer.shadowOpacity = 1
-        cardView.layer.shadowOffset =  CGSize(width: 0.0, height: -3.0)
-        cardView.layer.shadowRadius = 6.0
+        cardView.layer.shadowColor = UIColor.clear.cgColor
+        cardView.layer.cornerRadius = 4.0
+        cardView.layer.borderWidth = 1.0
+        cardView.layer.borderColor = UIColor.lightGray.cgColor
+        cardView.clipsToBounds = true
         cardView.layer.shouldRasterize = true
         cardView.backgroundColor =  UIColor.white
         let cardViews: [String: UIView] = ["cardView": cardView]
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[cardView]-15-|", options: [], metrics: nil, views: cardViews))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[cardView]-0-|", options: [], metrics: nil, views: cardViews))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[cardView]-15-|", options: [], metrics: nil, views: cardViews))
     }
     override func initialize() {
@@ -91,11 +92,11 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
         self.cardView.addSubview(self.showMoreButton)
 
         
-        let views : [String: Any] = ["tableView": tableView,  "showMoreButton": showMoreButton]
+        let views : [String: Any] = ["tableView": tableView as Any,  "showMoreButton": showMoreButton as Any]
         
         self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[tableView]-15-|", options: [], metrics: nil, views: views))
         self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat:"V:|-15-[tableView]-15-|", options: [], metrics: nil, views: views))
-        self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[showMoreButton(44.0)]|", options: [], metrics: nil, views: views))
+        self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[showMoreButton(34.0)]|", options: [], metrics: nil, views: views))
         self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[showMoreButton]-15-|", options: [], metrics: nil, views: views))
         
     }
@@ -133,8 +134,8 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
             if indexPaths.contains(indexPath){
                 let subtableViewCell = SubTableViewCell(style: .default, reuseIdentifier: cellReuseIdentifier1)
                 subtableViewCell.backgroundColor = UIColor.white
-
-                subtableViewCell.accessoryView = UIImageView(image: UIImage(named: "arrowSelected"))
+                let image = UIImage(named: "arrowSelected", in: bundle, compatibleWith: nil)
+                subtableViewCell.accessoryView = UIImageView(image: image)
                 subtableViewCell.rows = data.rows
                 subtableViewCell.headers = data.headers
                 subtableViewCell.sec = indexPath.section
@@ -151,7 +152,8 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
                 if(row.count > indexPath.row*2+1){
                     cell.secondLbl.text = row[indexPath.row*2+1]
                 }
-                cell.accessoryView = UIImageView(image: UIImage(named: "arrowUnselected"))
+                let image = UIImage(named: "arrowUnselected", in: bundle, compatibleWith: nil)
+                cell.accessoryView = UIImageView(image: image)
                 cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 22)
                 return cell
                 
@@ -166,7 +168,8 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
             if(row.count > indexPath.row*2+1){
                 cell.secondLbl.text = row[indexPath.row*2+1]
             }
-            cell.accessoryView = UIImageView(image: UIImage(named: "arrowUnselected"))
+            let image = UIImage(named: "arrowUnselected", in: bundle, compatibleWith: nil)
+            cell.accessoryView = UIImageView(image: image)
             cell.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 22)
 
             
@@ -229,7 +232,7 @@ class ResponsiveTableBubbleView: BubbleView, UITableViewDelegate, UITableViewDat
     override var intrinsicContentSize : CGSize {
         var height: CGFloat = 44.0
         let noOfUnselectedRows = rowsDataLimit - indexPaths.count
-        height = (CGFloat(noOfUnselectedRows * 44)) + 36
+        height = (CGFloat(noOfUnselectedRows * 44)) + 6
         for i in  0..<(indexPaths.count) {
             height = height + CGFloat(data.rows[i].count * 44)
         }

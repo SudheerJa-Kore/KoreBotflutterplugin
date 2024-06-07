@@ -144,6 +144,7 @@ public class KRECarouselCardView: UIView, UIGestureRecognizerDelegate {
     
     public func configureForCardInfo(cardInfo: KRECardInfo) {
         isImagePresent = cardInfo.isImagePresent
+        imageView.contentMode = .scaleAspectFill
         if let imageUrlString = cardInfo.imageURL, let url = URL(string: imageUrlString) {
             imageView.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder_image"))
         }

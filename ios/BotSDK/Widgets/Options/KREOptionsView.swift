@@ -216,14 +216,11 @@ open class KREOptionsView: UIView, UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = option.title
             cell.textLabel?.textAlignment = .center
             //cell.textLabel?.textColor = UIColor.lightRoyalBlue
-            //cell.textLabel?.font = UIFont(name: "Gilroy-Regular", size: 16.0)
             cell.textLabel?.textColor = UIColor.init(hexString: "#1565C0")
             cell.backgroundColor = UIColor.init(hexString: "#E3F2FD")
             if #available(iOS 8.2, *) {
                 //cell.textLabel?.font = UIFont.textFont(ofSize: 14.0, weight: .medium)
                 cell.textLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-            } else {
-                // Fallback on earlier versions
             }
             
             return cell
@@ -313,11 +310,11 @@ open class KREOptionsView: UIView, UITableViewDataSource, UITableViewDelegate {
             if(option.optionType == KREOptionType.button){
                 height += kMaxRowHeight
             }else if(option.optionType == KREOptionType.list){
-                let cell:KREListTableViewCell = self.tableView(optionsTableView, cellForRowAt: IndexPath(row: options.index(of: option)!, section: 0)) as! KREListTableViewCell
+                let cell:KREListTableViewCell = self.tableView(optionsTableView, cellForRowAt: IndexPath(row: options.firstIndex(of: option)!, section: 0)) as! KREListTableViewCell
                 var fittingSize = UIView.layoutFittingCompressedSize
                 fittingSize.width = width
                 let size = cell.systemLayoutSizeFitting(fittingSize, withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000), verticalFittingPriority: UILayoutPriority(rawValue: 250))
-                height += size.height
+                height += size.height + 5
             }
         }
         return height

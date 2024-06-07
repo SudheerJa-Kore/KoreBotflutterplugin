@@ -25,7 +25,7 @@ class ComposeBarView: UIView {
     
     fileprivate var textViewTrailingConstraint: NSLayoutConstraint!
     fileprivate(set) public var isKeyboardEnabled: Bool = false
-    let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
+    var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
     
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -50,7 +50,7 @@ class ComposeBarView: UIView {
         self.addSubview(self.growingTextView)
         self.growingTextView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
         
-        let composeBarTextColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor) ?? "#26344A")
+        let composeBarTextColor = UIColor.init(hexString: (brandingShared.widgetFooterTextColor) ?? "#26344A")
         self.growingTextView.textView.tintColor = composeBarTextColor
         self.growingTextView.textView.textColor = composeBarTextColor
         self.growingTextView.textView.textAlignment = .right
@@ -63,6 +63,7 @@ class ComposeBarView: UIView {
         self.growingTextView.layer.cornerRadius = 10.0
         self.growingTextView.isUserInteractionEnabled = false
         
+        attributes = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString: (brandingShared.widgetDividerColor) ?? "#7C7C7C")]
         
         self.growingTextView.placeholderAttributedText = NSAttributedString(string: "Type your Message here", attributes:attributes)
         
@@ -88,9 +89,7 @@ class ComposeBarView: UIView {
         self.menuButton.clipsToBounds = true
         self.addSubview(self.menuButton)
         
-        let buttonBg = (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#2881DF" == "#FFFFFF" ? "#2881DF" : (brandingShared.brandingInfoModel?.widgetHeaderColor) ?? "#2881DF"
         
-        //let widgetHeaderColor = UIColor.init(hexString: buttonBg)
         self.sendButton = UIButton.init(frame: CGRect.zero)
         //self.sendButton.setTitle("Send", for: .normal)
         self.sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -149,13 +148,12 @@ class ComposeBarView: UIView {
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomLineView(0.5)]|", options:[], metrics:nil, views:views))
         
         
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[menuButton(30)]-10-[growingTextView]-10-[sendButton(30)]-0-[speechToTextButton(30)]-15-|", options:[], metrics:nil, views:views))
-        //self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[growingTextView]-5-[speechToTextButton]-5-|", options:[], metrics:nil, views:views))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[menuButton(0)]-10-[growingTextView]-10-[sendButton(30)]-0-[speechToTextButton(30)]-15-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[growingTextView]-8-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[sendButton]-12-|", options:[], metrics:nil, views:views))
         self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=3-[menuButton]-12-|", options:[], metrics:nil, views:views))
-        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton, attribute: .centerY, relatedBy: .equal, toItem: self.speechToTextButton, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton, attribute: .height, relatedBy: .equal, toItem: self.speechToTextButton, attribute: .height, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton as Any, attribute: .centerY, relatedBy: .equal, toItem: self.speechToTextButton as Any, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+        self.addConstraint(NSLayoutConstraint.init(item: self.sendButton as Any, attribute: .height, relatedBy: .equal, toItem: self.speechToTextButton as Any, attribute: .height, multiplier: 1.0, constant: 0.0))
         self.speechToTextButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
         self.speechToTextButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
         self.speechToTextButton.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
@@ -243,12 +241,10 @@ class ComposeBarView: UIView {
         //self.sendButton.isEnabled = hasText //kk
         if hasText{
             topLineView.backgroundColor = .black
-            var sendImage = UIImage.init(named: "")
+            var sendImage = UIImage.init(named: "sendS")
             if preferred_language_Type == preferredLanguage{
-                //self.sendButton.setImage(UIImage(named: "SendSAr", in: bundle, compatibleWith: nil), for: .normal)
                  sendImage = UIImage(named: "SendSAr", in: bundle, compatibleWith: nil)
             }else{
-                //self.sendButton.setImage(UIImage(named: "sendS", in: bundle, compatibleWith: nil), for: .normal)
                  sendImage = UIImage(named: "sendS", in: bundle, compatibleWith: nil)
             }
             let tintedsendImage = sendImage?.withRenderingMode(.alwaysTemplate)
@@ -261,7 +257,7 @@ class ComposeBarView: UIView {
             if preferred_language_Type == preferredLanguage{
                 self.sendButton.setImage(UIImage(named: "sendAr", in: bundle, compatibleWith: nil), for: .normal)
             }else{
-            self.sendButton.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
+                self.sendButton.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
             }
         }
         

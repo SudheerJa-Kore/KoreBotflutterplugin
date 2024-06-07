@@ -68,8 +68,8 @@ class ListViewDetailsViewController: UIViewController {
         self.tableview.register(UINib(nibName: listTransAMultiLineCellIdentifier, bundle: bundle), forCellReuseIdentifier: listTransAMultiLineCellIdentifier)
         
         
-        subView.backgroundColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor) ?? "#FFFFFF")
-        headingLabel.textColor = UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetTextColor)!)
+        subView.backgroundColor = UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
+        headingLabel.textColor = UIColor.init(hexString: (brandingShared.widgetTextColor)  ?? "#000000")
         getData()
     }
     func getData(){
@@ -334,7 +334,7 @@ extension ListViewDetailsViewController: UITableViewDelegate,UITableViewDataSour
             let cell : NewListTableViewCell = tableView.dequeueReusableCell(withIdentifier: listCellIdentifier) as! NewListTableViewCell
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
-            cell.bgView.backgroundColor =  UIColor.init(hexString: (brandingShared.brandingInfoModel?.widgetBodyColor)!)//bubbleViewBotChatButtonBgColor
+            cell.bgView.backgroundColor =  UIColor.init(hexString: (brandingShared.widgetBodyColor) ?? "#FFFFFF")
             
             let elements = arrayOfElements[indexPath.row] as ComponentElements
             if elements.imageURL == nil{

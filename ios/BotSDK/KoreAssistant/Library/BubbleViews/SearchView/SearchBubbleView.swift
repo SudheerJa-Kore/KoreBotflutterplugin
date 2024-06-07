@@ -211,7 +211,8 @@ class SearchBubbleView: BubbleView {
         arrowImgv.image = jeremyGif
         arrowImgv.contentMode = .scaleAspectFit
         arrowImgv.image = jeremyGif?.withRenderingMode(.alwaysTemplate)
-        arrowImgv.tintColor = widgetHeaderColor
+        let brandingShared = BrandingSingleton.shared
+        arrowImgv.tintColor = UIColor.init(hexString: (brandingShared.widgetHeaderColor) ?? "#ffffff")
         
         let subView: [String: UIView] = ["titleLbl": titleLbl, "descLbl": descLbl, "readMoreBtn": readMoreBtn, "sourceLbl": sourceLbl,"urlLbl": urlLbl, "arrowImgv": arrowImgv]
         self.tileBgv.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[titleLbl(>=21)]-5-[descLbl(>=21)]-0-[readMoreBtn(30)]-5-[sourceLbl(>=21)]-5-[urlLbl(>=21)]-10-|", options: [], metrics: nil, views: subView))

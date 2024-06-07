@@ -164,12 +164,7 @@ open class KABotClient: NSObject {
                         self?.isConnecting = false
                         self?.isConnected = false
                         
-                        //self?.tryConnect()
-                        if weakSelf.retryCount <= 4{
-                            self?.tryConnect()
-                        }else{
-                            NotificationCenter.default.post(name: Notification.Name(tokenExipryNotification), object: nil)
-                        }
+                        self?.tryConnect()
                     })
                 }
             }
@@ -249,7 +244,7 @@ open class KABotClient: NSObject {
             
         }
         
-        botClient.onUserMessageReceived = { [weak self] (object) in
+        botClient.onUserMessageReceived = {  (object) in
             if let message = object["message"] as? [String:Any]{
                 if let agentTyping = message["type"] as? String{
                     if agentTyping == "typing"{
@@ -310,7 +305,7 @@ open class KABotClient: NSObject {
     }
     
     func getComponentType(_ templateType: String,_ tabledesign:String) -> ComponentType {
-        if (templateType == "quick_repliess") {
+        if (templateType == "quick_replies") {
             return .quickReply
         } else if (templateType == "buttonn") {
             return .options
@@ -341,7 +336,7 @@ open class KABotClient: NSObject {
         else if (templateType == "daterange" || templateType == "dateTemplate") {
             return .calendarView
         }
-        else if (templateType == "quick_replies_welcome" || templateType == "button" || templateType == "quick_replies"){
+        else if (templateType == "quick_replies_welcome" || templateType == "button" || templateType == "quick_repliess"){
             return .quick_replies_welcome
         }
         else if (templateType == "Notification") {
@@ -410,6 +405,8 @@ open class KABotClient: NSObject {
             return .details_list_template
         }else if (templateType == "search"){
             return .search_template
+        }else if (templateType == "bankingFeedbackTemplate"){
+            return .bankingFeedbackTemplate
         }
         return .text
     }
@@ -454,7 +451,9 @@ open class KABotClient: NSObject {
         
         if let iconUrl = object?.iconUrl {
             message.iconUrl = iconUrl
-            //reciverIcon = iconUrl
+            botHistoryIcon = iconUrl
+        }else{
+            message.iconUrl = botHistoryIcon
         }
         
         if let fromAgent = object?.fromAgent, fromAgent == true{
@@ -475,9 +474,6 @@ open class KABotClient: NSObject {
             case "text":
                 if let payload = componentModel.payload as? [String: Any],
                    let text = payload["text"] as? String {
-                    //                    if text == "Login Form is successfully submitted."{ 
-                    //                        text = "Thank you!"
-                    //                    }
                     let textComponent = Component()
                     textComponent.payload = text
                     ttsBody = text
@@ -504,7 +500,7 @@ open class KABotClient: NSObject {
                     
                     let string = text
                     let character: Character = "*"
-                    if string.contains(character) {
+                    if string.contains(character) ||  string.contains("http"){
                         print("\(string) contains \(character)")
                         if message.messageType == .default{
                             message.addComponent(textComponent)
@@ -519,6 +515,16 @@ open class KABotClient: NSObject {
                     }
                     
                     return (message, ttsBody)
+                }
+            case "image":
+                if let payload = componentModel.payload as? [String: Any] {
+                    if let dictionary = payload["payload"] as? [String: Any] {
+                        let optionsComponent: Component = Component(.image)
+                        optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                        message.sentDate = object?.createdOn
+                        message.addComponent(optionsComponent)
+                        return (message, ttsBody)
+                    }
                 }
             case "template":
                 if let payload = componentModel.payload as? [String: Any] {
@@ -721,6 +727,40 @@ open class KABotClient: NSObject {
                             }
                             
                         }
+                    case "image":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let optionsComponent: Component = Component(.image)
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "message":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let  componentType = dictionary["audioUrl"] != nil ? Component(.audio) : Component(.video)
+                            let optionsComponent: Component = componentType
+                            if let speechText = dictionary["text"] as? String{
+                                ttsBody = speechText
+                            }
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "video":
+                        if let _ = payload["payload"] as? [String: Any] {
+                            let  componentType = Component(.video)
+                            let optionsComponent: Component = componentType
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: payload)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
+                    case "audio":
+                        if let dictionary = payload["payload"] as? [String: Any] {
+                            let  componentType = Component(.audio)
+                            let optionsComponent: Component = componentType
+                            optionsComponent.payload = Utilities.stringFromJSONObject(object: dictionary)
+                            message.sentDate = object?.createdOn
+                            message.addComponent(optionsComponent)
+                        }
                     case "error":
                         if let dictionary = payload["payload"] as? [String: Any] {
                             let errorComponent: Component = Component(.error)
@@ -905,18 +945,14 @@ open class KABotClient: NSObject {
     
     
     // MARK: get Branding Values request
-    func brandingApiRequest(_ accessToken: String!, success:((_ brandingArray: NSArray) -> Void)?, failure:((_ error: Error) -> Void)?) {
-        
-        let urlString: String =  "\(SDKConfiguration.serverConfig.Branding_SERVER)workbench/api/workbench/sdkData?objectId=hamburgermenu&objectId=brandingwidgetdesktop"
+    func brandingApiRequest(_ accessToken: String!, success:((_ brandingDic: [String: Any]) -> Void)?, failure:((_ error: Error) -> Void)?) {
+        //https://bots.kore.ai/api/websdkthemes/st-183e9c7d-fc8a-56d8-ba47-2733f8767d6b/activetheme
+        let urlString: String =  "\(SDKConfiguration.serverConfig.BOT_SERVER)/api/websdkthemes/\(SDKConfiguration.botConfig.botId)/activetheme"
         let authorizationStr = "bearer \(accessToken!)"
         let headers : HTTPHeaders = [
-            "Connection":"Keep-Alive",
-            "Accept-Language": "en_US",
-            "Authorization": authorizationStr,
-            "tenantId": SDKConfiguration.botConfig.tenantId,
-            "Accepts-version": "1",
-            "botid": SDKConfiguration.botConfig.botId,
-            "state": "published"
+            "Keep-Alive": "Connection",
+            "Content-Type": "application/json",
+            "Authorization": authorizationStr
         ]
         
         let dataRequest = sessionManager.request(urlString, method: .get, parameters: [:], headers: headers)
@@ -927,7 +963,7 @@ open class KABotClient: NSObject {
                 return
             }
             
-            if let responseObject = response.value as? NSArray {
+            if let responseObject = response.value as? [String: Any] {
                 success?(responseObject)
             } else {
                 failure?(NSError(domain: "", code: 0, userInfo: [:]))
@@ -965,7 +1001,7 @@ open class KABotClient: NSObject {
         //getHistory - fetch all the history that the bot has previously
         botClient.getHistory(offset: offset, limit: limit, success: { [weak self] (responseObj) in
             if let responseObject = responseObj as? [String: Any], let messages = responseObject["messages"] as? Array<[String: Any]> {
-                //self?.insertOrUpdateHistoryMessages(messages)
+                botHistoryIcon = responseObject["icon"] as? String
                 print("History messges \(messages.count) \(messages)")
                 let reverse: Array<[String: Any]> = messages.reversed()
                 if showWelcomeMsg != "Yes"{

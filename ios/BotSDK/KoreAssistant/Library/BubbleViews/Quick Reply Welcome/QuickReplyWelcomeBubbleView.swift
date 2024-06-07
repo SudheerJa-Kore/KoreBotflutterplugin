@@ -293,41 +293,24 @@ extension QuickReplyWelcomeBubbleView : UICollectionViewDelegate, UICollectionVi
         
         if isQuickReplies{
             let elements = arrayOfElements[indexPath.row]
-            if elements.type == "web_url"{
+            if elements.type == "web_url" || elements.type == "url"{
                     self.linkAction?(elements.url)
             }else{
                 self.optionsAction(elements.title, elements.payload)
+                self.maskview.isHidden = false
             }
         }else{
             let elements = arrayOfButtons[indexPath.row]
-            if elements.type == "web_url"{
+            if elements.type == "web_url" || elements.type == "url"{
                 self.linkAction?(elements.url)
             }else{
                 self.optionsAction(elements.title, elements.payload)
+                self.maskview.isHidden = false
             }
         }
-        self.maskview.isHidden = false
+        
     }
-//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath){
-//        let cell = collectionView.cellForItem(at: indexPath) as! ButtonLinkCell
-//
-//        let textColor =  UserDefaults.standard.value(forKey: "ButtonBgColor") as? String
-//        let bgColor =  UserDefaults.standard.value(forKey: "ButtonTextColor") as? String
-//        cell.textlabel.textColor = UIColor.init(hexString: bgColor ?? "ff5e00")
-//        cell.contentView.backgroundColor = UIColor.init(hexString: textColor ?? "ffffff")
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath){
-//        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in
-//            let cell = collectionView.cellForItem(at: indexPath) as! ButtonLinkCell
-//
-//            let textColor =  UserDefaults.standard.value(forKey: "ButtonBgColor") as? String
-//            cell.textlabel.textColor = UIColor.init(hexString: textColor ?? "ff5e00")
-//
-//            let bgColor =  UserDefaults.standard.value(forKey: "ButtonTextColor") as? String
-//            cell.contentView.backgroundColor = UIColor.init(hexString: bgColor ?? "ffffff")
-//        }
-//    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var text:String?
         if isQuickReplies{
