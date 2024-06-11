@@ -17,7 +17,7 @@ class ButtonLinkNCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        titleBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        titleBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         let bundle = KREResourceLoader.shared.resourceBundle()
         let chatHisImg = UIImage.init(named: "buttonLink", in: bundle, compatibleWith: nil)

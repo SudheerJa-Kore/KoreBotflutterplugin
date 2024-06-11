@@ -51,7 +51,7 @@ class ContactCardBubbleView: BubbleView {
         self.headingLabel = UILabel(frame: CGRect.zero)
         self.headingLabel.textColor = BubbleViewBotChatTextColor
         self.headingLabel.backgroundColor = UIColor.clear
-        self.headingLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.headingLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -150,14 +150,12 @@ extension ContactCardBubbleView: UITableViewDelegate,UITableViewDataSource{
         cell.phonenoLbl.tintColor = .black
         cell.phonenoLbl.isUserInteractionEnabled = false
         cell.emailLbl.textColor = .black
-        cell.nameLbl.font =  UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        cell.phonenoLbl.font =  UIFont(name: "29LTBukra-Regular", size: 12.0)
-        cell.emailLbl.font =  UIFont(name: "29LTBukra-Regular", size: 12.0)
+        cell.nameLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cell.phonenoLbl.font =  UIFont(name: regularCustomFont, size: 12.0)
+        cell.emailLbl.font =  UIFont(name: regularCustomFont, size: 12.0)
         if cards.userIcon == nil || cards.userIcon == ""{
-            //cell.profilePicWidthConstraint.constant = 0.0
             cell.profilePic.image = UIImage(named: "faceIcon")
         }else{
-            //cell.profilePicWidthConstraint.constant = 60.0
             let url = URL(string: cards.userIcon!)
             cell.profilePic.af_setImage(withURL: url!, placeholderImage: UIImage(named: "faceIcon"))
         }

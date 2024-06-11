@@ -102,7 +102,7 @@ class IDFCUpdatedCarouselBubbleView: BubbleView {
         
         self.titleLbl = KREAttributedLabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -181,7 +181,7 @@ class IDFCUpdatedCarouselBubbleView: BubbleView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacing = 0.25 * 16.0
         let myAttributes = [NSAttributedString.Key.foregroundColor:UIColor(hex: 0x353535),
-                            NSAttributedString.Key.font: UIFont(name: "29LTBukra-SemiBold", size: 14.0),
+                            NSAttributedString.Key.font: UIFont(name: semiBoldCustomFont, size: 14.0),
                             NSAttributedString.Key.paragraphStyle:paragraphStyle]
         let mutableAttrString = NSMutableAttributedString(string: title, attributes: myAttributes as [NSAttributedString.Key : Any])
         return mutableAttrString
@@ -311,7 +311,7 @@ extension IDFCUpdatedCarouselBubbleView : UICollectionViewDelegate, UICollection
             cell.tagLbl.text = tagInfo.title?.uppercased()
             cell.tagLbl.textColor = UIColor.init(hexString: tagInfo.styles?.color ?? "#26344A")
             cell.tagLbl.backgroundColor = UIColor.init(hexString: tagInfo.styles?.background ?? "#b5e90b")
-            let size = cell.tagLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 12.0) as Any])
+            let size = cell.tagLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 12.0) as Any])
             if cell.tagLbl.text != nil {
                 cell.tagLblWidthConstraint.constant = (size?.width)! + 30.0
             }
@@ -329,7 +329,6 @@ extension IDFCUpdatedCarouselBubbleView : UICollectionViewDelegate, UICollection
         }
         
         cell.titleLbl.setHTMLString(arrayOfElementsTitles[indexPath.item] as? String ?? "", withWidth: CGFloat(cellWidth))
-        //cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
         cell.titleLbl.textColor = BubbleViewUserChatTextColor
         cell.carouselBtn.setTitleColor(BubbleViewBotChatTextColor, for: .normal)
         cell.layer.borderColor = UIColor.clear.cgColor

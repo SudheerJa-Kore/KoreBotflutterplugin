@@ -25,7 +25,7 @@ class CalenderBubbleView: BubbleView {
     var arrayOfSeletedValues = [String]()
     
     let yourAttributes : [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.font : UIFont(name: "29LTBukra-Medium", size: 12.0) as Any,
+        NSAttributedString.Key.font : UIFont(name: mediumCustomFont, size: 12.0) as Any,
         NSAttributedString.Key.foregroundColor : UIColor.blue,
         NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue]
     
@@ -76,7 +76,7 @@ class CalenderBubbleView: BubbleView {
         
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true

@@ -142,7 +142,7 @@ extension ButtonLinkBubbleView : UICollectionViewDelegate, UICollectionViewDataS
         cell.backgroundColor = .clear
         let elements = arrayOfElements[indexPath.row]
         cell.textlabel.text = elements.title
-        cell.textlabel.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cell.textlabel.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         cell.textlabel.textAlignment = .center
         cell.textlabel.textColor = bubbleViewBotChatButtonTextColor
         cell.bgV.backgroundColor = bubbleViewBotChatButtonBgColor
@@ -184,7 +184,7 @@ extension ButtonLinkBubbleView : UICollectionViewDelegate, UICollectionViewDataS
 //        cell.textlabel.text = text
 //        cell.layer.cornerRadius = 20.0
         var textWidth = 10
-        let size = text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-SemiBold", size: 14.0) as Any])
+        let size = text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any])
         if text != nil {
             textWidth = Int(size!.width)
         }

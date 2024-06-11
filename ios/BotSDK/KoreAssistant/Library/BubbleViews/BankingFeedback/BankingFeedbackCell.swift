@@ -16,7 +16,7 @@ class BankingFeedbackCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 12)
+        titleLbl.font = UIFont(name: regularCustomFont, size: 12)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

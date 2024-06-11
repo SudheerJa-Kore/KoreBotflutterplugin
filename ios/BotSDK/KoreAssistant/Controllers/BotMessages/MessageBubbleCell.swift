@@ -24,7 +24,7 @@ class MessageBubbleCell : UITableViewCell {
         let dateLabel = UILabel(frame: .zero)
         dateLabel.numberOfLines = 0
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
+        dateLabel.font = UIFont(name: regularCustomFont, size: 10.0)
         dateLabel.textColor = .lightGray
         dateLabel.isHidden = false
         return dateLabel

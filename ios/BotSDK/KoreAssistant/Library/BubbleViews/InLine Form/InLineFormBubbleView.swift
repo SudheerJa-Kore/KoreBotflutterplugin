@@ -27,7 +27,7 @@ class InLineFormBubbleView: BubbleView {
     public var optionsAction: ((_ text: String?, _ payload: String?) -> Void)!
     
     let yourAttributes : [NSAttributedString.Key: Any] = [
-    NSAttributedString.Key.font : UIFont(name: "29LTBukra-Medium", size: 14.0) as Any,
+    NSAttributedString.Key.font : UIFont(name: mediumCustomFont, size: 14.0) as Any,
     NSAttributedString.Key.foregroundColor : bubbleViewBotChatButtonTextColor]
     var arrayOfTextFieldsText = NSMutableArray()
     let activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
@@ -59,7 +59,7 @@ class InLineFormBubbleView: BubbleView {
         self.headingLabel.mentionTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.hashtagTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.linkTextColor = Common.UIColorRGB(0x0076FF)
-        self.headingLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.headingLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -136,7 +136,7 @@ class InLineFormBubbleView: BubbleView {
     }
     
     override var intrinsicContentSize : CGSize {
-        self.headingLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.headingLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         let limitingSize: CGSize  = CGSize(width: BubbleViewMaxWidth - 20, height: CGFloat.greatestFiniteMagnitude)
         let headingLabelSize: CGSize = self.headingLabel.sizeThatFits(limitingSize)
         sendButton.isHidden = false
@@ -351,7 +351,7 @@ extension InLineFormBubbleView: UITableViewDelegate,UITableViewDataSource{
         }
         
        
-        let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Medium", size: 14.0)!, NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: mediumCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
 
         cell.textFeildName.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: attributes)
 
@@ -385,7 +385,7 @@ extension InLineFormBubbleView: UITableViewDelegate,UITableViewDataSource{
         sendButton.clipsToBounds = true
         sendButton.layer.cornerRadius = 5
         sendButton.setTitleColor(bubbleViewBotChatButtonTextColor, for: .normal)
-        sendButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        sendButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(sendButton)
         sendButton.addTarget(self, action: #selector(self.tapsOnInlineFormBtn(_:)), for: .touchUpInside)
         sendButton.tag = section

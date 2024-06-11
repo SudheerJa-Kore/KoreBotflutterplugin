@@ -61,19 +61,19 @@ class CustomFeedbackViewController: UIViewController, UIGestureRecognizerDelegat
         if #available(iOS 11.0, *) {
             emojiView.roundCorners([ .layerMaxXMinYCorner, .layerMinXMinYCorner], radius: 15.0, borderColor: UIColor.lightGray, borderWidth: 0)
         }
-        emojiTitleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        emojiNotNowBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        emojiTitleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        emojiNotNowBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         emojiNotNowBtn.setTitleColor(themeColor, for: .normal)
         
         feedbackV.isHidden = true
         if #available(iOS 11.0, *) {
             feedbackV.roundCorners([ .layerMaxXMinYCorner, .layerMinXMinYCorner], radius: 15.0, borderColor: UIColor.lightGray, borderWidth: 0)
         }
-        feedbackTitleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        feedbacktxtV.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        feedbackPlaceholderLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        feedbackTitleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        feedbacktxtV.font = UIFont(name: regularCustomFont, size: 14.0)
+        feedbackPlaceholderLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         feedbackPlaceholderLbl.textColor = .lightGray
-        feedbackNotNowBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        feedbackNotNowBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         feedbackNotNowBtn.setTitleColor(themeColor, for: .normal)
         
         feedbacktxtV.layer.cornerRadius = 4.0
@@ -84,14 +84,14 @@ class CustomFeedbackViewController: UIViewController, UIGestureRecognizerDelegat
         feedbackSubmitBtn.layer.cornerRadius = 4.0
         feedbackSubmitBtn.clipsToBounds = true
         feedbackSubmitBtn.isUserInteractionEnabled = false
-        feedbackSubmitBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        feedbackSubmitBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         thanksView.isHidden = true
         if #available(iOS 11.0, *) {
             thanksView.roundCorners([ .layerMaxXMinYCorner, .layerMinXMinYCorner], radius: 15.0, borderColor: UIColor.lightGray, borderWidth: 0)
         }
-        thanksTitleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        closeBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        thanksTitleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        closeBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         closeBtn.backgroundColor = themeColor
         closeBtn.layer.cornerRadius = 4.0
         closeBtn.clipsToBounds = true

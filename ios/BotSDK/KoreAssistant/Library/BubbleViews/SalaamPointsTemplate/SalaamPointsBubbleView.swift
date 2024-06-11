@@ -126,7 +126,7 @@ class SalaamPointsBubbleView: BubbleView {
         self.titleLbl.linkTextColor = BubbleViewBotChatTextColor
         self.titleLbl.mentionTextColor = BubbleViewBotChatTextColor
         self.titleLbl.hashtagTextColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -196,7 +196,7 @@ class SalaamPointsBubbleView: BubbleView {
                     let details = arrayOfCardDetails[i]
                     let values = details.value
                     lbl.numberOfLines = 0
-                    lbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+                    lbl.font = UIFont(name: regularCustomFont, size: 14.0)
                     lbl.text = values
                     let width = UIScreen.main.bounds.size.width - 50 
                     let height = lbl.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
@@ -273,7 +273,7 @@ class SalaamPointsBubbleView: BubbleView {
             let details = arrayOfCardDetails[i]
             let values = details.value
             lbl.numberOfLines = 0
-            lbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0) // make sure you set this correctly
+            lbl.font = UIFont(name: regularCustomFont, size: 14.0)
             lbl.text = values
             let width = UIScreen.main.bounds.size.width - 50 // the width of the view you are constraint to, keep in mind any applied margins here
             let height = lbl.systemLayoutSizeFitting(CGSize(width: width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
@@ -397,7 +397,7 @@ extension SalaamPointsBubbleView: UITableViewDelegate,UITableViewDataSource{
             cell.copyBtn.tag = indexPath.row
             cell.copyBtnWidthConstraint.constant = 0
             if let copy = cardsDetails.copyValue{
-                let size = copy.size(withAttributes:[.font: UIFont(name: "29LTBukra-Medium", size: 12.0)!])
+                let size = copy.size(withAttributes:[.font: UIFont(name: mediumCustomFont, size: 12.0)!])
                 cell.copyBtnWidthConstraint.constant = size.width + 10
                 cell.copyBtn.setTitle(copy, for: .normal)
             }
@@ -419,7 +419,7 @@ extension SalaamPointsBubbleView: UITableViewDelegate,UITableViewDataSource{
         copyBtn.layer.cornerRadius = 5
         copyBtn.setTitleColor(themeColor, for: .normal)
         copyBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        copyBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        copyBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
             view.addSubview(copyBtn)
         copyBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         copyBtn.addTarget(self, action: #selector(self.copyButtonAction(_:)), for: .touchUpInside)
@@ -434,7 +434,7 @@ extension SalaamPointsBubbleView: UITableViewDelegate,UITableViewDataSource{
         shareBtn.layer.cornerRadius = 5
         shareBtn.setTitleColor(themeColor, for: .normal)
         shareBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        shareBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        shareBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(shareBtn)
         shareBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         shareBtn.addTarget(self, action: #selector(self.shareButtonAction(_:)), for: .touchUpInside)
@@ -450,7 +450,7 @@ extension SalaamPointsBubbleView: UITableViewDelegate,UITableViewDataSource{
         showMoreBtn.layer.cornerRadius = 5
         showMoreBtn.setTitleColor(themeColor, for: .normal)
         showMoreBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        showMoreBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        showMoreBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(showMoreBtn)
         showMoreBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         showMoreBtn.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)

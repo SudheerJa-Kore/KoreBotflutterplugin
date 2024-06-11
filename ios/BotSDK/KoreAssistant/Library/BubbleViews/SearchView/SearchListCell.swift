@@ -28,8 +28,8 @@ class SearchListCell: UITableViewCell {
         self.bgV.layer.shadowRadius = 4
         self.bgV.layer.shadowOffset = CGSize(width: 0 , height:2)
         
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        descLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        descLbl.font = UIFont(name: regularCustomFont, size: 14.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

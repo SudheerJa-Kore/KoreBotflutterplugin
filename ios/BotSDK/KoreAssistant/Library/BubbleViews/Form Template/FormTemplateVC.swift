@@ -53,7 +53,7 @@ class FormTemplateVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        errorLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        errorLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         errorLbl.isHidden = true
         tabV.register(UINib.init(nibName: "FormTemplateCell", bundle: bundle), forCellReuseIdentifier: "FormTemplateCell")
         if #available(iOS 11.0, *) {
@@ -64,18 +64,18 @@ class FormTemplateVC: UIViewController {
         
         //SearchView
         searchView.isHidden = true
-        headingLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        headingLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         headingLbl.textColor = .black
         
         searchV.layer.cornerRadius = 4.0
         searchV.layer.borderWidth = 1.0
         searchV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         
-        searchTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        searchTF.font = UIFont(name: regularCustomFont, size: 14.0)
         searchTF.textColor =  UIColor.init(hexString: "#333333")
         let attributes = [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray,
-            NSAttributedString.Key.font : UIFont(name: "29LTBukra-Regular", size: 14)
+            NSAttributedString.Key.font : UIFont(name: regularCustomFont, size: 14)
         ]
         self.searchTF.attributedPlaceholder = NSAttributedString(string: "Search", attributes:attributes as [NSAttributedString.Key : Any])
         
@@ -356,8 +356,8 @@ extension FormTemplateVC: UITableViewDelegate, UITableViewDataSource{
                 cell.bgVTF.clipsToBounds = true
                 cell.bgVTF.backgroundColor = UIColor(red: 0.973, green: 0.976, blue: 0.988, alpha: 1)
                 
-                cell.addressTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-                cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+                cell.addressTF.font = UIFont(name: regularCustomFont, size: 14.0)
+                cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
                 cell.arrowBtn.isHidden = true
                 cell.addressTF.isUserInteractionEnabled = true
                 let fields = arrayOfFields[indexPath.row]
@@ -385,8 +385,8 @@ extension FormTemplateVC: UITableViewDelegate, UITableViewDataSource{
                 cell.bgVTF.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
                 cell.bgVTF.clipsToBounds = true
 
-                cell.addressTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-                cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+                cell.addressTF.font = UIFont(name: regularCustomFont, size: 14.0)
+                cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
                 cell.arrowBtn.isHidden = false
                 cell.addressTF.isUserInteractionEnabled = false
                 cell.arrowBtn.addTarget(self, action: #selector(self.contriesButtonAction(_:)), for: .touchUpInside)
@@ -450,7 +450,7 @@ extension FormTemplateVC: UITableViewDelegate, UITableViewDataSource{
         submitBtn.layer.cornerRadius = 5
         submitBtn.setTitleColor(themeColor, for: .normal)
         submitBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        submitBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        submitBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)!
         view.addSubview(submitBtn)
         submitBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         submitBtn.addTarget(self, action: #selector(self.submitButtonAction(_:)), for: .touchUpInside)
@@ -488,7 +488,7 @@ extension FormTemplateVC {
         dropDown.shadowRadius = 25
         dropDown.animationduration = 0.25
         dropDown.textColor = .darkGray
-        dropDown.textFont  = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        dropDown.textFont  = UIFont(name: mediumCustomFont, size: 14.0)
         setupColorDropDown()
     }
     // MARK: Setup DropDown

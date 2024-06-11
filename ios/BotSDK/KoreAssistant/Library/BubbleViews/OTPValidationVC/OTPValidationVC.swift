@@ -66,18 +66,18 @@ class OTPValidationVC: UIViewController, UITextFieldDelegate {
         cellImgv.tintColor = themeColor
         
         
-        HeadingLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        descLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        notRecivedotpLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        HeadingLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        descLbl.font = UIFont(name: regularCustomFont, size: 14.0)
+        notRecivedotpLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         notRecivedotpLbl.textColor = themeColor
         secondsLbl.textColor = themeColor
-        mobileNoLbl.font = UIFont(name: "29LTBukra-Regular", size: 16.0)
-        firstTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        secondTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        thirdTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        foruthTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        fifthTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        sixthTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
+        mobileNoLbl.font = UIFont(name: regularCustomFont, size: 16.0)
+        firstTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        secondTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        thirdTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        foruthTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        fifthTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        sixthTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
         
         firstTF.layer.cornerRadius = 4.0
         firstTF.layer.borderWidth = 2.0
@@ -153,7 +153,7 @@ class OTPValidationVC: UIViewController, UITextFieldDelegate {
         }
         
         resendBtn.isHidden = true
-        resendBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        resendBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         resendBtn.setTitleColor(themeColor, for: .normal)
         resendBtn.backgroundColor = .clear
         resendBtn.layer.cornerRadius = 4.0

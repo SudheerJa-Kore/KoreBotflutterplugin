@@ -53,7 +53,7 @@ class PdfShowViewController: UIViewController {
                                 let fileArray = fileName?.components(separatedBy: "/")
                                 let finalFileName = fileArray?.last
                                 titleLbl.text = finalFileName
-                                titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+                                titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
                             }
                             self.view.backgroundColor = BubbleViewLeftTint
                         }

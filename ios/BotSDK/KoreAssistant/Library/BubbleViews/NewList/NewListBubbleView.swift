@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import korebotplugin
+
 class NewListBubbleView: BubbleView {
     static let elementsLimit: Int = 4
     
@@ -31,7 +31,7 @@ class NewListBubbleView: BubbleView {
     var templateLanguage:String?
     
     let yourAttributes : [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.font : UIFont(name: "29LTBukra-Regular", size: 12.0) as Any,
+        NSAttributedString.Key.font : UIFont(name: regularCustomFont, size: 12.0) as Any,
         NSAttributedString.Key.foregroundColor : themeColor,
         NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue]
  
@@ -127,7 +127,7 @@ class NewListBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -138,11 +138,7 @@ class NewListBubbleView: BubbleView {
         self.titleLbl.linkTextColor = BubbleViewBotChatTextColor
         self.titleLbl.tintColor = BubbleViewBotChatTextColor
         self.tileBgv.addSubview(self.titleLbl)
-        
-//        if (templateLanguage?.caseInsensitiveCompare(preferred_language_Type) == .orderedSame){
-//            self.titleLbl.textAlignment = .right
-//        }
-        
+
         let subView: [String: UIView] = ["titleLbl": titleLbl]
         self.tileBgv.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[titleLbl(>=21)]-16-|", options: [], metrics: nil, views: subView))
         self.tileBgv.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[titleLbl]-16-|", options: [], metrics: nil, views: subView))
@@ -437,7 +433,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 cell.priceLbl.text = price?.replacingOccurrences(of: "<br />", with: "\n")
                 
                 cell.priceLblWidthConstraint.constant = 10
-                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                 if cell.priceLbl.text != nil {
                     cell.priceLblWidthConstraint.constant = (size?.width)! + 10.0
                  }
@@ -509,7 +505,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 cell.priceLbl.text = elements.value
                 
                 cell.priceLblWidthConstraint.constant = 10
-                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                 if cell.priceLbl.text != nil {
                     cell.priceLblWidthConstraint.constant = (size?.width)! + 10.0
                 }
@@ -613,7 +609,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                     }
                     //cell.valueLabelWidthConstraint.constant = 85
                    cell.valueLabelWidthConstraint.constant = 10
-                   let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+                   let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                    if cell.priceLbl.text != nil {
                        cell.valueLabelWidthConstraint.constant = (size?.width)! + 10.0
                     }
@@ -682,20 +678,10 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
                 cell.tagBtn.setTitleColor(themeColor, for: .normal)
                 cell.tagBtn.layer.cornerRadius = 5.0
                 
-                let size = tagBtnText.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 9.0)!])
+                let size = tagBtnText.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                 cell.tagBtnWidthConstraint.constant = (size.width) + 10.0
             }
-                    
-                    
-            //       let moreButtonHeight =  arrayOfComponents.count > rowsDataLimit ? 35.0 : 0.0
-            //        if moreButtonHeight == 0.0{
-            //            cell.bgView.layer.masksToBounds = false
-            //            cell.underlineLbl.isHidden = true
-            //        }else{
-            //            cell.bgView.layer.masksToBounds = true
-            //            cell.underlineLbl.isHidden = false
-            //        }
-                    
+
             if (templateLanguage?.caseInsensitiveCompare(preferred_language_Type) == .orderedSame){
                 cell.bgView.semanticContentAttribute = .forceRightToLeft
                 cell.titleLabel.textAlignment = .right
@@ -749,7 +735,7 @@ extension NewListBubbleView: UITableViewDelegate,UITableViewDataSource{
             showMoreButton.layer.cornerRadius = 5
             showMoreButton.setTitleColor(themeColor, for: .normal)
             showMoreButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-            showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+            showMoreButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
             view.addSubview(showMoreButton)
             showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
             showMoreButton.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)

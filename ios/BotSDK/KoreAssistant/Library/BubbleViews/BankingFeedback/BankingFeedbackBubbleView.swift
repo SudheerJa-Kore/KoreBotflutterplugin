@@ -345,7 +345,7 @@ extension BankingFeedbackBubbleView: UITableViewDelegate,UITableViewDataSource{
         let label = UILabel()
         label.frame = CGRect.init(x: 10, y: 0, width: headerView.frame.width-20, height: headerView.frame.height)
         label.text = headersArray[section] as? String
-        label.font = UIFont(name: "29LTBukra-Medium", size: 14)
+        label.font = UIFont(name: mediumCustomFont, size: 14)
         label.numberOfLines = 2
         label.textColor = .black
         headerView.addSubview(label)
@@ -378,7 +378,7 @@ extension BankingFeedbackBubbleView: UITableViewDelegate,UITableViewDataSource{
         txtView.layer.cornerRadius = 5
         txtView.layer.cornerRadius = 5.0
         txtView.layer.borderWidth = 1.0
-        txtView.font = UIFont(name: "29LTBukra-Regular", size: 14)
+        txtView.font = UIFont(name: regularCustomFont, size: 14)
         txtView.layer.borderColor = UIColor.gray.cgColor
         view.addSubview(txtView)
         
@@ -387,7 +387,7 @@ extension BankingFeedbackBubbleView: UITableViewDelegate,UITableViewDataSource{
         placeHolderlbl.translatesAutoresizingMaskIntoConstraints = false
         placeHolderlbl.clipsToBounds = true
         placeHolderlbl.text = "Tell us more.."
-        placeHolderlbl.font = UIFont(name: "29LTBukra-Regular", size: 14)
+        placeHolderlbl.font = UIFont(name: regularCustomFont, size: 14)
         placeHolderlbl.textColor = .darkGray
         view.addSubview(placeHolderlbl)
         
@@ -399,7 +399,7 @@ extension BankingFeedbackBubbleView: UITableViewDelegate,UITableViewDataSource{
         confirmBtn.layer.cornerRadius = 5
         confirmBtn.setTitleColor(.white, for: .normal)
         confirmBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        confirmBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        confirmBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(confirmBtn)
         confirmBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         confirmBtn.addTarget(self, action: #selector(self.confirmButtonAction(_:)), for: .touchUpInside)
@@ -414,7 +414,7 @@ extension BankingFeedbackBubbleView: UITableViewDelegate,UITableViewDataSource{
         cancelBtn.layer.cornerRadius = 5
         cancelBtn.setTitleColor(.black, for: .normal)
         cancelBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        cancelBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        cancelBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(cancelBtn)
         cancelBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         cancelBtn.addTarget(self, action: #selector(self.cancelBtnButtonAction(_:)), for: .touchUpInside)

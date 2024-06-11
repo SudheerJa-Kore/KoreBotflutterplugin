@@ -56,7 +56,7 @@ class QuickReplyTextBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "Inter-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -118,7 +118,6 @@ class QuickReplyTextBubbleView: BubbleView {
         self.titleLbl.linkTextColor = BubbleViewBotChatTextColor
         self.titleLbl.tintColor = BubbleViewBotChatTextColor
 
-        //self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
         let limitingSize: CGSize  = CGSize(width: kMaxTextWidth, height: CGFloat.greatestFiniteMagnitude)
         var textSize: CGSize = self.titleLbl.sizeThatFits(limitingSize)
         if textSize.height < self.titleLbl.font?.pointSize ?? 0.0 {

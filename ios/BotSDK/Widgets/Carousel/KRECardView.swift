@@ -271,11 +271,11 @@ public class KRECardView: UIView, UIGestureRecognizerDelegate {
        let paragraphStyle = NSMutableParagraphStyle()
        paragraphStyle.paragraphSpacing = 0.25 * 16.0
        let myAttributes = [NSAttributedString.Key.foregroundColor:UIColor(hex: 0x353535),
-                           NSAttributedString.Key.font: UIFont(name: "29LTBukra-SemiBold", size: 12.0),
+                           NSAttributedString.Key.font: UIFont(name: semiBoldCustomFont, size: 12.0),
                            NSAttributedString.Key.paragraphStyle:paragraphStyle]
        let mutableAttrString = NSMutableAttributedString(string: title, attributes: myAttributes)
        let myAttributes2 = [NSAttributedString.Key.foregroundColor:UIColor(hex: 0x353535),
-                            NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 12.0)]
+                            NSAttributedString.Key.font: UIFont(name: regularCustomFont, size: 12.0)]
        let mutableAttrString2 = NSMutableAttributedString(string: "\n\(subtitle)", attributes: myAttributes2)
        mutableAttrString.append(mutableAttrString2)
        return mutableAttrString

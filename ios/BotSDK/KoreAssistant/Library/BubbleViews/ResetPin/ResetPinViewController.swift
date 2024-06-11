@@ -51,21 +51,21 @@ class ResetPinViewController: UIViewController, UITextFieldDelegate {
         underToplineLbl.layer.cornerRadius = 3.0
         underToplineLbl.clipsToBounds = true
         
-        HeadingLbl.font = UIFont(name: "29LTBukra-Bold", size: 22.0)
-        enterPinlbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        reEnterPinLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        errorLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        HeadingLbl.font = UIFont(name: boldCustomFont, size: 22.0)
+        enterPinlbl.font = UIFont(name: regularCustomFont, size: 14.0)
+        reEnterPinLbl.font = UIFont(name: regularCustomFont, size: 14.0)
+        errorLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         errorLbl.textColor = themeColor
         
-        firstTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        secondTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        thirdTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        foruthTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
+        firstTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        secondTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        thirdTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        foruthTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
         
-        firstTFre.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        secondTFre.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        thirdTFre.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        foruthTFre.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
+        firstTFre.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        secondTFre.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        thirdTFre.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        foruthTFre.font = UIFont(name: semiBoldCustomFont, size: 20.0)
         
         firstTF.layer.cornerRadius = 4.0
         firstTF.layer.borderWidth = 1.0
@@ -136,8 +136,8 @@ class ResetPinViewController: UIViewController, UITextFieldDelegate {
         }
         
         infoView.isHidden = false
-        infoHeadingLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        infoDescLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        infoHeadingLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        infoDescLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         
         tableV.register(UINib.init(nibName: "ResetPasswordCell", bundle: bundle), forCellReuseIdentifier: "ResetPasswordCell")
         errorLbl.isHidden = true

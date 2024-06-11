@@ -26,7 +26,6 @@ A new Flutter plugin project.
   s.resource_bundles = {
     'KoreBotSDK' => ["BotSDK/**/*.{xcassets}","BotSDK/**/*.{xcdatamodeld}", "BotSDK/Widgets/Widgets/**/*.{xcdatamodeld}", "BotSDK/Widgets/Resources/*.{xcassets}", 'BotSDK/**/*.xib', 'BotSDK/Widgets/**/*.xib', 'BotSDK/Widgets/Widgets/**/**/*.xib'],
     'Gilroy' => ['BotSDK/**/**/**/**/*.otf'],
-    'Inter' => ['BotSDK/**/**/**/**/*.ttf'],
     '29LTBukra' => ['BotSDK/**/**/**/**/*.ttf'],
   }
   

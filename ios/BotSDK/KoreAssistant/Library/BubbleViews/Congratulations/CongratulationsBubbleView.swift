@@ -83,7 +83,7 @@ class CongratulationsBubbleView: BubbleView {
         self.headingLabel = UILabel(frame: CGRect.zero)
         self.headingLabel.textColor = BubbleViewBotChatTextColor
         self.headingLabel.backgroundColor = UIColor.clear
-        self.headingLabel.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        self.headingLabel.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -161,11 +161,11 @@ class CongratulationsBubbleView: BubbleView {
                 
                 let attributedString = NSAttributedString(string:(allItems.heading ?? ""),
                                                    attributes:[NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                               NSAttributedString.Key.font: UIFont(name: "29LTBukra-Semibold", size: 14.0) as Any])
+                                                               NSAttributedString.Key.font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any])
                 
                 let attributedString1 = NSAttributedString(string:("\n\(allItems.transActionDesc ?? "")"),
                                                    attributes:[NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                               NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any])
+                                                               NSAttributedString.Key.font: UIFont(name: regularCustomFont, size: 14.0) as Any])
                 let combination = NSMutableAttributedString()
                     
                     combination.append(attributedString)
@@ -222,8 +222,8 @@ extension CongratulationsBubbleView: UITableViewDelegate,UITableViewDataSource{
         cell.valueLbl.text = transact.id
         cell.titleLbl.textColor = BubbleViewBotChatTextColor
         cell.titleLbl.textColor = BubbleViewBotChatTextColor
-        cell.titleLbl.font =  UIFont(name: "29LTBukra-Bold", size: 12.0)
-        cell.valueLbl.font =  UIFont(name: "29LTBukra-Bold", size: 12.0)
+        cell.titleLbl.font =  UIFont(name: boldCustomFont, size: 12.0)
+        cell.valueLbl.font =  UIFont(name: boldCustomFont, size: 12.0)
         return cell
     }
      func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -242,7 +242,7 @@ extension CongratulationsBubbleView: UITableViewDelegate,UITableViewDataSource{
         let headerLabel = UILabel(frame: .zero)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.textAlignment = .left
-        headerLabel.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
+        headerLabel.font = UIFont(name: regularCustomFont, size: 10.0)
         headerLabel.textColor = BubbleViewBotChatTextColor
         headerLabel.text =   tableHeaderTitle
         subView.addSubview(headerLabel)
@@ -250,7 +250,7 @@ extension CongratulationsBubbleView: UITableViewDelegate,UITableViewDataSource{
         let headerDescLabel = UILabel(frame: .zero)
         headerDescLabel.translatesAutoresizingMaskIntoConstraints = false
         headerDescLabel.textAlignment = .right
-        headerDescLabel.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
+        headerDescLabel.font = UIFont(name: regularCustomFont, size: 10.0)
         headerDescLabel.textColor = BubbleViewBotChatTextColor
         headerDescLabel.text =  tableHeaderValaue
         subView.addSubview(headerDescLabel)

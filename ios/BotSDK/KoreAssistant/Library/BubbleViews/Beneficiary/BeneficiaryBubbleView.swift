@@ -97,7 +97,7 @@ class BeneficiaryBubbleView: BubbleView {
 
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true

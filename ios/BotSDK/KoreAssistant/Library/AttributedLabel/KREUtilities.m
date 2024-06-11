@@ -62,7 +62,6 @@
 
 + (NSString *)getMarkdownStringFromString:(NSString *)string{
     if(!string) return nil;
-    //    __block NSString *originalString = @"First date: \\dt(2016-01-08T13:36:56.060-0530,\"ddd, MMM dd, yyyy\") \nSecond date: \\dt(2016-01-08T13:36:56.060Z, \"dddd, MMMM dd, yyyy\" ) \nThird date: \\dt(2016-01-08T13:36:56.060-0530  ,'ddd., MMM. dd, yyyy') \nFourth date: \\dt( 2016-01-08T13:36:56.060Z, \"ddd., MMM. dd, yyyy \") \nFifth maybe date: \\dt(2016-01-08T13:36:56.060z   ,  'ddd., MMM. dd, yyyy' ) \n\\d(2016-01-08,\"MMMM dd, yyyy\") \n\\d(2016-01-08) \\t(13:36:56.060) \\t(13:36:56.060, \"a mm:h\") \\#(12345.67) \\#(12345.67,\"#,##0.000\") \\$(12345.67,\"USD\",\"#,##0.000\") \n\\$(12345.67,\"USD\") \n\\$(12000,\"USD\")";
     
     __block NSString *originalString = [string copy];
     __block NSMutableString *sString = [[NSMutableString alloc] initWithString:originalString];

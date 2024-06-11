@@ -45,17 +45,17 @@ class SalikPinViewController: UIViewController, UITextFieldDelegate {
         walletIDBgv.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         walletIDBgv.clipsToBounds = true
         
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        walletIDTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        desclbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
-        pinTitleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        errorLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        walletIDTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        desclbl.font = UIFont(name: regularCustomFont, size: 12.0)
+        pinTitleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        errorLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         errorLbl.textColor = themeColor
         
-        firstTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        secondTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        thirdTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
-        foruthTF.font = UIFont(name: "29LTBukra-Semibold", size: 20.0)
+        firstTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        secondTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        thirdTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
+        foruthTF.font = UIFont(name: semiBoldCustomFont, size: 20.0)
         
         firstTF.layer.cornerRadius = 4.0
         firstTF.layer.borderWidth = 1.0

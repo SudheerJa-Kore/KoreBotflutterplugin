@@ -25,8 +25,8 @@ class LanguageViewController: UIViewController {
         subView.layer.cornerRadius = 18.0
         subView.clipsToBounds = true
         // Do any additional setup after loading the view.
-        self.engBtn.titleLabel?.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        self.arabicBtn.titleLabel?.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.engBtn.titleLabel?.font = UIFont(name: regularCustomFont, size: 14.0)
+        self.arabicBtn.titleLabel?.font = UIFont(name: regularCustomFont, size: 14.0)
 
         engBtn.layer.cornerRadius = 4.0
         engBtn.layer.borderWidth = 1.0
@@ -41,7 +41,7 @@ class LanguageViewController: UIViewController {
         arabicBtn.clipsToBounds = true
         arabicBtn.backgroundColor = themeColor
         arabicBtn.setTitle("تغيير اللغة إلى العربية", for: .normal)
-        self.engBtn.titleLabel?.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        self.engBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         if preferredLanguage == preferred_language_Type{
             arabicBtn.layer.borderWidth = 0.0
             arabicBtn.backgroundColor = themeColor

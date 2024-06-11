@@ -34,7 +34,7 @@ public class BotConnect: NSObject {
     }
     
     @objc
-    public func initialize(_ clientId: String, clientSecret: String, botId: String, chatBotName: String, identity: String, isAnonymous: Bool, JWTServerUrl: String, BOTServerUrl: String){
+    public func initialize(_ clientId: String, clientSecret: String, botId: String, chatBotName: String, identity: String, isAnonymous: Bool, JWTServerUrl: String, BOTServerUrl: String, isHistoryApi: Bool){
         
         SDKConfiguration.botConfig.clientId = clientId as String
         SDKConfiguration.botConfig.clientSecret = clientSecret as String
@@ -46,43 +46,42 @@ public class BotConnect: NSObject {
         SDKConfiguration.serverConfig.BOT_SERVER = BOTServerUrl as String
         SDKConfiguration.serverConfig.Branding_SERVER = String(format: "\(BOTServerUrl)/")
         SDKConfiguration.botConfig.tenantId = "620415a603ee27d50d2a47fa"
+        isTableViewDrag = isHistoryApi
     }
     
     @objc public func show(){
         
-        primaryColor = "#37474f"
-        secondaryColor = "#ffffff"
-        
         guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
             return
         }
-        isCallingHistoryApi = true
-        load29LTBukraFonts()
         
+        load29LTBukraFonts(fontName: "29LTBukra")
+        loadCustomFontNames()
+
         let botViewController = ChatMessagesViewController()
         let navigationController = UINavigationController(rootViewController: botViewController)
         navigationController.isNavigationBarHidden = true
         navigationController.modalPresentationStyle = .fullScreen
-        //botViewController.botClient = client
         botViewController.title = SDKConfiguration.botConfig.chatBotName
-        //Addition fade in animation
         botViewController.modalPresentationStyle = .fullScreen
         rootViewController.present(navigationController, animated: false)
     }
     
+    func loadCustomFontNames(){
+        regularCustomFont = "29LTBukra-Regular"
+        mediumCustomFont = "29LTBukra-Medium"
+        boldCustomFont =   "29LTBukra-Bold"
+        semiBoldCustomFont = "29LTBukra-Semibold"
+        italicCustomFont =  "29LTBukra-BoldSlanted"
+    }
 
-    func load29LTBukraFonts(){
-        UserDefaults.standard.set(defaultLoaderColorStr, forKey: "ThemeColor")
-        UserDefaults.standard.synchronize()
-        themeColor = UIColor.init(hexString: defaultLoaderColorStr)
-
-        let bundleName = "29LTBukra"
+    func load29LTBukraFonts(fontName:String){
+        let bundleName = fontName
         guard let bundleUrl = Bundle(for: Self.self).url(forResource: bundleName, withExtension: "bundle"),
             let bundle = Bundle(url: bundleUrl),
             let urls = bundle.urls(forResourcesWithExtension: "ttf", subdirectory: nil) else {
                 return
         }
-
         for url in urls {
             loadFontFile(from: url)
         }
@@ -93,11 +92,9 @@ public class BotConnect: NSObject {
         guard let fontData = try? Data(contentsOf: fontUrl) else {
             return
         }
-
         guard let cfData = fontData as? CFData, let provider = CGDataProvider(data: cfData), let cgFont = CGFont(provider) else {
             return
         }
-
         var error: Unmanaged<CFError>?
         if !CTFontManagerRegisterGraphicsFont(cgFont, &error) {
             debugPrint("KREFontLoader : error loading Font")

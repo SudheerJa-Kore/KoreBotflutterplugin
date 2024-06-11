@@ -164,7 +164,7 @@ class TableBubbleView: BubbleView, UICollectionViewDataSource, UICollectionViewD
         self.showMoreButton.setTitle("Show more", for: .normal)
         self.showMoreButton.translatesAutoresizingMaskIntoConstraints = false
         self.showMoreButton.setTitleColor(.white, for: .normal)
-        self.showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Bold", size: 14.0)!
+        self.showMoreButton.titleLabel?.font = UIFont(name: boldCustomFont, size: 14.0)
         self.showMoreButton.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)
         self.showMoreButton.isHidden = true
         self.showMoreButton.clipsToBounds = true
@@ -185,7 +185,7 @@ class TableBubbleView: BubbleView, UICollectionViewDataSource, UICollectionViewD
         
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -243,7 +243,7 @@ class TableBubbleView: BubbleView, UICollectionViewDataSource, UICollectionViewD
         if indexPath.section == 0 {
             cell.textLabel.numberOfLines = 2
             cell.textLabel.text = header.title
-            cell.textLabel.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)!
+            cell.textLabel.font = UIFont(name: semiBoldCustomFont, size: 12.0)
             cell.textLabel.textAlignment = header.alignment
             cell.bgView.backgroundColor = .clear
             cell.textLabel.textColor = .black
@@ -264,7 +264,7 @@ class TableBubbleView: BubbleView, UICollectionViewDataSource, UICollectionViewD
             } else {
                 cell.textLabel.text = row[indexPath.row]
                 cell.textLabel.numberOfLines = 2
-                cell.textLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)!
+                cell.textLabel.font = UIFont(name: regularCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)
                 cell.textLabel.textAlignment = header.alignment
                 
                 //Set Corner Radious
@@ -296,7 +296,7 @@ class TableBubbleView: BubbleView, UICollectionViewDataSource, UICollectionViewD
             itemWidth = floor((maxWidth*CGFloat(percentage)/100))
         }
         else{
-            let width : CGFloat = (header.title as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont(name: "29LTBukra-SemiBold", size: 12.0)]).width*2.0
+            let width : CGFloat = (header.title as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont(name: semiBoldCustomFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0)]).width*2.0
             itemWidth = width
         }
         

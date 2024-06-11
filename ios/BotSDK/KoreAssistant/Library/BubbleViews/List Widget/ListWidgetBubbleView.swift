@@ -26,7 +26,7 @@ class ListWidgetBubbleView: BubbleView {
     var headerUrl: String?
     
     let yourAttributes : [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.font : UIFont(name: "Gilroy-Bold", size: 15.0) as Any,
+        NSAttributedString.Key.font : UIFont(name: boldCustomFont, size: 15.0) as Any,
         NSAttributedString.Key.foregroundColor : UIColor.blue,
         NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue]
     
@@ -102,7 +102,7 @@ class ListWidgetBubbleView: BubbleView {
         showMoreButton.layer.cornerRadius = 5
         showMoreButton.setTitleColor(.blue, for: .normal)
         showMoreButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        showMoreButton.titleLabel?.font = UIFont(name: "Gilroy-Bold", size: 14.0)!
+        showMoreButton.titleLabel?.font = UIFont(name: boldCustomFont, size: 14.0)
         self.addSubview(showMoreButton)
         showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
         showMoreButton.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)
@@ -214,7 +214,7 @@ extension ListWidgetBubbleView: UITableViewDataSource, UITableViewDelegate {
         let headerLabel = UILabel(frame: .zero)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.textAlignment = .left
-        headerLabel.font = UIFont(name: "Gilroy-Bold", size: 15.0)
+        headerLabel.font = UIFont(name: boldCustomFont, size: 15.0)
         headerLabel.font = headerLabel.font.withSize(15.0)
 
         headerLabel.textColor = .black
@@ -224,7 +224,7 @@ extension ListWidgetBubbleView: UITableViewDataSource, UITableViewDelegate {
         let headerDescLabel = UILabel(frame: .zero)
         headerDescLabel.translatesAutoresizingMaskIntoConstraints = false
         headerDescLabel.textAlignment = .left
-        headerDescLabel.font = UIFont(name: "Gilroy-Regular", size: 15.0)
+        headerDescLabel.font = UIFont(name: regularCustomFont, size: 15.0)
         headerDescLabel.font = headerDescLabel.font.withSize(12.0)
         headerDescLabel.textColor = .black
         headerDescLabel.text = headerDescription
@@ -235,7 +235,7 @@ extension ListWidgetBubbleView: UITableViewDataSource, UITableViewDelegate {
         urlLabel.mentionTextColor = Common.UIColorRGB(0x8ac85a)
         urlLabel.hashtagTextColor = Common.UIColorRGB(0x8ac85a)
         urlLabel.linkTextColor = Common.UIColorRGB(0x0076FF)
-        urlLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 16.0)
+        urlLabel.font = UIFont(name: mediumCustomFont, size: 16.0)
         urlLabel.numberOfLines = 0
         urlLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         urlLabel.isUserInteractionEnabled = true

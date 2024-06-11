@@ -108,7 +108,7 @@ class ButtonLinkNBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -120,10 +120,6 @@ class ButtonLinkNBubbleView: BubbleView {
         self.titleLbl.tintColor = BubbleViewBotChatTextColor
         self.titleLbl.textContainerInset = UIEdgeInsets.zero
         self.titleLbl.textContainer.lineFragmentPadding = 0
-//        let style = NSMutableParagraphStyle()
-//        style.lineSpacing = 0
-//        let attributes = [NSAttributedString.Key.paragraphStyle : style]
-//        self.titleLbl.typingAttributes = attributes
         self.tileBgv.addSubview(self.titleLbl)
         
         let subView: [String: UIView] = ["titleLbl": titleLbl]

@@ -15,8 +15,7 @@ enum BubbleMaskTailPosition : Int {
 let brandingShared = BrandingSingleton.shared
 
 var BubbleViewRightTint: UIColor = UIColor.init(hexString: (brandingShared.userchatBgColor) ?? "#37474f")
-//var BubbleViewLeftTint: UIColor = UIColor.init(hexString: (brandingShared.botchatBgColor) ?? "#fce9e6")
-var BubbleViewLeftTint: UIColor = UIColor.init(hexString: secondaryColor) 
+var BubbleViewLeftTint: UIColor = UIColor.init(hexString: (brandingShared.botchatBgColor) ?? "#fce9e6")
 var BubbleViewUserChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.userchatTextColor) ?? "#000000")
 var BubbleViewBotChatTextColor: UIColor = UIColor.init(hexString: (brandingShared.botchatTextColor) ?? "#313131")
 var bubbleViewBotChatButtonTextColor: UIColor = UIColor.init(hexString: (brandingShared.buttonActiveTextColor) ?? "#ffffff")

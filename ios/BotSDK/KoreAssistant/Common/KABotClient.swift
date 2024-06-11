@@ -100,7 +100,7 @@ open class KABotClient: NSObject {
             }
         }
         
-        self.getMessages(offset: 0, limit: limit + 1, completion:{ (success) in
+        self.getMessages(offset: 0, limit: limit, completion:{ (success) in
             if success {
                 isCallingHistoryApi = false
                 self.reconnectStatus(completion: block)

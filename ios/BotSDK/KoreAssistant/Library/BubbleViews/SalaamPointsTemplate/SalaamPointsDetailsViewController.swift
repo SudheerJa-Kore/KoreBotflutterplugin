@@ -43,19 +43,11 @@ class SalaamPointsDetailsViewController: UIViewController {
             headerView.roundCorners([ .layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 10.0, borderColor: UIColor.clear, borderWidth: 1.5)
         }
         
-        headingLabel.font = UIFont(name: "29LTBukra-Bold", size: 16.0)
+        headingLabel.font = UIFont(name: boldCustomFont, size: 16.0)
         if #available(iOS 11.0, *) {
             self.subView.roundCorners([ .layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 10.0, borderColor: UIColor.clear, borderWidth: 1.5)
         }
         self.tableview.layer.cornerRadius = 2.0
-//        self.tableview.clipsToBounds = true
-//        self.tableview.layer.masksToBounds = false
-//        self.tableview.layer.shadowColor = UIColor.lightGray.cgColor
-//        self.tableview.layer.shadowOffset =  CGSize.zero
-//        self.tableview.layer.shadowOpacity = 0.3
-//        self.tableview.layer.shadowRadius = 4
-//        self.tableview.layer.shadowOffset = CGSize(width: 0 , height:2)
-//        self.tableview.tableFooterView = UIView(frame:.zero)
         self.tableview.register(UINib(nibName: listCellIdentifier, bundle: bundle), forCellReuseIdentifier: listCellIdentifier)
         self.tableview.register(UINib(nibName: listCellICarddentifier, bundle: bundle), forCellReuseIdentifier: listCellICarddentifier)
         
@@ -210,7 +202,7 @@ extension SalaamPointsDetailsViewController: UITableViewDelegate,UITableViewData
             cell.copyBtn.tag = indexPath.row
             cell.copyBtnWidthConstraint.constant = 0
             if let copy = cardsDetails.copyValue{
-                let size = copy.size(withAttributes:[.font: UIFont(name: "29LTBukra-Medium", size: 12.0)!])
+                let size = copy.size(withAttributes:[.font: UIFont(name: mediumCustomFont, size: 12.0) ?? UIFont.systemFont(ofSize: 12.0)])
                 cell.copyBtnWidthConstraint.constant = size.width + 10
                 cell.copyBtn.setTitle(copy, for: .normal)
             }

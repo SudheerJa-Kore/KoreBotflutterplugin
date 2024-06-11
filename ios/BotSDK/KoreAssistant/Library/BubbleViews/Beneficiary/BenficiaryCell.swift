@@ -16,8 +16,8 @@ class BenficiaryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        titleLabel.font =  UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        descLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        titleLabel.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        descLbl.font = UIFont(name: regularCustomFont, size: 12.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

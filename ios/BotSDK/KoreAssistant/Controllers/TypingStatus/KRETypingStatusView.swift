@@ -63,7 +63,7 @@ open class KRETypingStatusView: UIView {
     
     // MARK: -
     func startTypingStatus(using urlString: String? = nil, dotColor: UIColor = .lightRoyalBlue) {
-        let image = UIImage(named: "kore", in: bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        let image = UIImage(named: "kora", in: bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         if let urlString = urlString, let url = URL(string: urlString) {
             typingImageView.af_setImage(withURL: url, placeholderImage:image)
         } else {

@@ -54,7 +54,7 @@ class BoldTextBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false

@@ -61,7 +61,7 @@ class RadioListBubbleView: BubbleView {
         self.headingLabel = UILabel(frame: CGRect.zero)
         self.headingLabel.textColor = BubbleViewBotChatTextColor
         self.headingLabel.backgroundColor = UIColor.clear
-        self.headingLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.headingLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -227,12 +227,12 @@ extension RadioListBubbleView: UITableViewDelegate,UITableViewDataSource{
         cell.descLbl.textColor = .black
         cell.priceLbl.textColor = .black
         
-        cell.titleLbl.font =  UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        cell.descLbl.font =  UIFont(name: "29LTBukra-Regular", size: 12.0)
-        cell.priceLbl.font =  UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cell.titleLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cell.descLbl.font =  UIFont(name: regularCustomFont, size: 12.0)
+        cell.priceLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
         
         cell.priceLblWidthConstraint.constant = 10
-        let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-SemiBold", size: 14.0) as Any])
+        let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any])
         if cell.priceLbl.text != nil {
             cell.priceLblWidthConstraint.constant = (size?.width)! + 10.0
         }
@@ -272,7 +272,7 @@ extension RadioListBubbleView: UITableViewDelegate,UITableViewDataSource{
         showMoreButton.clipsToBounds = true
         showMoreButton.layer.cornerRadius = 5
         showMoreButton.setTitleColor(.white, for: .normal)
-        showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        showMoreButton.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         view.addSubview(showMoreButton)
         showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         showMoreButton.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)
@@ -291,7 +291,7 @@ extension RadioListBubbleView: UITableViewDelegate,UITableViewDataSource{
         cantFindButton.clipsToBounds = true
         cantFindButton.layer.cornerRadius = 5
         cantFindButton.setTitleColor(.white, for: .normal)
-        cantFindButton.titleLabel?.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        cantFindButton.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         view.addSubview(cantFindButton)
         cantFindButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         cantFindButton.addTarget(self, action: #selector(self.cantFindTransactionButtonAction(_:)), for: .touchUpInside)

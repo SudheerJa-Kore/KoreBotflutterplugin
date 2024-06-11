@@ -118,7 +118,7 @@ class IDFCCarouselBubbleView: BubbleView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.paragraphSpacing = 0.25 * 16.0
         let myAttributes = [NSAttributedString.Key.foregroundColor:UIColor(hex: 0x353535),
-                            NSAttributedString.Key.font: UIFont(name: "29LTBukra-SemiBold", size: 14.0),
+                            NSAttributedString.Key.font: UIFont(name: semiBoldCustomFont, size: 14.0),
                             NSAttributedString.Key.paragraphStyle:paragraphStyle]
         let mutableAttrString = NSMutableAttributedString(string: title, attributes: myAttributes as [NSAttributedString.Key : Any])
         return mutableAttrString

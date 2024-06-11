@@ -25,7 +25,7 @@ class IDFCUpdatedCaroselCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.tagLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        self.tagLbl.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         self.tagLbl.numberOfLines = 0
         self.tagLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.tagLbl.isUserInteractionEnabled = true

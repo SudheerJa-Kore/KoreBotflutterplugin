@@ -22,7 +22,7 @@ class LeftMenuCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        self.titleLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLabel.font = UIFont(name: regularCustomFont, size: 14.0)
     }
     
 }

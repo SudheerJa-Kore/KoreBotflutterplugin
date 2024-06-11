@@ -27,15 +27,9 @@ class CardSelectionCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         bgV.layer.cornerRadius = 5.0
-//        bgV.clipsToBounds = true
-//        bgV.layer.masksToBounds = false
-//        bgV?.layer.shadowColor = UIColor.lightGray.cgColor
-//        bgV?.layer.shadowOffset =  CGSize.zero
-//        bgV?.layer.shadowOpacity = 0.5
-//        bgV?.layer.shadowRadius = 10
-        titleLbl.font =  UIFont(name: "29LTBukra-Regular", size: 14.0) //Semibold
-        cardTypeLbl.font =  UIFont(name: "29LTBukra-Regular", size: 14.0) //Semibold
-        cardnoLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        titleLbl.font =  UIFont(name: regularCustomFont, size: 14.0)
+        cardTypeLbl.font =  UIFont(name: regularCustomFont, size: 14.0)
+        cardnoLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         cardnoLbl.textColor = UIColor.init(hexString: "#7C7C7C")
     }
 

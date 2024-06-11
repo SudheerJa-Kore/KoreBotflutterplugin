@@ -133,9 +133,9 @@ extension ServiceListBubbleView: UITableViewDelegate,UITableViewDataSource{
         let cell : ServiceListCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! ServiceListCell
         cell.backgroundColor = UIColor.white
         cell.selectionStyle = .none
-        cell.titeLabel.font =  UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        cell.valueLabel.font =  UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        cell.tagLabel.font =  UIFont(name: "29LTBukra-Bold", size: 10.0)
+        cell.titeLabel.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cell.valueLabel.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cell.tagLabel.font =  UIFont(name: boldCustomFont, size: 10.0)
         let elements = elementsArray[indexPath.row]
         cell.titeLabel.text = elements.title
         cell.titeLabel.textColor = BubbleViewUserChatTextColor
@@ -151,7 +151,7 @@ extension ServiceListBubbleView: UITableViewDelegate,UITableViewDataSource{
         
         cell.tagLabel.textAlignment = .center
         cell.tagLblWidthConstraint.constant = 10
-        let size = cell.tagLabel.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Bold", size: 10.0)!])
+        let size = cell.tagLabel.text?.size(withAttributes:[.font: UIFont(name: boldCustomFont, size: 10.0) ?? UIFont.systemFont(ofSize: 10.0)])
         if cell.tagLabel.text != nil {
             cell.tagLblWidthConstraint.constant = (size?.width)! + 10.0
         }
@@ -185,8 +185,8 @@ extension ServiceListBubbleView: UITableViewDelegate,UITableViewDataSource{
             showMoreButton.layer.cornerRadius = 5
             showMoreButton.setTitleColor(.white, for: .normal)
             showMoreButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-            showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
-            showMoreButton.addRightIcon(image: UIImage.init(named: "icons24ArrowCta")!)
+            showMoreButton.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+            showMoreButton.addRightIcon(image: UIImage.init(named: "icons24ArrowCta") ?? UIImage())
             view.addSubview(showMoreButton)
             showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
             showMoreButton.addTarget(self, action: #selector(self.showMoreButtonAction(_:)), for: .touchUpInside)

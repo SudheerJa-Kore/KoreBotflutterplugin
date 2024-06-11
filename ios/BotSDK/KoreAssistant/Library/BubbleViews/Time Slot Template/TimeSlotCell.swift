@@ -16,7 +16,7 @@ class TimeSlotCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         titleLbl.textColor = .black
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
     }
 
 }

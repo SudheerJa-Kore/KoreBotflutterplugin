@@ -129,7 +129,7 @@ class IDFCFeedbackBubbleView: BubbleView {
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
         self.titleLbl.backgroundColor = UIColor.clear
-        self.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -169,7 +169,7 @@ class IDFCFeedbackBubbleView: BubbleView {
         sendBtn.clipsToBounds = true
         sendBtn.layer.cornerRadius = 5
         sendBtn.setTitleColor(.white, for: .normal)
-        sendBtn.titleLabel?.font = UIFont(name: "29LTBukra-Semibold", size: 12.0)
+        sendBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         suggestionView.addSubview(sendBtn)
         sendBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         sendBtn.addTarget(self, action: #selector(self.sendButtonAction(_:)), for: .touchUpInside)
@@ -190,7 +190,7 @@ class IDFCFeedbackBubbleView: BubbleView {
         self.placeHolderLabel.textColor = UIColor.init(hexString: "#a27174")
         placeHolderLabel.text = ""
         self.placeHolderLabel.backgroundColor =  .clear//UIColor.init(hexString: "#712126")
-        self.placeHolderLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.placeHolderLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         self.placeHolderLabel.numberOfLines = 0
         self.placeHolderLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.placeHolderLabel.isUserInteractionEnabled = true
@@ -202,7 +202,7 @@ class IDFCFeedbackBubbleView: BubbleView {
         self.feedBackTxtV.textColor = BubbleViewBotChatTextColor
         self.feedBackTxtV.backgroundColor = UIColor.clear
         self.feedBackTxtV.text = ""
-        self.feedBackTxtV.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        self.feedBackTxtV.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         self.feedBackTxtV.isUserInteractionEnabled = true
         self.feedBackTxtV.translatesAutoresizingMaskIntoConstraints = false
         self.descBGV.addSubview(self.feedBackTxtV)
@@ -210,7 +210,7 @@ class IDFCFeedbackBubbleView: BubbleView {
         self.underlineLabel = UILabel(frame: CGRect.zero)
         self.underlineLabel.textColor = BubbleViewBotChatTextColor
         self.underlineLabel.backgroundColor =  UIColor.init(hexString: "#a27174")
-        self.underlineLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.underlineLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         self.underlineLabel.numberOfLines = 0
         self.underlineLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.underlineLabel.isUserInteractionEnabled = true
@@ -353,7 +353,7 @@ extension IDFCFeedbackBubbleView : UICollectionViewDelegate, UICollectionViewDat
         let image = Utilities.base64ToImage(base64String: elements.emoji)
         cell.imagV.image = image
         cell.textLabel.text = elements.feedBackDesc
-        cell.textLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        cell.textLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         cell.textLabel.textAlignment = .center
         cell.textLabel.textColor = BubbleViewBotChatTextColor
         if selectedIndex == indexPath.item{
@@ -450,7 +450,7 @@ extension IDFCFeedbackBubbleView :UITableViewDelegate,UITableViewDataSource{
         let btns = arrayOfButtons[indexPath.row]
         cell.textlabel.text = btns.title
         cell.textlabel.textAlignment = .center
-        cell.textlabel.font =  UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        cell.textlabel.font =  UIFont(name: semiBoldCustomFont, size: 12.0)
         cell.textlabel.textColor = .white
         
         cell.textlabel.textInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)

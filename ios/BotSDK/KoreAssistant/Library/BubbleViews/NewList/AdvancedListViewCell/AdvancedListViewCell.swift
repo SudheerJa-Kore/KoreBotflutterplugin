@@ -23,12 +23,12 @@ class AdvancedListViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        titleLbl.font =  UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        cardNoLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
-        disbursalDateLbl.font = UIFont(name: "29LTBukra-Regular", size: 9.0)
-        disbursalAmountLbl.font = UIFont(name: "29LTBukra-Regular", size: 9.0)
-        dateLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
-        amountLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        titleLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cardNoLbl.font = UIFont(name: regularCustomFont, size: 12.0)
+        disbursalDateLbl.font = UIFont(name: regularCustomFont, size: 9.0)
+        disbursalAmountLbl.font = UIFont(name: regularCustomFont, size: 9.0)
+        dateLbl.font = UIFont(name: regularCustomFont, size: 12.0)
+        amountLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         titleLbl.textColor = UIColor(red: 37/255, green: 36/255, blue: 59/255, alpha: 1)
         cardNoLbl.textColor = UIColor(red: 37/255, green: 36/255, blue: 59/255, alpha: 1)

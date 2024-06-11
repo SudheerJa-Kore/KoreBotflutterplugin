@@ -27,7 +27,8 @@ class TextBubbleView : BubbleView {
         self.textLabel.hashtagTextColor = BubbleViewBotChatTextColor
         self.textLabel.linkTextColor = BubbleViewBotChatTextColor
         self.textLabel.tintColor = BubbleViewBotChatTextColor
-        self.textLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        
+        self.textLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.textLabel.numberOfLines = 0
         self.textLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.textLabel.isUserInteractionEnabled = true
@@ -101,7 +102,6 @@ class TextBubbleView : BubbleView {
         return matches.first != nil
     }
     override var intrinsicContentSize : CGSize {
-        //self.textLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
         let limitingSize: CGSize  = CGSize(width: kMaxTextWidth, height: CGFloat.greatestFiniteMagnitude)
         var textSize: CGSize = self.textLabel.sizeThatFits(limitingSize)
         if textSize.height < self.textLabel.font.pointSize {

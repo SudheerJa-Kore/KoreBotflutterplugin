@@ -23,9 +23,9 @@ class UserValidationCell: UITableViewCell {
         bgVTF.clipsToBounds = true
 
         addressTF.textColor = .black
-        addressTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        errorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        addressTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        errorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         errorLbl.textColor = UIColor.init(hexString: "#B00020")
     }
 

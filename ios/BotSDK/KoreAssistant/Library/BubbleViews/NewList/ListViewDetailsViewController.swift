@@ -60,7 +60,7 @@ class ListViewDetailsViewController: UIViewController {
             headerView.roundCorners([ .layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 10.0, borderColor: UIColor.clear, borderWidth: 1.5)
         }
 
-        headingLabel.font = UIFont(name: "29LTBukra-Semibold", size: 16.0)
+        headingLabel.font = UIFont(name: semiBoldCustomFont, size: 16.0)
         self.tableview.tableFooterView = UIView(frame:.zero)
         self.tableview.register(UINib(nibName: listCellIdentifier, bundle: bundle), forCellReuseIdentifier: listCellIdentifier)
         self.tableview.register(UINib(nibName: listTransACellIdentifier, bundle: bundle), forCellReuseIdentifier: listTransACellIdentifier)
@@ -169,7 +169,7 @@ extension ListViewDetailsViewController: UITableViewDelegate,UITableViewDataSour
                 cell.priceLbl.text = price?.replacingOccurrences(of: "<br />", with: "\n")
                 
                 cell.priceLblWidthConstraint.constant = 10
-                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                 if cell.priceLbl.text != nil {
                     cell.priceLblWidthConstraint.constant = (size?.width)! + 10.0
                  }
@@ -258,7 +258,7 @@ extension ListViewDetailsViewController: UITableViewDelegate,UITableViewDataSour
                }
                 
                 cell.priceLblWidthConstraint.constant = 10
-                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+                let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
                 if cell.priceLbl.text != nil {
                     cell.priceLblWidthConstraint.constant = (size?.width)! + 10.0
                 }
@@ -366,7 +366,7 @@ extension ListViewDetailsViewController: UITableViewDelegate,UITableViewDataSour
             }
             //cell.valueLabelWidthConstraint.constant = 85
             cell.valueLabelWidthConstraint.constant = 10
-            let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 14.0)!])
+            let size = cell.priceLbl.text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 14.0)])
             if cell.priceLbl.text != nil {
                 cell.valueLabelWidthConstraint.constant = (size?.width)! + 10.0
              }
@@ -431,7 +431,7 @@ extension ListViewDetailsViewController: UITableViewDelegate,UITableViewDataSour
                 cell.tagBtn.setTitleColor(themeColor, for: .normal)
                 cell.tagBtn.layer.cornerRadius = 5.0
                 
-                let size = tagBtnText.size(withAttributes:[.font: UIFont(name: "29LTBukra-Semibold", size: 9.0)!])
+                let size = tagBtnText.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 9.0)])
                 cell.tagBtnWidthConstraint.constant = (size.width) + 10.0
             }
             

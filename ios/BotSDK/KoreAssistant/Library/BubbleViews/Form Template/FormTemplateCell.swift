@@ -26,8 +26,8 @@ class FormTemplateCell: UITableViewCell {
         bgVTF.clipsToBounds = true
 
         addressTF.textColor = .black
-        addressTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        addressTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         
     }

@@ -60,56 +60,11 @@ class NewListTableViewCell: UITableViewCell {
         bgView?.clipsToBounds = false
         
         
-        titleLabel.font =  UIFont(name: "29LTBukra-Semibold", size: 13.5)
-        subTitleLabel.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
-        subTitleLabel2.font = UIFont(name: "29LTBukra-Regular", size: 12.3)
-        priceLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        tagBtn.titleLabel?.font =  UIFont(name: "29LTBukra-Semibold", size: 9)
-        
-        
-//        titleLabel.textColor = UIColor.init(hexString:"#313131")
-//        subTitleLabel.textColor = UIColor.init(hexString:"#313131")
-//        subTitleLabel2.textColor = UIColor.init(hexString:"#313131")
-//        priceLbl.textColor = UIColor.init(hexString:"#313131")
-//        priceLbl.alpha = 0.7
-        
-        titleLabel.textColor = BubbleViewBotChatTextColor
-        subTitleLabel.textColor = BubbleViewBotChatTextColor
-        subTitleLabel2.textColor = BubbleViewBotChatTextColor
-        priceLbl.textColor = BubbleViewBotChatTextColor
-        
-//        let shadows = UIView()
-//        let screenRect = UIScreen.main.bounds
-//        shadows.frame = CGRect(x: 2, y: bgView.frame.origin.y, width: screenRect.size.width - 40 - 4, height: bgView.frame.size.height - 2)
-//        shadows.clipsToBounds = false
-//        bgView.addSubview(shadows)
-//        let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 6)
-//        let layer0 = CALayer()
-//        layer0.shadowPath = shadowPath0.cgPath
-//        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8).cgColor
-//        layer0.shadowOpacity = 0.08
-//        layer0.shadowRadius = 12
-//        layer0.shadowOffset = CGSize(width: 0, height: 8)
-//        layer0.bounds = shadows.bounds
-//        layer0.position = shadows.center
-//        shadows.layer.addSublayer(layer0)
-//        let shapes = UIView()
-//        shapes.frame = CGRect(x:2, y: bgView.frame.origin.y, width: screenRect.size.width - 40 - 4, height: bgView.frame.size.height - 2)
-//        shapes.clipsToBounds = true
-//        bgView.addSubview(shapes)
-//        let layer1 = CALayer()
-//        layer1.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-//        layer1.bounds = shapes.bounds
-//        layer1.position = shapes.center
-//        shapes.layer.addSublayer(layer1)
-//        shapes.layer.cornerRadius = 6
-        
-//        self.bgView.bringSubviewToFront(titleLabel)
-//        self.bgView.bringSubviewToFront(subTitleLabel)
-//        self.bgView.bringSubviewToFront(subTitleLabel2)
-//        self.bgView.bringSubviewToFront(priceLbl)
-//        self.bgView.bringSubviewToFront(tagBtn)
-//        self.bgView.bringSubviewToFront(imgView)
+        titleLabel.font =  UIFont(name: semiBoldCustomFont, size: 13.5)
+        subTitleLabel.font = UIFont(name: regularCustomFont, size: 12.0)
+        subTitleLabel2.font = UIFont(name: regularCustomFont, size: 12.3)
+        priceLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        tagBtn.titleLabel?.font =  UIFont(name: semiBoldCustomFont, size: 9)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

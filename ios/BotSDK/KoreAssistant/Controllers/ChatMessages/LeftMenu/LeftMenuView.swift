@@ -177,7 +177,7 @@ extension LeftMenuView: UITableViewDelegate,UITableViewDataSource{
         let headerLabel = UILabel(frame: .zero)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.textAlignment = .left
-        headerLabel.font = UIFont(name: "29LTBukra-Semibold", size: 16.0)
+        headerLabel.font = UIFont(name: semiBoldCustomFont, size: 16.0)
         headerLabel.font = headerLabel.font.withSize(15.0)
         
         headerLabel.textColor = .black

@@ -69,15 +69,15 @@ class ResetPasswordVC: UIViewController {
         super.viewDidLoad()
         submitBtn.isUserInteractionEnabled = false
         validationLbl1.text = "1 lowercase character"
-        validationLbl1.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        validationLbl1.font = UIFont(name: regularCustomFont, size: 12.0)
         validationLbl2.text = "1 numeric character"
-        validationLbl2.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        validationLbl2.font = UIFont(name: regularCustomFont, size: 12.0)
         validationLbl3.text = "Between 8 & 20 characters"
-        validationLbl3.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        validationLbl3.font = UIFont(name: regularCustomFont, size: 12.0)
         
-        oldPwdLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        newPwdLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        rePwdLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        oldPwdLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        newPwdLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        rePwdLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         // Do any additional setup after loading the view.
         oldPasswordBgv.layer.borderWidth = 1.0
@@ -95,14 +95,14 @@ class ResetPasswordVC: UIViewController {
         reEnterPasswordBgV.layer.borderColor = UIColor.init(hexString: "#738794").cgColor
         reEnterPasswordBgV.clipsToBounds = true
         
-        oldPasswordTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        passwordTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        reEnterPasswordTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        oldPasswordTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        passwordTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        reEnterPasswordTF.font = UIFont(name: regularCustomFont, size: 14.0)
         oldPasswordTF.textColor = .black
         passwordTF.textColor = .black
         reEnterPasswordTF.textColor = .black
         
-        submitBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        submitBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         submitBtn.titleLabel?.textColor = UIColor.white
         submitBtn.backgroundColor = themeColor
         submitBtn.layer.cornerRadius = 4.0
@@ -116,8 +116,8 @@ class ResetPasswordVC: UIViewController {
             self.infoSubV.roundCorners([ .layerMaxXMinYCorner, .layerMinXMinYCorner], radius: 15.0, borderColor: UIColor.lightGray, borderWidth: 0)
         }
         
-        infoHeadingLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        infoDescLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        infoHeadingLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        infoDescLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         
         tableV.register(UINib.init(nibName: "ResetPasswordCell", bundle: bundle), forCellReuseIdentifier: "ResetPasswordCell")
         

@@ -103,7 +103,7 @@ class PDFBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -575,7 +575,7 @@ extension PDFBubbleView: UITableViewDelegate,UITableViewDataSource{
         let pdf = pdfDownloadArray[indexPath.row]
         cell.titleLbl.text = pdf.title
         cell.titleLbl.textColor = .black
-        cell.titleLbl.font =  UIFont(name: "29LTBukra-Regular", size: 14.0)
+        cell.titleLbl.font =  UIFont(name: regularCustomFont, size: 14.0)
         cell.downloadBtn.tag = indexPath.row
         cell.downloadBtn.addTarget(self, action: #selector(self.downloadButtonAction(_:)), for: .touchUpInside)
         

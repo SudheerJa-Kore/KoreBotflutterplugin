@@ -25,7 +25,7 @@ class ComposeBarView: UIView {
     
     fileprivate var textViewTrailingConstraint: NSLayoutConstraint!
     fileprivate(set) public var isKeyboardEnabled: Bool = false
-    var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
+    var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: regularCustomFont, size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString:"#7C7C7C")]
     
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -43,7 +43,7 @@ class ComposeBarView: UIView {
     
     fileprivate func setupViews() {
         self.backgroundColor = UIColor.init(hexString: "#f8f9fc")
-        loadCustomFonts()
+        //loadCustomFonts()
         
         self.growingTextView = KREGrowingTextView(frame: CGRect.zero)
         self.growingTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,14 +56,14 @@ class ComposeBarView: UIView {
         self.growingTextView.textView.textAlignment = .right
         self.growingTextView.maxNumberOfLines = 10
         
-        self.growingTextView.font = UIFont(name: "29LTBukra-Regular", size: 15.0) ?? UIFont.systemFont(ofSize: 15.0)
+        self.growingTextView.font = UIFont(name: regularCustomFont, size: 15.0) ?? UIFont.systemFont(ofSize: 15.0)
         self.growingTextView.textView.textColor = .black
         self.growingTextView.animateHeightChange = true
         self.growingTextView.backgroundColor = .clear
         self.growingTextView.layer.cornerRadius = 10.0
         self.growingTextView.isUserInteractionEnabled = false
         
-        attributes = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Regular", size: 14.0) as Any, NSAttributedString.Key.foregroundColor: UIColor.init(hexString: (brandingShared.widgetDividerColor) ?? "#7C7C7C")]
+        attributes = [NSAttributedString.Key.font: UIFont(name: regularCustomFont, size: 14.0) ?? UIFont.systemFont(ofSize: 15.0), NSAttributedString.Key.foregroundColor: UIColor.init(hexString: (brandingShared.widgetDividerColor) ?? "#7C7C7C")]
         
         self.growingTextView.placeholderAttributedText = NSAttributedString(string: "Type your Message here", attributes:attributes)
         
@@ -80,9 +80,9 @@ class ComposeBarView: UIView {
         let menuImage = UIImage(named: "Menu", in: bundle, compatibleWith: nil)
         let tintedMenuImage = menuImage?.withRenderingMode(.alwaysTemplate)
         self.menuButton.setImage(tintedMenuImage, for: .normal)
-        self.menuButton.tintColor = themeColor
+        self.menuButton.tintColor = .black
         
-        self.menuButton.titleLabel?.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
+        self.menuButton.titleLabel?.font = UIFont(name: boldCustomFont, size: 14.0)
         self.menuButton.addTarget(self, action: #selector(self.taskMenuButtonAction(_:)), for: .touchUpInside)
         self.menuButton.isHidden = false
         self.menuButton.contentEdgeInsets = UIEdgeInsets(top: 9.0, left: 3.0, bottom: 7.0, right: 3.0)
@@ -104,7 +104,7 @@ class ComposeBarView: UIView {
         self.sendButton.layer.cornerRadius = 5
         self.sendButton.setTitleColor(Common.UIColorRGB(0xFFFFFF), for: .normal)
         self.sendButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        self.sendButton.titleLabel?.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
+        self.sendButton.titleLabel?.font = UIFont(name: boldCustomFont, size: 14.0)
         self.sendButton.addTarget(self, action: #selector(self.sendButtonAction(_:)), for: .touchUpInside)
         self.sendButton.isHidden = true
         self.sendButton.contentEdgeInsets = UIEdgeInsets(top: 9.0, left: 3.0, bottom: 7.0, right: 3.0)
@@ -118,7 +118,7 @@ class ComposeBarView: UIView {
         let audioImage = UIImage(named: "audio_icon", in: bundle, compatibleWith: nil)
         let tintedaudioImage = audioImage?.withRenderingMode(.alwaysTemplate)
         self.speechToTextButton.setImage(tintedaudioImage, for: .normal)
-        self.speechToTextButton.tintColor = themeColor
+        self.speechToTextButton.tintColor = .black
         
         //self.speechToTextButton.setImage(UIImage(named: "audio_icon", in: bundle, compatibleWith: nil), for: .normal)
         self.speechToTextButton.layer.cornerRadius = 5.0
@@ -225,7 +225,7 @@ class ComposeBarView: UIView {
         let menuImage = UIImage(named: "Menu", in: bundle, compatibleWith: nil)
         let tintedMenuImage = menuImage?.withRenderingMode(.alwaysTemplate)
         self.menuButton.setImage(tintedMenuImage, for: .normal)
-        self.menuButton.tintColor = themeColor
+        self.menuButton.tintColor = .black
         
         self.growingTextView.isUserInteractionEnabled = true
         self.sendButton.isUserInteractionEnabled = true
@@ -249,7 +249,7 @@ class ComposeBarView: UIView {
             }
             let tintedsendImage = sendImage?.withRenderingMode(.alwaysTemplate)
             self.sendButton.setImage(tintedsendImage, for: .normal)
-            self.sendButton.tintColor = themeColor
+            self.sendButton.tintColor = .black
             
         }else{
             self.sendButton.tintColor = .clear

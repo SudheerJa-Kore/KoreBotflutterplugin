@@ -99,7 +99,7 @@ class SearchBubbleView: BubbleView {
         showMoreBtn.layer.cornerRadius = 10
         showMoreBtn.setTitleColor(BubbleViewBotChatTextColor, for: .normal)
         showMoreBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        showMoreBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        showMoreBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         cardView.addSubview(showMoreBtn)
         showMoreBtn.setTitle("See more results", for: .normal)
         showMoreBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
@@ -121,7 +121,7 @@ class SearchBubbleView: BubbleView {
 
         self.titleLbl = KREAttributedLabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Bold", size: 16.0)
+        self.titleLbl.font = UIFont(name: boldCustomFont, size: 16.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -136,7 +136,7 @@ class SearchBubbleView: BubbleView {
         
         self.descLbl = UILabel(frame: CGRect.zero)
         self.descLbl.textColor = BubbleViewBotChatTextColor
-        self.descLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.descLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.descLbl.numberOfLines = 0
         self.descLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.descLbl.isUserInteractionEnabled = true
@@ -156,13 +156,13 @@ class SearchBubbleView: BubbleView {
         readMoreBtn.layer.cornerRadius = 10
         readMoreBtn.setTitleColor(.white, for: .normal)
         readMoreBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        readMoreBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        readMoreBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         tileBgv.addSubview(readMoreBtn)
         readMoreBtn.setTitle("Read More", for: .normal)
         readMoreBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         readMoreBtn.addTarget(self, action: #selector(self.readMoreButtonAction(_:)), for: .touchUpInside)
         let yourAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "29LTBukra-SemiBold", size: 14.0) as Any,
+            .font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any,
               .foregroundColor: textlinkColor,
               .underlineStyle: NSUnderlineStyle.single.rawValue
           ]
@@ -174,7 +174,7 @@ class SearchBubbleView: BubbleView {
         
         self.sourceLbl = UILabel(frame: CGRect.zero)
         self.sourceLbl.textColor = BubbleViewBotChatTextColor
-        self.sourceLbl.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
+        self.sourceLbl.font = UIFont(name: boldCustomFont, size: 14.0)
         self.sourceLbl.numberOfLines = 0
         self.sourceLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.sourceLbl.isUserInteractionEnabled = true
@@ -189,14 +189,14 @@ class SearchBubbleView: BubbleView {
         
         self.urlLbl = KREAttributedTextView(frame: CGRect.zero)
         self.urlLbl.textColor = BubbleViewBotChatTextColor
-        self.urlLbl.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
-        //self.urlLbl.numberOfLines = 0
+        self.urlLbl.font = UIFont(name: boldCustomFont, size: 14.0)
+
         self.urlLbl.textContainer.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.urlLbl.isUserInteractionEnabled = true
         self.urlLbl.contentMode = UIView.ContentMode.topLeft
         self.urlLbl.translatesAutoresizingMaskIntoConstraints = false
         self.tileBgv.addSubview(self.urlLbl)
-        //self.urlLbl.adjustsFontSizeToFitWidth = true
+        
         self.urlLbl.isEditable = false
         self.urlLbl.isScrollEnabled = false
         self.urlLbl.backgroundColor = .clear
@@ -251,7 +251,7 @@ class SearchBubbleView: BubbleView {
         if isReadMore{
             isReadMore = false
             let yourAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "29LTBukra-SemiBold", size: 14.0) as Any,
+                .font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any,
                   .foregroundColor: textlinkColor,
                   .underlineStyle: NSUnderlineStyle.single.rawValue
               ]
@@ -263,7 +263,7 @@ class SearchBubbleView: BubbleView {
         }else{
             isReadMore = true
             let yourAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "29LTBukra-SemiBold", size: 14.0) as Any,
+                .font: UIFont(name: semiBoldCustomFont, size: 14.0) as Any,
                   .foregroundColor: textlinkColor,
                   .underlineStyle: NSUnderlineStyle.single.rawValue
               ]
@@ -421,7 +421,7 @@ extension SearchBubbleView: UITableViewDelegate,UITableViewDataSource{
         let label = UILabel()
         label.frame = CGRect.init(x: 10, y: 5, width: headerView.frame.width-24, height: headerView.frame.height-5)
         label.text = "Web pages"
-        label.font = UIFont(name: "29LTBukra-SemiBold", size: 16)
+        label.font = UIFont(name: semiBoldCustomFont, size: 16)
         label.textColor = BubbleViewBotChatTextColor
         headerView.addSubview(label)
         

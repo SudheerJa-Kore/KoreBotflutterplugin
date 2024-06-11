@@ -124,7 +124,7 @@ class QuickReplyWelcomeBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "Inter-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -262,7 +262,7 @@ extension QuickReplyWelcomeBubbleView : UICollectionViewDelegate, UICollectionVi
         }
         cell.bgV.backgroundColor = .clear
         
-        cell.textlabel.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        cell.textlabel.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         cell.textlabel.textAlignment = .center
         let textColor =  bubbleViewBotChatButtonTextColor
         cell.textlabel.textColor = textColor
@@ -321,7 +321,7 @@ extension QuickReplyWelcomeBubbleView : UICollectionViewDelegate, UICollectionVi
             text = elements.title
         }
         var textWidth = 10
-        let size = text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-SemiBold", size: 12.0) as Any])
+        let size = text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 12.0) as Any])
         if text != nil {
             textWidth = Int(size!.width)
         }

@@ -24,15 +24,10 @@ class NewListTrannsActionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        dateLbl.font =  UIFont(name: "29LTBukra-Semibold", size: 16.0)
-        titleLabl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        priceLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
+        dateLbl.font =  UIFont(name: semiBoldCustomFont, size: 16.0)
+        titleLabl.font = UIFont(name: regularCustomFont, size: 14.0)
+        priceLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         underlineLbl.backgroundColor = UIColor.init(hexString:"#DDE0E9")
-        
-//        dateLbl.textColor = UIColor.init(hexString:"#313131")
-//        titleLabl.textColor = UIColor.init(hexString:"#4A5052")
-//        priceLbl.textColor = UIColor.init(hexString:"#313131")
-        
                 dateLbl.textColor = BubbleViewBotChatTextColor
                 titleLabl.textColor = BubbleViewBotChatTextColor
                 priceLbl.textColor = BubbleViewBotChatTextColor

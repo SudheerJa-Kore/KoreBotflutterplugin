@@ -20,10 +20,10 @@ class SalaamPointsCardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        offersLbl.font =  UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        cardLbl.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        offersLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        cardLbl.font = UIFont(name: mediumCustomFont, size: 12.0)
         
-        cardTxtV.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        cardTxtV.font = UIFont(name: mediumCustomFont, size: 12.0)
         cardTxtV.backgroundColor = .clear
         cardTxtV.isEditable = false
         cardTxtV.isScrollEnabled = false
@@ -36,7 +36,7 @@ class SalaamPointsCardCell: UITableViewCell {
         cardTxtV.tintColor = .black
         
         copyBtn.setTitleColor(themeColor, for: .normal)
-        copyBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        copyBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

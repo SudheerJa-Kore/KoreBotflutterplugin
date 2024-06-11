@@ -109,27 +109,13 @@ class AdvancedMultiSelectBubbleView: BubbleView {
         self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[tableView]-0-|", options: [], metrics: nil, views: views))
         self.cardView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[maskview]-0-|", options: [], metrics: nil, views: views))
 
-//        self.titleLbl = UILabel(frame: CGRect.zero)
-//        self.titleLbl.textColor = BubbleViewBotChatTextColor
-//        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
-//        self.titleLbl.numberOfLines = 0
-//        self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
-//        self.titleLbl.isUserInteractionEnabled = true
-//        self.titleLbl.contentMode = UIView.ContentMode.topLeft
-//        self.titleLbl.translatesAutoresizingMaskIntoConstraints = false
-//        self.tileBgv.addSubview(self.titleLbl)
-//        self.titleLbl.adjustsFontSizeToFitWidth = true
-//        self.titleLbl.backgroundColor = .clear
-//        self.titleLbl.layer.cornerRadius = 6.0
-//        self.titleLbl.clipsToBounds = true
-//        self.titleLbl.sizeToFit()
         
         self.titleLbl = KREAttributedTextView(frame: CGRect.zero)
         self.titleLbl.textColor = Common.UIColorRGB(0x484848)
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -323,7 +309,7 @@ extension AdvancedMultiSelectBubbleView: UITableViewDelegate,UITableViewDataSour
         let cell : AdvancedMultiCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: listCellIdentifier) as! AdvancedMultiCellTableViewCell
         cell.backgroundColor = UIColor.clear
         cell.selectionStyle = .none
-        cell.titleLbl.font =  UIFont(name: "29LTBukra-Regular", size: 14.0)
+        cell.titleLbl.font =  UIFont(name: regularCustomFont, size: 14.0)
         if indexPath.row == 0{
             cell.titleLbl.text = "Select All"
             cell.cardnoLbl.text = ""
@@ -476,7 +462,7 @@ extension AdvancedMultiSelectBubbleView: UITableViewDelegate,UITableViewDataSour
             showMoreButton.layer.cornerRadius = 5
             showMoreButton.setTitleColor(BubbleViewUserChatTextColor, for: .normal)
             showMoreButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-            showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+            showMoreButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
             view.addSubview(showMoreButton)
             showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
             showMoreButton.addTarget(self, action: #selector(self.submitButtonAction(_:)), for: .touchUpInside)
@@ -498,7 +484,7 @@ extension AdvancedMultiSelectBubbleView: UITableViewDelegate,UITableViewDataSour
         cancelBtn.layer.cornerRadius = 5
         cancelBtn.setTitleColor(themeColor, for: .normal)
         cancelBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        cancelBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        cancelBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(cancelBtn)
         cancelBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         cancelBtn.addTarget(self, action: #selector(self.cancelButtonAction(_:)), for: .touchUpInside)

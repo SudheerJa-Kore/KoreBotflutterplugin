@@ -110,7 +110,7 @@ class CardSelectionBubbleView: BubbleView {
         
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewBotChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -286,13 +286,13 @@ extension CardSelectionBubbleView: UITableViewDelegate,UITableViewDataSource{
             }
             
             cell.cardLblWidthConstraint.constant = 10
-            let size = cell.cardnoLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Bold", size: 12.0)!])
+            let size = cell.cardnoLbl.text?.size(withAttributes:[.font: UIFont(name: boldCustomFont, size: 12.0) ?? UIFont.boldSystemFont(ofSize: 12.0)])
             if cell.cardnoLbl.text != nil {
                 cell.cardLblWidthConstraint.constant = (size?.width)! + 10.0 + 10.0
             }
             
             cell.cardTypeLblWidthConstraint.constant = 10.0
-            let sizee = cell.cardTypeLbl.text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-Bold", size: 12.0)!])
+            let sizee = cell.cardTypeLbl.text?.size(withAttributes:[.font: UIFont(name: boldCustomFont, size: 12.0) ?? UIFont.boldSystemFont(ofSize: 12.0)])
             if cell.cardTypeLbl.text != nil {
                 cell.cardTypeLblWidthConstraint.constant = (sizee?.width)! + 10.0 + 10.0
             }
@@ -461,7 +461,7 @@ extension CardSelectionBubbleView: UITableViewDelegate,UITableViewDataSource{
         showMoreButton.layer.cornerRadius = 5
         showMoreButton.setTitleColor(.white, for: .normal)
         showMoreButton.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        showMoreButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        showMoreButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(showMoreButton)
         showMoreButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         showMoreButton.addTarget(self, action: #selector(self.submitButtonAction(_:)), for: .touchUpInside)
@@ -481,7 +481,7 @@ extension CardSelectionBubbleView: UITableViewDelegate,UITableViewDataSource{
         cancelButton.layer.cornerRadius = 5
         cancelButton.setTitleColor(themeColor, for: .normal)
         cancelButton.setTitleColor(themeColor, for: .disabled)
-        cancelButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        cancelButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(cancelButton)
         cancelButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         cancelButton.addTarget(self, action: #selector(self.cancelButtonAction(_:)), for: .touchUpInside)

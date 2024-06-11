@@ -58,8 +58,8 @@ class TaskMenuViewController: UIViewController {
         self.tableview.register(UINib(nibName: taskMenuCellIdentifier, bundle: bundle), forCellReuseIdentifier: taskMenuCellIdentifier)
         self.tableview.register(UINib(nibName: leftMenuCellIdentifier, bundle: bundle), forCellReuseIdentifier: leftMenuCellIdentifier)
         
-        self.engBtn.titleLabel?.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        self.arabicBtn.titleLabel?.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.engBtn.titleLabel?.font = UIFont(name: regularCustomFont, size: 14.0)
+        self.arabicBtn.titleLabel?.font = UIFont(name: regularCustomFont, size: 14.0)
         
         engBtn.layer.cornerRadius = 4.0
         engBtn.layer.borderWidth = 1.0
@@ -244,7 +244,7 @@ extension TaskMenuViewController: UITableViewDelegate,UITableViewDataSource{
         let headerLabel = UILabel(frame: .zero)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.textAlignment = .left
-        headerLabel.font = UIFont(name: "29LTBukra-Semibold", size: 16.0)
+        headerLabel.font = UIFont(name: semiBoldCustomFont, size: 16.0)
         headerLabel.font = headerLabel.font.withSize(15.0)
         
         headerLabel.textColor = .black

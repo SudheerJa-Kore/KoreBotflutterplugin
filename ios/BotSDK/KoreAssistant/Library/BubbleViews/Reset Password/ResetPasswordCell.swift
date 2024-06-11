@@ -14,7 +14,7 @@ class ResetPasswordCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

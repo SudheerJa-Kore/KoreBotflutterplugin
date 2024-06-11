@@ -34,7 +34,7 @@ class CustomDropDownTemplate: BubbleView {
         self.headingLabel.mentionTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.hashtagTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.linkTextColor = Common.UIColorRGB(0x0076FF)
-        self.headingLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.headingLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -65,7 +65,7 @@ class CustomDropDownTemplate: BubbleView {
         self.inlineTextField.translatesAutoresizingMaskIntoConstraints = false
         let attributes = [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray,
-            NSAttributedString.Key.font : UIFont(name: "29LTBukra-Regular", size: 14)
+            NSAttributedString.Key.font : UIFont(name: regularCustomFont, size: 14)
         ]
         self.inlineTextField.attributedPlaceholder = NSAttributedString(string: "Select", attributes:attributes)
         self.textFBgV.addSubview(self.inlineTextField)
@@ -75,7 +75,7 @@ class CustomDropDownTemplate: BubbleView {
         self.inlineButton.clipsToBounds = true
         self.inlineButton.setImage(UIImage.init(named: ""), for: .normal)
         self.inlineButton.layer.cornerRadius = 5
-        self.inlineButton.titleLabel?.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.inlineButton.titleLabel?.font = UIFont(name: regularCustomFont, size: 14.0)
         self.textFBgV.addSubview(self.inlineButton)
         self.inlineButton.contentHorizontalAlignment = .right
         inlineButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)

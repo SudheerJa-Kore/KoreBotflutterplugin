@@ -113,7 +113,7 @@ class DetailsListBubbleView: BubbleView {
         self.titleLbl.mentionTextColor = .white
         self.titleLbl.hashtagTextColor = .white
         self.titleLbl.linkTextColor = .white
-        self.titleLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.titleLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.titleLbl.backgroundColor = .clear
         self.titleLbl.isEditable = false
         self.titleLbl.isScrollEnabled = false
@@ -363,7 +363,7 @@ extension DetailsListBubbleView: UITableViewDelegate,UITableViewDataSource{
         viewMore.layer.cornerRadius = 5
         viewMore.setTitleColor(themeColor, for: .normal)
         viewMore.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        viewMore.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)!
+        viewMore.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)!
         view.addSubview(viewMore)
         viewMore.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         viewMore.addTarget(self, action: #selector(self.viewMoreButtonAction(_:)), for: .touchUpInside)

@@ -144,7 +144,7 @@ extension UpdatedCarouselBubbleView : UICollectionViewDelegate, UICollectionView
         let elements = arrayOfCarousels[indexPath.row]
         cell.bgView.backgroundColor = BubbleViewLeftTint
         cell.titleLbl.text = elements.elementText
-        cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         cell.titleLbl.textColor = BubbleViewBotChatTextColor
         cell.carouselBtn.setTitleColor(BubbleViewBotChatTextColor, for: .normal)
         cell.layer.borderColor = UIColor.clear.cgColor
@@ -175,7 +175,7 @@ extension UpdatedCarouselBubbleView : UICollectionViewDelegate, UICollectionView
          let indexPath = IndexPath(row: indexPath.item, section: indexPath.section)
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customCellIdentifier, for: indexPath) as! UpdatedCarouselCell
         cell.titleLbl.text = text
-        cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
 
         let cellWidth = 150
         let cellBtnHeight = 30

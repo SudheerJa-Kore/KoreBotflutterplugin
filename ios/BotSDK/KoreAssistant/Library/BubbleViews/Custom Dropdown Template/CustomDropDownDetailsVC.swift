@@ -28,18 +28,18 @@ class CustomDropDownDetailsVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        headingLbl.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        headingLbl.font = UIFont(name: mediumCustomFont, size: 14.0)
         headingLbl.textColor = .black
         
         searchV.layer.cornerRadius = 4.0
         searchV.layer.borderWidth = 1.0
         searchV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         
-        searchTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        searchTF.font = UIFont(name: regularCustomFont, size: 14.0)
         searchTF.textColor =  UIColor.init(hexString: "#333333")
         let attributes = [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray,
-            NSAttributedString.Key.font : UIFont(name: "29LTBukra-Regular", size: 14)
+            NSAttributedString.Key.font : UIFont(name: regularCustomFont, size: 14)
         ]
         self.searchTF.attributedPlaceholder = NSAttributedString(string: "Search", attributes:attributes as [NSAttributedString.Key : Any])
         
@@ -182,7 +182,7 @@ extension CustomDropDownDetailsVC: UITableViewDelegate, UITableViewDataSource{
         label.frame = CGRect.init(x: 24, y: 5, width: headerView.frame.width-24, height: headerView.frame.height)
         label.text = headerStr
         label.numberOfLines = 2
-        label.font = UIFont(name: "29LTBukra-SemiBold", size: 16)
+        label.font = UIFont(name: semiBoldCustomFont, size: 16)
         label.textColor = .black
         headerView.addSubview(label)
         

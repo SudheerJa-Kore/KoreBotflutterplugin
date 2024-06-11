@@ -22,6 +22,9 @@ typedef NSFont UIFont;
     self = [super init];
     if (!self)
         return nil;
+    NSString *mediumFont = @"29LTBukra-Medium";
+    NSString *italicFont = @"HelveticaNeue-Italic";
+    NSString *boldFont = @"HelveticaNeue-Bold";
     
 #if TARGET_OS_TV
     NSUInteger defaultSize = 29;
@@ -29,7 +32,7 @@ typedef NSFont UIFont;
     NSUInteger defaultSize = 14;
 #endif
     
-    self.defaultAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-Medium" size:defaultSize] };
+    self.defaultAttributes = @{ NSFontAttributeName: [UIFont fontWithName:mediumFont size:defaultSize] };
     
 #if TARGET_OS_TV
     _headerAttributes = @[ @{ NSFontAttributeName: [UIFont boldSystemFontOfSize:76] },
@@ -48,21 +51,21 @@ typedef NSFont UIFont;
 #endif
     _isItalicBold = false;
     _listAttributes = @[];
-    _quoteAttributes = @[@{NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-BoldSlanted" size:defaultSize]}];
+    _quoteAttributes = @[@{NSFontAttributeName: [UIFont fontWithName:italicFont size:defaultSize]}];
     
     _imageAttributes = @{};
     _linkAttributes = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:230.0/255.0 green:209.0/255.0 blue:202/255.0 alpha:1],
                          NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle) }; //blueColor
     
     // Courier New and Courier are the only monospace fonts compatible with watchOS 2
-    _monospaceAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-Bold" size:defaultSize],
+    _monospaceAttributes = @{ NSFontAttributeName: [UIFont fontWithName:mediumFont size:defaultSize],
                               NSForegroundColorAttributeName: [UIColor colorWithRed:0.95 green:0.54 blue:0.55 alpha:1] };
-    _strongAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-Bold" size:defaultSize] };
-    //_underlineAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:defaultSize], NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle) };
-    _underlineAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-MediumSlanted" size:defaultSize] };
+    _strongAttributes = @{ NSFontAttributeName: [UIFont fontWithName:boldFont size:defaultSize] };
+    
+    _underlineAttributes = @{ NSFontAttributeName: [UIFont fontWithName:mediumFont size:defaultSize] };
 
 #if TARGET_OS_IPHONE
-    _emphasisAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"29LTBukra-BoldSlanted" size:defaultSize] };
+    _emphasisAttributes = @{ NSFontAttributeName: [UIFont fontWithName:italicFont size:defaultSize] };
 #else
     _emphasisAttributes = @{ NSFontAttributeName: [[NSFontManager sharedFontManager] convertFont:[UIFont systemFontOfSize:defaultSize] toHaveTrait:NSItalicFontMask] };
 #endif

@@ -72,10 +72,10 @@ class UserValidationViewController: UIViewController {
         acoountNoV.layer.cornerRadius = 4.0
         acoountNoV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         acoountNoV.clipsToBounds = true
-        accountnoLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        accountnoLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         accountNoTF.textColor = .black
-        accountNoTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        accountNoErrorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        accountNoTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        accountNoErrorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         accountNoErrorLbl.textColor = UIColor.init(hexString: "#B00020")
         accountNoErrorLbl.isHidden = true
         accountNoErrorLbl.text = ""
@@ -84,10 +84,10 @@ class UserValidationViewController: UIViewController {
         cvvNoV.layer.cornerRadius = 4.0
         cvvNoV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         cvvNoV.clipsToBounds = true
-        cvvnoLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cvvnoLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         cvvNoTF.textColor = .black
-        cvvNoTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        cvvErrorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        cvvNoTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        cvvErrorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         cvvErrorLbl.textColor = UIColor.init(hexString: "#B00020")
         cvvErrorLbl.isHidden = true
         cvvErrorLbl.text = ""
@@ -96,10 +96,10 @@ class UserValidationViewController: UIViewController {
         DOBV.layer.cornerRadius = 4.0
         DOBV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         DOBV.clipsToBounds = true
-        DOBLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        DOBLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         DOBTF.textColor = .black
-        DOBTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        DOBErrorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        DOBTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        DOBErrorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         DOBErrorLbl.textColor = UIColor.init(hexString: "#B00020")
         DOBErrorLbl.isHidden = true
         DOBErrorLbl.text = ""
@@ -108,16 +108,16 @@ class UserValidationViewController: UIViewController {
         userNameV.layer.cornerRadius = 4.0
         userNameV.layer.borderColor = UIColor.init(hexString: "#7C7C7C").cgColor
         userNameV.clipsToBounds = true
-        userNameLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        userNameLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         userNameTF.textColor = .black
-        userNameTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        UserNameErrorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        userNameTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        UserNameErrorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         UserNameErrorLbl.textColor = UIColor.init(hexString: "#B00020")
         UserNameErrorLbl.isHidden = true
         UserNameErrorLbl.text = ""
         
         submitbtn.setTitle(submitBtnTitle, for: .normal)
-        submitbtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        submitbtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         submitbtn.titleLabel?.textColor = UIColor.white
         submitbtn.backgroundColor = themeColor
         submitbtn.layer.cornerRadius = 4.0
@@ -147,8 +147,8 @@ class UserValidationViewController: UIViewController {
         }
         let bundle = KREResourceLoader.shared.resourceBundle()
         tabV.register(UINib.init(nibName: "UserValidationCell", bundle: bundle), forCellReuseIdentifier: "UserValidationCell")
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 22.0)
-        errorLbl.font = UIFont(name: "29LTBukra-Regular", size: 12.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 22.0)
+        errorLbl.font = UIFont(name: regularCustomFont, size: 12.0)
         
         getData()
         if #available(iOS 11.0, *) {
@@ -621,8 +621,8 @@ extension UserValidationViewController: UITableViewDelegate, UITableViewDataSour
         cell.bgVTF.clipsToBounds = true
         cell.bgVTF.backgroundColor = UIColor(red: 0.973, green: 0.976, blue: 0.988, alpha: 1)
         
-        cell.addressTF.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
-        cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        cell.addressTF.font = UIFont(name: regularCustomFont, size: 14.0)
+        cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         
         cell.addressTF.isUserInteractionEnabled = true
         let fields = arrayOfFields[indexPath.row]
@@ -706,7 +706,7 @@ extension UserValidationViewController: UITableViewDelegate, UITableViewDataSour
         submitBtn.layer.cornerRadius = 5
         submitBtn.setTitleColor(.white, for: .normal)
         submitBtn.setTitleColor(Common.UIColorRGB(0x999999), for: .disabled)
-        submitBtn.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        submitBtn.titleLabel?.font = UIFont(name: mediumCustomFont, size: 12.0)
         view.addSubview(submitBtn)
         submitBtn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         submitBtn.addTarget(self, action: #selector(self.submitButtonAction(_:)), for: .touchUpInside)

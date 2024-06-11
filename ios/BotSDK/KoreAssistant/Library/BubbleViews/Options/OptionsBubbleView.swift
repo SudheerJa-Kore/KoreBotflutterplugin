@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import korebotplugin
 
 class OptionsBubbleView: BubbleView {
     static let buttonsLimit: Int = 5
@@ -30,7 +29,7 @@ class OptionsBubbleView: BubbleView {
         self.textLabel.mentionTextColor = Common.UIColorRGB(0x8ac85a)
         self.textLabel.hashtagTextColor = Common.UIColorRGB(0x8ac85a)
         self.textLabel.linkTextColor = Common.UIColorRGB(0x0076FF)
-        self.textLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.textLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.textLabel.numberOfLines = 0
         self.textLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.textLabel.isUserInteractionEnabled = true
@@ -101,21 +100,15 @@ class OptionsBubbleView: BubbleView {
                 templateLanguage = jsonObject["lang"] != nil ? jsonObject["lang"] as! String : default_language 
                 if (templateLanguage?.caseInsensitiveCompare(preferred_language_Type) == .orderedSame) {
                     self.textLabel.textAlignment = .right
-//                    if #available(iOS 11.0, *) {
-//                        self.roundCorners([ .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner], radius: 10.0, borderColor: UIColor.clear, borderWidth: 1.5)
-//                    }
                 }else{
                     self.textLabel.textAlignment = .left
-//                    if #available(iOS 11.0, *) {
-//                        self.roundCorners([ .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner], radius: 10.0, borderColor: UIColor.clear, borderWidth: 1.5)
-//                    }
                 }
             }
         }
     }
 
     override var intrinsicContentSize : CGSize {
-        self.textLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.textLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         let limitingSize: CGSize  = CGSize(width: BubbleViewMaxWidth - 32, height: CGFloat.greatestFiniteMagnitude)
         let textSize: CGSize = self.textLabel.sizeThatFits(limitingSize)
         let rowsHeight = self.optionsView.getExpectedHeight(width: BubbleViewMaxWidth)

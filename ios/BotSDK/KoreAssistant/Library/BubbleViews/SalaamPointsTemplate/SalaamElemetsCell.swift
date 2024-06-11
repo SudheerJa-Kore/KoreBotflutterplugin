@@ -19,8 +19,8 @@ class SalaamElemetsCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         bgView.backgroundColor = .white
-        titleLbl.font =  UIFont(name: "29LTBukra-Regular", size: 14.0)
-        valueLbl.font = UIFont(name: "29LTBukra-Semibold", size: 18.0)
+        titleLbl.font =  UIFont(name: regularCustomFont, size: 14.0)
+        valueLbl.font = UIFont(name: semiBoldCustomFont, size: 18.0)
         bgView.layer.cornerRadius = 5.0
         bgView.layer.borderWidth = 1.0
         bgView.layer.borderColor = UIColor.init(hexString:"#DDE0E9").cgColor//UIColor.lightGray.cgColor

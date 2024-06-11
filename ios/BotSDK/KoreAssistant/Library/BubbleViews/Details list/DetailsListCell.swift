@@ -18,8 +18,8 @@ class DetailsListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        titleLbl.font =  UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        detailsLbl.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        titleLbl.font =  UIFont(name: semiBoldCustomFont, size: 14.0)
+        detailsLbl.font = UIFont(name: mediumCustomFont, size: 12.0)
     }
 
     

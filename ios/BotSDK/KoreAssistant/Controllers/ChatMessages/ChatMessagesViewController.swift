@@ -146,6 +146,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isCallingHistoryApi = true
         
         linerProgressBar.frame = CGRect(x: 0, y: 0 , width: UIScreen.main.bounds.size.width, height:1)
         self.headerView.addSubview(linerProgressBar)
@@ -250,7 +251,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     
     func brandingValues(){
         let widgetTxtColor = UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
-        let font:UIFont? = UIFont(name: "29LTBukra-Semibold", size:16)
+        let font:UIFont? = UIFont(name: semiBoldCustomFont, size:16)
         let titleStr = brandingShared.botName ?? SDKConfiguration.botConfig.chatBotName
         let attString:NSMutableAttributedString = NSMutableAttributedString(string: titleStr , attributes: [.font:font!])
         let titleLabel = UILabel()
@@ -282,7 +283,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         UserDefaults.standard.set(brandingShared.buttonActiveBgColor, forKey: "ButtonBgColor")
         UserDefaults.standard.set(brandingShared.widgetBorderColor, forKey: "widgetBorderColor")
         
-        BubbleViewRightTint = UIColor.init(hexString: (brandingShared.userchatBgColor) ?? "#26344A")
+        let bubbleViewRightTint = (brandingShared.userchatBgColor) ?? "#26344A"
+        BubbleViewRightTint = UIColor.init(hexString: bubbleViewRightTint)
         BubbleViewLeftTint = UIColor.init(hexString: (brandingShared.botchatBgColor) ?? "#F4F4F4")
         BubbleViewUserChatTextColor = UIColor.init(hexString: (brandingShared.userchatTextColor) ?? "#000000")
         let BotChatTextColor = (brandingShared.botchatTextColor) ?? "#313131"
@@ -295,8 +297,8 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         bubbleViewBotChatButtonBgColor = UIColor.init(hexString: brandingShared.buttonActiveBgColor ?? "#FFFFFF")
         bubbleViewBotChatButtonInactiveTextColor = UIColor.init(hexString: (brandingShared.buttonInactiveTextColor) ?? "#ff5e00")
         
-        UserDefaults.standard.set(btnActiveTextColor, forKey: "ThemeColor")
-        themeColor = UIColor.init(hexString: btnActiveTextColor)
+        //UserDefaults.standard.set(bubbleViewRightTint, forKey: "ThemeColor")
+        themeColor = UIColor.init(hexString: bubbleViewRightTint)
         
         let chatHisImg = UIImage.init(named: "chatHistory", in: bundle, compatibleWith: nil)
         chatHistoryImg.image = chatHisImg?.withRenderingMode(.alwaysTemplate)
@@ -1091,7 +1093,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
     }
     
     func configureleftMenu(){
-        self.leftMenuTitleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.leftMenuTitleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.leftMenuView = LeftMenuView()
         self.leftMenuView.translatesAutoresizingMaskIntoConstraints = false
         self.leftMenuView.backgroundColor = .clear
@@ -1327,7 +1329,7 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
             print("Network reachability: \(status)")
             switch status {
             case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                 self.establishBotConnection() //kk
+                 self.establishBotConnection()
                 break
             case .notReachable:
                 fallthrough
@@ -2322,7 +2324,9 @@ extension ChatMessagesViewController {
     }
     
     func tableviewScrollDidEnd(){
-         fetchMessages()
+        if isTableViewDrag{
+            fetchMessages()
+        }
     }
 }
 extension ChatMessagesViewController: KABotClientDelegate {
@@ -2692,9 +2696,9 @@ extension ChatMessagesViewController{
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         //**
-        let titleAttributes = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Medium", size: 15.0), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let titleAttributes = [NSAttributedString.Key.font: UIFont(name: mediumCustomFont, size: 15.0), NSAttributedString.Key.foregroundColor: UIColor.black]
         let titleString = NSAttributedString(string: alertController.title!, attributes: titleAttributes as [NSAttributedString.Key : Any])
-        let messageAttributes = [NSAttributedString.Key.font: UIFont(name: "29LTBukra-Medium", size: 14.0), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let messageAttributes = [NSAttributedString.Key.font: UIFont(name: mediumCustomFont, size: 14.0), NSAttributedString.Key.foregroundColor: UIColor.black]
         let messageString = NSAttributedString(string: alertController.message!, attributes: messageAttributes as [NSAttributedString.Key : Any])
         alertController.setValue(titleString, forKey: "attributedTitle")
         alertController.setValue(messageString, forKey: "attributedMessage")

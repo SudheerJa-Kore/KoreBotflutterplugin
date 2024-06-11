@@ -219,8 +219,7 @@ open class KREOptionsView: UIView, UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.textColor = UIColor.init(hexString: "#1565C0")
             cell.backgroundColor = UIColor.init(hexString: "#E3F2FD")
             if #available(iOS 8.2, *) {
-                //cell.textLabel?.font = UIFont.textFont(ofSize: 14.0, weight: .medium)
-                cell.textLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+                cell.textLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
             }
             
             return cell

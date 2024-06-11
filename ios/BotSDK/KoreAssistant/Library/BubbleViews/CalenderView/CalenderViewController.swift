@@ -66,14 +66,14 @@ class CalenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        headingLabel.font = UIFont(name: "29LTBukra-Semibold", size: 16.0)
-        confirmButton.titleLabel?.font = UIFont(name: "29LTBukra-Medium", size: 17.0)
+        headingLabel.font = UIFont(name: semiBoldCustomFont, size: 16.0)
+        confirmButton.titleLabel?.font = UIFont(name: mediumCustomFont, size: 17.0)
         
-        fromYearLabel.font = UIFont(name: "29LTBukra-Regular", size: 17.0)
-        fromDateLabel.font = UIFont(name: "29LTBukra-Bold", size: 21.0)
+        fromYearLabel.font = UIFont(name: regularCustomFont, size: 17.0)
+        fromDateLabel.font = UIFont(name: boldCustomFont, size: 21.0)
         
-        fromDateRangeLabel.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
-        toDateRangeLabel.font = UIFont(name: "29LTBukra-Bold", size: 14.0)
+        fromDateRangeLabel.font = UIFont(name: boldCustomFont, size: 14.0)
+        toDateRangeLabel.font = UIFont(name: boldCustomFont, size: 14.0)
         
         headingLabel.textColor =  UIColor.init(hexString: (brandingShared.widgetTextColor) ?? "#26344A")
         confirmButton.backgroundColor = UIColor.init(hexString: (brandingShared.buttonActiveBgColor) ?? "#26344A")

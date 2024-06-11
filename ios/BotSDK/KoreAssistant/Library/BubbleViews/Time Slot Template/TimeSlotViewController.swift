@@ -42,13 +42,13 @@ class TimeSlotViewController: UIViewController {
         underToplineLbl.clipsToBounds = true
         
         // Do any additional setup after loading the view.
-        dateLbl.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        dateLbl.font = UIFont(name: mediumCustomFont, size: 12.0)
         dateLbl.textColor = .black
-        dateTextLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        dateTextLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         dateTextLbl.textColor = themeColor
-        titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 16.0)
+        titleLbl.font = UIFont(name: semiBoldCustomFont, size: 16.0)
         titleLbl.textColor = .black
-        continueBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        continueBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         continueBtn.titleLabel?.textColor = UIColor.white
         continueBtn.backgroundColor = themeColor
         continueBtn.layer.cornerRadius = 4.0
@@ -69,7 +69,7 @@ class TimeSlotViewController: UIViewController {
             self.bgV.roundCorners([ .layerMaxXMinYCorner, .layerMinXMinYCorner], radius: 15.0, borderColor: UIColor.lightGray, borderWidth: 0)
         }
         
-        confirmBtn.titleLabel?.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+        confirmBtn.titleLabel?.font = UIFont(name: semiBoldCustomFont, size: 14.0)
         confirmBtn.titleLabel?.textColor = UIColor.white
         confirmBtn.backgroundColor = themeColor
         confirmBtn.layer.cornerRadius = 4.0
@@ -209,11 +209,11 @@ extension TimeSlotViewController: UICollectionViewDelegate, UICollectionViewData
         cell.bgV.clipsToBounds = true
         
         if selectedIndex[indexPath.item] as! Int == indexPath.item{
-            cell.titleLbl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
+            cell.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
             cell.bgV.layer.borderWidth = 2.0
             cell.bgV.layer.borderColor = UIColor.init(hexString: "#333333").cgColor
         }else{
-            cell.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+            cell.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
             cell.bgV.layer.borderWidth = 1.0
             cell.bgV.layer.borderColor = UIColor.init(hexString: "#D7D7D7").cgColor
         }
@@ -221,14 +221,6 @@ extension TimeSlotViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // MARK: Multiple Items Selection
-//        if selectedIndex[indexPath.item] as! Int == 1000{
-//            selectedIndex.replaceObject(at: indexPath.item, with: indexPath.item)
-//            selectedIndexValues.replaceObject(at: indexPath.item, with: "\(slotsArray[indexPath.item])")
-//        }else{
-//            selectedIndex.replaceObject(at: indexPath.item, with: 1000)
-//            selectedIndexValues.replaceObject(at: indexPath.item, with: "")
-//        }
-
         selectedTime = "\(slotsArray[indexPath.item])"
         
         // MARK: Single Item Selection

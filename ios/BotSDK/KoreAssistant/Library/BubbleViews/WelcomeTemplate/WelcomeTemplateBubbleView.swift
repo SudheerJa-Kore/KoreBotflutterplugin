@@ -78,7 +78,7 @@ class WelcomeTemplateBubbleView: BubbleView {
         
         self.headingLbl = UILabel(frame: CGRect.zero)
         self.headingLbl.textColor = BubbleViewBotChatTextColor
-        self.headingLbl.font = UIFont(name: "29LTBukra-Regular", size: 18.0)
+        self.headingLbl.font = UIFont(name: regularCustomFont, size: 18.0)
         self.headingLbl.numberOfLines = 0
         self.headingLbl.textAlignment = .center
         self.headingLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -94,7 +94,7 @@ class WelcomeTemplateBubbleView: BubbleView {
         
         self.descLbl = UILabel(frame: CGRect.zero)
         self.descLbl.textColor = themeColor
-        self.descLbl.font = UIFont(name: "29LTBukra-Bold", size: 20.0)
+        self.descLbl.font = UIFont(name: boldCustomFont, size: 20.0)
         self.descLbl.numberOfLines = 0
         self.descLbl.textAlignment = .center
         self.descLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -110,7 +110,7 @@ class WelcomeTemplateBubbleView: BubbleView {
         
         self.suggestionLbl = UILabel(frame: CGRect.zero)
         self.suggestionLbl.textColor = BubbleViewBotChatTextColor
-        self.suggestionLbl.font = UIFont(name: "29LTBukra-Regular", size: 10.0)
+        self.suggestionLbl.font = UIFont(name: regularCustomFont, size: 10.0)
         self.suggestionLbl.numberOfLines = 0
         self.suggestionLbl.textAlignment = .left
         self.suggestionLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -181,7 +181,7 @@ class WelcomeTemplateBubbleView: BubbleView {
         
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = BubbleViewUserChatTextColor
-        self.titleLbl.font = UIFont(name: "29LTBukra-Semibold", size: 16.0)
+        self.titleLbl.font = UIFont(name: semiBoldCustomFont, size: 16.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -287,7 +287,7 @@ extension WelcomeTemplateBubbleView : UICollectionViewDelegate, UICollectionView
        
         cell.bgV.backgroundColor = .clear
         
-        cell.textlabel.font = UIFont(name: "29LTBukra-SemiBold", size: 12.0)
+        cell.textlabel.font = UIFont(name: semiBoldCustomFont, size: 12.0)
         cell.textlabel.textAlignment = .center
         let textColor =  UserDefaults.standard.value(forKey: "ButtonBgColor") as? String
         cell.textlabel.textColor = UIColor.init(hexString: textColor ?? "ff5e00")
@@ -363,7 +363,7 @@ extension WelcomeTemplateBubbleView : UICollectionViewDelegate, UICollectionView
         text = elements.title
         
         var textWidth = 10
-        let size = text?.size(withAttributes:[.font: UIFont(name: "29LTBukra-SemiBold", size: 12.0) as Any])
+        let size = text?.size(withAttributes:[.font: UIFont(name: semiBoldCustomFont, size: 12.0) as Any])
         if text != nil {
             textWidth = Int(size!.width)
         }

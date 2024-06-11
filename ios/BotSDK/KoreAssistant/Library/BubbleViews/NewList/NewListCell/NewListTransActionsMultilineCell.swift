@@ -25,10 +25,10 @@ class NewListTransActionsMultilineCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        dateLbl.font =  UIFont(name: "29LTBukra-Semibold", size: 16.0)
-        titleLabl.font = UIFont(name: "29LTBukra-SemiBold", size: 14.0)
-        priceLbl.font = UIFont(name: "29LTBukra-Semibold", size: 14.0)
-        subTitle.font = UIFont(name: "29LTBukra-Medium", size: 12.0)
+        dateLbl.font =  UIFont(name: semiBoldCustomFont, size: 16.0)
+        titleLabl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        priceLbl.font = UIFont(name: semiBoldCustomFont, size: 14.0)
+        subTitle.font = UIFont(name: mediumCustomFont, size: 12.0)
         underlineLbl.backgroundColor = UIColor.init(hexString:"#DDE0E9")
     }
 

@@ -49,7 +49,7 @@ class IDFCAgentBubbleView: BubbleView {
         
         self.titleLbl = UILabel(frame: CGRect.zero)
         self.titleLbl.textColor = .black
-        self.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         self.titleLbl.numberOfLines = 0
         self.titleLbl.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.titleLbl.isUserInteractionEnabled = true
@@ -99,7 +99,7 @@ class IDFCAgentBubbleView: BubbleView {
     
     //MARK: View height calculation
     override var intrinsicContentSize : CGSize {
-        self.titleLbl.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.titleLbl.font = UIFont(name: regularCustomFont, size: 14.0)
         let limitingSize: CGSize  = CGSize(width: kMaxTextWidth, height: CGFloat.greatestFiniteMagnitude)
         var textSize: CGSize = self.titleLbl.sizeThatFits(limitingSize)
         if textSize.height < self.titleLbl.font.pointSize {

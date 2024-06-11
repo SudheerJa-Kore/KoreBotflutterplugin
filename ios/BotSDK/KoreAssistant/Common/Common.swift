@@ -59,6 +59,13 @@ var themeColor: UIColor = UIColor.init(hexString: defaultLoaderColorStr)
 var textlinkColor: UIColor = UIColor.init(hexString: "#591efd")
 var botHistoryIcon:String?
 
+var regularCustomFont = "HelveticaNeue"
+var mediumCustomFont = "HelveticaNeue-Medium"
+var boldCustomFont = "HelveticaNeue-Bold"
+var semiBoldCustomFont = "HelveticaNeue-Semibold"
+var italicCustomFont =  "HelveticaNeue-Italic"
+var isTableViewDrag = false
+
 var uniqueUserId: String?
 var userInfoUserId: String?
 var authInfoAccessToken: String?
@@ -88,8 +95,6 @@ public var previousSessionxAuth = ""
 var isErrorType: String?
 
 var alertName = "Kore"
-public var primaryColor = "#37474f"
-public var secondaryColor = "#ffffff"
 
 var isAgentConnect = false
 var reloadTabV = true
@@ -114,20 +119,12 @@ var loginMobileNo: String?
 
 var preferred_language_Type = "AR"
 var preferredLanguage: String?
-var default_language = "EN" //AR
+var default_language = "EN"
 var isCallingHistoryApi = true
 let date: Date = Date()
-var randomID  = String(format: "email%ld%@", date.timeIntervalSince1970, "@domain.com")
 var recentSearchArray = [String]()
 
 var customDropDownShowText = false
-
-var regularCustomFont = "HelveticaNeue"
-var mediumCustomFont = "HelveticaNeue-Medium"
-var boldCustomFont = "HelveticaNeue-Bold"
-var semiBoldCustomFont = "HelveticaNeue-Semibold"
-var italicCustomFont =  "HelveticaNeue-Italic"
-
 var frameworkBundle:Bundle? {
     let bundleId = "com.kore.rtc"
     return Bundle(identifier: bundleId)

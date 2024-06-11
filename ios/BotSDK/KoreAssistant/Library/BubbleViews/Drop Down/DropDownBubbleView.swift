@@ -42,7 +42,7 @@ class DropDownBubbleView: BubbleView {
         self.headingLabel.mentionTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.hashtagTextColor = Common.UIColorRGB(0x8ac85a)
         self.headingLabel.linkTextColor = Common.UIColorRGB(0x0076FF)
-        self.headingLabel.font = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        self.headingLabel.font = UIFont(name: mediumCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -195,7 +195,7 @@ extension DropDownBubbleView {
         dropDown.shadowRadius = 25
         dropDown.animationduration = 0.25
         dropDown.textColor = .darkGray
-        dropDown.textFont  = UIFont(name: "29LTBukra-Medium", size: 14.0)
+        dropDown.textFont  = UIFont(name: mediumCustomFont, size: 14.0)
         setupColorDropDown()
     }
     // MARK: Setup DropDown
@@ -203,10 +203,7 @@ extension DropDownBubbleView {
         dropDown.anchorView = inlineButton
         dropDown.bottomOffset = CGPoint(x: 0, y: inlineButton.bounds.height)
         dropDown.dataSource = arrayOfElements as! [String]
-        //colorDropDown.selectRow(0)
-        // Action triggered on selection
         dropDown.selectionAction = { [weak self] (index, item) in
-            //self?.amountButton.setTitle(item, for: .normal)
             self!.inlineTextField.text = item
             customDropDownText = item
             NotificationCenter.default.post(name: Notification.Name(dropDownTemplateNotification), object: item)

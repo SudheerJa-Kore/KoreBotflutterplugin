@@ -50,7 +50,7 @@ class StatusTemplateBubbleView: BubbleView {
         self.tagLabel = KREAttributedLabel(frame: CGRect.zero)
         self.tagLabel.textColor = BubbleViewBotChatTextColor
         self.tagLabel.backgroundColor = UIColor.clear
-        self.tagLabel.font = UIFont(name: "29LTBukra-Bold", size: 10.0)
+        self.tagLabel.font = UIFont(name: boldCustomFont, size: 10.0)
         self.tagLabel.numberOfLines = 0
         self.tagLabel.textAlignment = .center
         self.tagLabel.layer.cornerRadius = 5.0
@@ -63,7 +63,7 @@ class StatusTemplateBubbleView: BubbleView {
         self.headingLabel = KREAttributedLabel(frame: CGRect.zero)
         self.headingLabel.textColor = BubbleViewBotChatTextColor
         self.headingLabel.backgroundColor = UIColor.clear
-        self.headingLabel.font = UIFont(name: "29LTBukra-Regular", size: 14.0)
+        self.headingLabel.font = UIFont(name: regularCustomFont, size: 14.0)
         self.headingLabel.numberOfLines = 0
         self.headingLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.headingLabel.isUserInteractionEnabled = true
@@ -114,7 +114,7 @@ class StatusTemplateBubbleView: BubbleView {
         let limitingSize: CGSize  = CGSize(width: kMaxTextWidth, height: CGFloat.greatestFiniteMagnitude)
         let headingLabelSize: CGSize = self.headingLabel.sizeThatFits(limitingSize)
         
-        self.tagLabel.font = UIFont(name: "29LTBukra-Bold", size: 10.0)
+        self.tagLabel.font = UIFont(name: boldCustomFont, size: 10.0)
         let tagLabelSize: CGSize = self.tagLabel.sizeThatFits(limitingSize)
         
         tagLabelWidthConstraint.constant = tagLabelSize.width + 10
