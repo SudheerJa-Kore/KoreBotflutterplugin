@@ -57,6 +57,7 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
       SDKConfiguration.Client.client_id = call.argument("clientId");
       SDKConfiguration.Client.bot_name = call.argument("chatBotName");
       SDKConfiguration.Client.identity = call.argument("identity");
+      SDKConfiguration.Client.history_call = Boolean.TRUE.equals(call.argument("callHistory"));
 
       SDKConfiguration.Server.SERVER_URL = call.argument("server_url");
       SDKConfiguration.setJwtServerUrl(call.argument("jwt_server_url"));
