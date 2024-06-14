@@ -48,7 +48,12 @@ public class SDKConfiguration {
 
     //JWTServer related configurations
     public static class JWTServer {
-        static final String JWT_SERVER_URL = "https://staging-bots.korebots.com";
+        static String JWT_SERVER_URL = "https://staging-bots.korebots.com";
+
+    }
+
+    public static void setJwtServerUrl(String serverUrl) {
+        JWTServer.JWT_SERVER_URL = serverUrl;
     }
 
     //Server related configurations
