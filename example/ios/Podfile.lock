@@ -14,7 +14,7 @@ PODS:
     - Starscream
   - MarkdownKit (1.7.1)
   - ObjectMapper (3.5.3)
-  - Starscream (4.0.6)
+  - Starscream (4.0.8)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -38,13 +38,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
   AlamofireObjectMapper: 74d1440c92c42bbcc2b5f4dc81654ac095ec669f
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   GhostTypewriter: 62540772d227fbfe633bfa728d08fe8af5b4d805
   korebotplugin: 38cdc6f72d14c792e6b9a529ad0003502a5ea3bb
   MarkdownKit: 0b15195c63cf3e39387949c4bdeccde0055e252a
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
-  Starscream: fb2c4510bebf908c62bd383bcf05e673720e91fd
+  Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
 
-PODFILE CHECKSUM: 61f7f00a6fc3467a8834161d9bd64c4c266aa465
+PODFILE CHECKSUM: fb408a289158b00660fcdf4ee69e15b9fae7e08f
 
 COCOAPODS: 1.15.2
