@@ -62,7 +62,6 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
       SDKConfiguration.Server.SERVER_URL = call.argument("server_url");
       SDKConfiguration.setJwtServerUrl(call.argument("jwt_server_url"));
 
-      BotSocketConnectionManager.getInstance().startAndInitiateConnectionWithConfig(context, null);
       Intent intent = new Intent(context, BotChatActivity.class);
       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       Bundle bundle = new Bundle();

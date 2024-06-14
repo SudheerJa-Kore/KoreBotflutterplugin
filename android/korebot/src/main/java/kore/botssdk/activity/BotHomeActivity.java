@@ -88,7 +88,7 @@ public class BotHomeActivity extends BotAppCompactActivity implements ProviderIn
                         if(!SDKConfiguration.Client.isWebHook)
                         {
                             SDKConfiguration.Client.identity = UUID.randomUUID().toString();
-                            BotSocketConnectionManager.getInstance().startAndInitiateConnectionWithConfig(getApplicationContext(),null);
+                            BotSocketConnectionManager.getInstance().startAndInitiateConnectionWithConfig(getApplicationContext(),null, SDKConfiguration.Client.history_call);
                             launchBotChatActivity();
                         }
                         else

@@ -72,7 +72,6 @@ public class SDKConfiguration {
         public static final String TTS_WS_URL = "wss://speech.kore.ai/tts/ws";
         public static final boolean IS_ANONYMOUS_USER = false;
         public static String SERVER_URL = "https://bots.kore.ai/"; // "https://demo.kore.net";
-        public static final String TOKEN_SERVER_URL = "https://demodpd.kore.ai/";
         public static final String Branding_SERVER_URL = "https://bots.kore.ai/";
         public static final String koreAPIUrl = "https://sit-bots.kore.ai/";
     }

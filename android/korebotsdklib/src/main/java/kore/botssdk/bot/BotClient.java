@@ -9,15 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.UUID;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import kore.botssdk.models.BotInfoModel;
 import kore.botssdk.models.BotMessageAckModel;
-import kore.botssdk.models.BotSocketOptions;
 import kore.botssdk.net.RestResponse;
-import kore.botssdk.net.SDKConfiguration;
 import kore.botssdk.utils.LogUtils;
 import kore.botssdk.utils.Utils;
 import kore.botssdk.websocket.SocketConnectionListener;
@@ -78,34 +75,11 @@ public class BotClient {
     }
     /**
      * Connection for anonymous user
-     *
-     * @param socketConnectionListener
      */
-    public void connectAsAnonymousUser(String jwtToken, String chatBotName, String taskBotId, SocketConnectionListener socketConnectionListener) {
-
-        String uuid = UUID.randomUUID().toString();//"e56dd516-5491-45b2-9ff7-ffcb7d8f2461";
+    public void connectAsAnonymousUser(String jwtToken, String chatBotName, String taskBotId, SocketConnectionListener socketConnectionListener, boolean isReconnect) {
         botInfoModel = new BotInfoModel(chatBotName,taskBotId,customData);
-        SocketWrapper.getInstance(mContext).connectAnonymous(jwtToken, botInfoModel,  socketConnectionListener,null);
+        SocketWrapper.getInstance(mContext).connectAnonymous(jwtToken, botInfoModel,  socketConnectionListener,null, isReconnect);
     }
-
-
-    public void shouldAttemptToReconnect(boolean value){
-        SocketWrapper.getInstance(mContext).shouldAttemptToReconnect(value);
-    }
-    /**
-     * Connection for anonymous user
-     *
-     * @param socketConnectionListener
-     */
-    public void connectAsAnonymousUserWithOptions(String jwtToken, String chatBotName,
-                                                  String taskBotId, SocketConnectionListener socketConnectionListener, BotSocketOptions options) {
-
-        String uuid = UUID.randomUUID().toString();//"e56dd516-5491-45b2-9ff7-ffcb7d8f2461";
-        botInfoModel = new BotInfoModel(chatBotName,taskBotId,customData);
-        SocketWrapper.getInstance(mContext).connectAnonymous(jwtToken, botInfoModel, socketConnectionListener,options);
-    }
-
-
 
     public String generateJWT(String email,String secret,String clientId, boolean isAnonymousUser){
         long curTime = System.currentTimeMillis();

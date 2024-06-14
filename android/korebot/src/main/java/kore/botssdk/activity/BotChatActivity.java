@@ -203,7 +203,7 @@ public class BotChatActivity extends BotAppCompactActivity implements ComposeFoo
             BotSocketConnectionManager.getInstance().setChatListener(sListener);
         }
 
-        BotSocketConnectionManager.getInstance().startAndInitiateConnectionWithConfig(getApplicationContext(), null);
+        BotSocketConnectionManager.getInstance().startAndInitiateConnectionWithConfig(getApplicationContext(), null, SDKConfiguration.Client.history_call);
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -226,10 +226,13 @@ public class BotChatActivity extends BotAppCompactActivity implements ComposeFoo
         public void onConnectionStateChanged(BaseSocketConnectionManager.CONNECTION_STATE state, boolean isReconnection) {
             if (state == BaseSocketConnectionManager.CONNECTION_STATE.CONNECTED) {
                 getBrandingDetails();
+
+                if (SDKConfiguration.Client.history_call && botContentFragment != null) {
+                    botContentFragment.loadChatHistory(0, 10);
+                }
             }
 
             new PushNotificationRegister().registerPushNotification(BotChatActivity.this, botClient.getUserId(), botClient.getAccessToken(), sharedPreferences.getString("FCMToken", getUniqueDeviceId(BotChatActivity.this)));
-
             updateTitleBar(state);
         }
 
@@ -686,13 +689,11 @@ public class BotChatActivity extends BotAppCompactActivity implements ComposeFoo
 
     public BrandingModel getBrandingDataFromTxt() {
         BotActiveThemeModel botActiveThemeModel;
-        try
-        {
+        try {
             InputStream is = getResources().openRawResource(R.raw.branding_response);
             Reader reader = new InputStreamReader(is);
             botActiveThemeModel = gson.fromJson(reader, BotActiveThemeModel.class);
-            if(botActiveThemeModel != null)
-            {
+            if (botActiveThemeModel != null) {
                 BrandingModel brandingModel = new BrandingModel();
                 brandingModel.setBotchatBgColor(brandingNewDos.getBotMessage().getBubbleColor());
                 brandingModel.setBotchatTextColor(brandingNewDos.getBotMessage().getFontColor());
