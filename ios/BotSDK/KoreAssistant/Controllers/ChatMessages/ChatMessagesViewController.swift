@@ -383,7 +383,9 @@ class ChatMessagesViewController: UIViewController, BotMessagesViewDelegate, Com
         let dic = ["event_code": "BotClosed", "event_message": "Bot closed by the user"]
         let jsonString = Utilities.stringFromJSONObject(object: dic)
         NotificationCenter.default.post(name: Notification.Name(CallbacksNotification), object: jsonString)
-        
+        if !isCallChatHistory{
+            showWelcomeMsg = true
+        }
         botClosed()
     }
     
@@ -2324,7 +2326,7 @@ extension ChatMessagesViewController {
     }
     
     func tableviewScrollDidEnd(){
-        if isTableViewDrag{
+        if isCallChatHistory{
             fetchMessages()
         }
     }
@@ -2686,7 +2688,7 @@ extension ChatMessagesViewController{
         chatMaskview.isHidden = true
         chatHistoryV.isHidden = true
         chatHistoryHeightConstraint.constant = 5.0
-        if showWelcomeMsg == "Yes"{
+        if showWelcomeMsg == true{
             NotificationCenter.default.post(name: Notification.Name("StartTyping"), object: nil)
         }
         

@@ -64,7 +64,7 @@ var mediumCustomFont = "HelveticaNeue-Medium"
 var boldCustomFont = "HelveticaNeue-Bold"
 var semiBoldCustomFont = "HelveticaNeue-Semibold"
 var italicCustomFont =  "HelveticaNeue-Italic"
-var isTableViewDrag = false
+var isCallChatHistory = false
 
 var uniqueUserId: String?
 var userInfoUserId: String?
@@ -80,7 +80,7 @@ var history = true
 var lastMsgreceivedTime: Date?
 var welcomeMsgRemoveCount = 0
 var shareAndCopyStr: String?
-public var showWelcomeMsg = "Yes"
+public var showWelcomeMsg = true
 var historyLimit = 0
 
 public var authorizationToken: String?

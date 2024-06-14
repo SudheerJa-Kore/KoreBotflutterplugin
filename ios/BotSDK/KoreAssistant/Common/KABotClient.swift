@@ -87,7 +87,7 @@ open class KABotClient: NSObject {
         }
         
         var limit = 0
-        if showWelcomeMsg == "Yes"{
+        if showWelcomeMsg == true{
             historyLimit = 0
             limit = 1
         }else{
@@ -444,8 +444,8 @@ open class KABotClient: NSObject {
             messageIdIndex = messageIdIndex + 1
             message.messageIdIndex = NSNumber(value: messageIdIndex)
             historyLimit += 1
-            if showWelcomeMsg == "Yes"{
-                showWelcomeMsg = "No"
+            if showWelcomeMsg == true{
+                showWelcomeMsg = false
             }
         }
         
@@ -853,7 +853,7 @@ open class KABotClient: NSObject {
                     isErrorType = "Grant Call"
                     self?.botClient.connectWithJwToken(jwToken, intermediary: { [weak self] (client) in
                         self?.fetchMessages(completion: { (reconnects) in
-                            if showWelcomeMsg == "Yes"{
+                            if showWelcomeMsg == true{
                                 self?.botClient.connect(isReconnect: reconnects)
                             }else{
                                 self?.botClient.connect(isReconnect: true)
@@ -1004,10 +1004,8 @@ open class KABotClient: NSObject {
                 botHistoryIcon = responseObject["icon"] as? String
                 print("History messges \(messages.count) \(messages)")
                 let reverse: Array<[String: Any]> = messages.reversed()
-                if showWelcomeMsg != "Yes"{
+                if showWelcomeMsg != true{
                     self?.insertOrUpdateHistoryMessages(reverse)
-                }else{
-                    
                 }
             }
             self?.historyRequestInProgress = false

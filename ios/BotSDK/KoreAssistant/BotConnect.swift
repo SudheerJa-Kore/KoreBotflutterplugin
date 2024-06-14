@@ -34,7 +34,7 @@ public class BotConnect: NSObject {
     }
     
     @objc
-    public func initialize(_ clientId: String, clientSecret: String, botId: String, chatBotName: String, identity: String, isAnonymous: Bool, JWTServerUrl: String, BOTServerUrl: String, isHistoryApi: Bool){
+    public func initialize(_ clientId: String, clientSecret: String, botId: String, chatBotName: String, identity: String, isAnonymous: Bool, JWTServerUrl: String, BOTServerUrl: String, isCallHistory: Bool){
         
         SDKConfiguration.botConfig.clientId = clientId as String
         SDKConfiguration.botConfig.clientSecret = clientSecret as String
@@ -46,7 +46,7 @@ public class BotConnect: NSObject {
         SDKConfiguration.serverConfig.BOT_SERVER = BOTServerUrl as String
         SDKConfiguration.serverConfig.Branding_SERVER = String(format: "\(BOTServerUrl)/")
         SDKConfiguration.botConfig.tenantId = "620415a603ee27d50d2a47fa"
-        isTableViewDrag = isHistoryApi
+        isCallChatHistory = isCallHistory
     }
     
     @objc public func show(){

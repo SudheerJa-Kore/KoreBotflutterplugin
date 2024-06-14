@@ -46,8 +46,11 @@ import korebotplugin
                 guard let botServerUrl = configDetails?["server_url"] as? String else{
                     return
                  }
+                guard let isCallHistory = configDetails?["callHistory"] as? Bool else{
+                    return
+                 }
                 //Set Korebot Config
-                self.setBotConfig(clientId: clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity, JWT_SERVER: jwtServerUrl, BOT_SERVER: botServerUrl)
+                self.setBotConfig(clientId: clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity, JWT_SERVER: jwtServerUrl, BOT_SERVER: botServerUrl, isCallHistory: isCallHistory)
                 
                 // Show the Bot Window by calling the below method call
                 self.showBotWindow()
@@ -64,7 +67,7 @@ import korebotplugin
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func setBotConfig(clientId:String, clientSecret:String, botId:String, chatBotName:String, identity:String, JWT_SERVER:String, BOT_SERVER:String){
+    func setBotConfig(clientId:String, clientSecret:String, botId:String, chatBotName:String, identity:String, JWT_SERVER:String, BOT_SERVER:String, isCallHistory: Bool){
         
         let clientId = clientId; // Copy this value from Bot Builder SDK Settings ex. cs-5250bdc9-6bfe-5ece-92c9-ab54aa2d4285
         
@@ -98,7 +101,7 @@ import korebotplugin
 //        
 //        let BOT_SERVER = "https://bots.kore.ai";
         
-        botConnect.initialize(clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity, isAnonymous: isAnonymous, JWTServerUrl: JWT_SERVER, BOTServerUrl: BOT_SERVER, isHistoryApi: false);
+        botConnect.initialize(clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity, isAnonymous: isAnonymous, JWTServerUrl: JWT_SERVER, BOTServerUrl: BOT_SERVER, isCallHistory: isCallHistory);
     }
     
     func showBotWindow(){
