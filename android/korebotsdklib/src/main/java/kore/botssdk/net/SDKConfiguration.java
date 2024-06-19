@@ -68,7 +68,7 @@ public class SDKConfiguration {
             SERVER_URL = serverUrl;
         }
 
-        static String KORE_BOT_SERVER_URL = "https://bots.kore.ai/";//https://qa-bots.kore.ai";
+        public static String KORE_BOT_SERVER_URL = "https://bots.kore.ai/";//https://qa-bots.kore.ai";
         public static final String TTS_WS_URL = "wss://speech.kore.ai/tts/ws";
         public static final boolean IS_ANONYMOUS_USER = false;
         public static String SERVER_URL = "https://bots.kore.ai/"; // "https://demo.kore.net";

@@ -56,14 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
   final myController = TextEditingController();
 
   var botConfig = {
-    "clientId": "cs-1e845b00-81ad-5757-a1e7-d0f6fea227e9",
-    "clientSecret": "5OcBSQtH/k6Q/S6A3bseYfOee02YjjLLTNoT1qZDBso=",
-    "botId": "st-b9889c46-218c-58f7-838f-73ae9203488c",
+    "clientId": "cs-47e5f4e6-0621-563d-a3fb-2d1f3ab94750",
+    "clientSecret": "TvctzsjB/iewjdddKi2Ber4PPrYr0LoTi1WUasiMceM=",
+    "botId": "st-953e931b-1fe5-5bcc-9bb7-1b9bd4226947",
     "chatBotName": "SDKBot",
     "identity": "rajasekhar.balla@kore.com",
     "jwt_server_url":
         "https://mk2r2rmj21.execute-api.us-east-1.amazonaws.com/dev/",
-    "server_url": "https://bots.kore.ai",
+    "server_url": "https://platform.kore.ai",
     "callHistory": false
   };
 

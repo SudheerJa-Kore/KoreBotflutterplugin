@@ -64,7 +64,7 @@ public interface RestAPI {
     Call<RestResponse.RTMUrl> getRtmUrl(@Header("Authorization") String token, @Body HashMap<String, Object> optParameterBotInfo, @Query("isReconnect") boolean isReconnect);
 
 //    Get search results
-    @GET("api/public/stream/{botId}/advancedSearch")
+    @POST("api/public/stream/{botId}/advancedSearch")
     Call<ResponseBody> getAdvancedSearch(@Path("botId") String botId, @Header("auth") String token, @Body HashMap<String, Object> jsonObject);
 
     //Subscribe to Push notification

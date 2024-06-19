@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -53,6 +54,7 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
     MethodChannel channel;
     Context context;
     private final Gson gson = new Gson();
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "kore.botsdk/chatbot");
@@ -93,13 +95,12 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
             SDKConfiguration.Client.history_call = Boolean.TRUE.equals(call.argument("callHistory"));
 
             SDKConfiguration.Server.SERVER_URL = call.argument("server_url");
+            SDKConfiguration.Server.KORE_BOT_SERVER_URL = call.argument("server_url");
             SDKConfiguration.setJwtServerUrl(call.argument("jwt_server_url"));
 
             //For jwtToken
             makeStsJwtCallWithConfig();
-        }
-        else if(call.method.equals("getSearchResults"))
-        {
+        } else if (call.method.equals("getSearchResults")) {
             getSearchResults(call.argument("searchQuery"));
         }
     }
@@ -133,7 +134,17 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
             public void onResponse(@NonNull retrofit2.Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
 
                 if (response.isSuccessful()) {
-                    channel.invokeMethod("Callbacks", response.body());
+                    try {
+                        if (response.body() != null)
+                            channel.invokeMethod("Callbacks", new Gson().toJson(response.body().string()));
+                        else
+                            channel.invokeMethod("Callbacks", "No response received.");
+                    } catch (IOException e) {
+                        channel.invokeMethod("Callbacks", "No response received.");
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    channel.invokeMethod("Callbacks", "No response received.");
                 }
             }
 
@@ -164,6 +175,7 @@ public class KorebotpluginPlugin implements FlutterPlugin, MethodCallHandler {
 
         return hsh;
     }
+
     private HashMap<String, Object> getSearchObject(String query) {
         HashMap<String, Object> hsh = new HashMap<>();
         hsh.put("query", query);
