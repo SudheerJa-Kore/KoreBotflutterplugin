@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         "jwt_server_url":
             "https://mk2r2rmj21.execute-api.us-east-1.amazonaws.com/dev/",
         "server_url": "https://bots.kore.ai",
-        "callHistory": true
+        "callHistory": false
       });
     } on PlatformException {}
   }
