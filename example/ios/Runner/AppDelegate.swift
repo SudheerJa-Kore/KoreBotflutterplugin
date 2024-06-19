@@ -59,6 +59,49 @@ import korebotplugin
                 NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "CallbacksNotification"), object: nil)
                 
                 NotificationCenter.default.addObserver(self, selector: #selector(self.callbacksMethod), name: NSNotification.Name(rawValue: "CallbacksNotification"), object: nil)
+            }else if call.method == "initialize"{
+                guard let botConfig = call.arguments else {
+                  return
+                }
+                let configDetails = botConfig as? [String: Any]
+                guard let clientId = configDetails?["clientId"] as? String else{
+                   return
+                }
+                guard let clientSecret = configDetails?["clientSecret"] as? String else{
+                   return
+                }
+                guard let botId = configDetails?["botId"] as? String else{
+                   return
+                }
+                guard let chatBotName = configDetails?["chatBotName"] as? String else{
+                   return
+                }
+                guard let identity = configDetails?["identity"] as? String else{
+                   return
+                }
+                guard let jwtServerUrl = configDetails?["jwt_server_url"] as? String else{
+                    return
+                 }
+                guard let botServerUrl = configDetails?["server_url"] as? String else{
+                    return
+                 }
+                guard let isCallHistory = configDetails?["callHistory"] as? Bool else{
+                    return
+                 }
+                //Set Korebot Config
+                self.setBotConfig(clientId: clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity, JWT_SERVER: jwtServerUrl, BOT_SERVER: botServerUrl, isCallHistory: isCallHistory)
+                
+                self.searchConnect(clientId: clientId, clientSecret: clientSecret, botId: botId, chatBotName: chatBotName, identity: identity)
+                
+            }else if call.method == "getSearchResults"{
+                guard let message = call.arguments else {
+                return
+                }
+                let messageDetails = message as? [String: Any]
+                guard let serachTxt = messageDetails?["searchQuery"] as? String else{
+                   return
+                }
+                self.sendQuery(text: serachTxt)
             }
             
         })
@@ -79,7 +122,7 @@ import korebotplugin
         
         let identity = identity;// This should represent the subject for JWT token. This can be an email or phone number, in case of known user, and in case of anonymous user, this can be a randomly generated unique id.
         
-        let isAnonymous = true; // This should be either true (in case of known-user) or false (in-case of anonymous user).
+        let isAnonymous = false; // This should be either true (in case of known-user) or false (in-case of anonymous user).
         
         let JWT_SERVER = JWT_SERVER; // Replace it with the actual JWT server URL, if required. Refer to developer documentation for instructions on hosting JWT Server.
         
@@ -128,4 +171,41 @@ import korebotplugin
         }
         return nil
     }
+    
+    func convertJsonObjectFromString(object: Any) -> String? {
+        var jsonString: String? = nil
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
+            jsonString = String(data: jsonData, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+        } catch {
+            print(error.localizedDescription)
+        }
+        return jsonString
+    }
+    
+    func searchConnect(clientId:String, clientSecret:String, botId:String, chatBotName:String, identity:String){
+        let clientId: String = clientId
+        let clientSecret: String = clientSecret
+        let isAnonymous: Bool = false
+        let identity =  identity
+        
+        botConnect.getJwTokenWithClientId(clientId, clientSecret: clientSecret, identity: identity, isAnonymous: isAnonymous, success: {  (jwToken) in
+            //print(jwToken)
+        }, failure: { (error) in
+            print(error)
+        })
+    }
+    
+    func sendQuery(text:String){
+        self.botConnect.getSearchResults(text) { resultDic in
+           // print(resultDic)
+            if self.flutterMethodChannel != nil{
+                //let jsonStr = self.convertJsonObjectFromString(object: resultDic)
+                self.flutterMethodChannel?.invokeMethod("Callbacks", arguments: resultDic)
+            }
+        } failure: { (error) in
+            print(error)
+        }
+    }
+    
 }

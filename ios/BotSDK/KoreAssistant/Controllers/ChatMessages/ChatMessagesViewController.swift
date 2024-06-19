@@ -2568,58 +2568,12 @@ extension ChatMessagesViewController{
                       let activeTheme = try? jsonDecoder.decode(ActiveTheme.self, from: jsonData) else {
                     return
                 }
+            if activeTheme.widgetHeader?.bordercolor != nil{
+                self?.brandingMapping(activeTheme: activeTheme, client: client, thread: thread)
+            }else{
+                self?.getOfflineBrandingData(client: client, thread: thread)
+            }
             
-            let widgetBorderColor = activeTheme.widgetHeader?.bordercolor
-            let widgetTextColor = activeTheme.widgetHeader?.fontcolor
-            let buttonInactiveBgColor = activeTheme.buttons?.onHoverButtonColor
-            let buttonInactiveTextColor = activeTheme.buttons?.onHoverFontColor
-            let buttonActiveBgColor = activeTheme.buttons?.defaultButtonColor
-            let buttonActiveTextColor = activeTheme.buttons?.defaultFontColor
-            let widgetBgColor = activeTheme.widgetHeader?.backGroundColor
-            let userchatBgColor = activeTheme.userMessage?.bubbleColor
-            let userchatTextColor = activeTheme.userMessage?.fontcolor
-            let theme = ""
-            let botName = SDKConfiguration.botConfig.chatBotName
-            let botchatBgColor = activeTheme.botMessage?.bubbleColor
-            let botchatTextColor = activeTheme.botMessage?.fontcolor
-             
-            let widgetDividerColor = activeTheme.widgetFooter?.placeHolder
-            let bankLogo = ""
-             var widgetBgImage = ""
-             if let userWidgetBgImage =  activeTheme.widgetBody?.useBackgroundImage, userWidgetBgImage == true{
-                 widgetBgImage = activeTheme.widgetBody?.backGroundImage ?? ""
-             }
-            let widgetBodyColor = activeTheme.widgetBody?.backGroundColor
-            let widgetFooterColor = activeTheme.widgetFooter?.backGroundColor
-            let widgetHeaderColor = activeTheme.widgetHeader?.backGroundColor
-            
-            let widgetFooterTextColor = activeTheme.widgetFooter?.fontcolor
-            let widgetFooterPlaceholderColor = activeTheme.widgetFooter?.placeHolder
-            
-            let brandingShared = BrandingSingleton.shared
-            brandingShared.widgetBorderColor = widgetBorderColor
-            brandingShared.widgetTextColor = widgetTextColor
-            brandingShared.buttonInactiveBgColor = buttonInactiveBgColor
-            brandingShared.buttonInactiveTextColor = buttonInactiveTextColor
-            brandingShared.widgetBgColor = widgetBgColor
-            brandingShared.botchatTextColor = botchatTextColor
-            brandingShared.buttonActiveBgColor = buttonActiveBgColor
-            brandingShared.buttonActiveTextColor = buttonActiveTextColor
-            brandingShared.userchatBgColor = userchatBgColor
-            brandingShared.theme = theme
-            brandingShared.botName = botName
-            brandingShared.botchatBgColor = botchatBgColor
-            brandingShared.userchatTextColor = userchatTextColor
-            brandingShared.widgetDividerColor = widgetDividerColor
-            brandingShared.bankLogo = bankLogo
-            brandingShared.widgetBgImage = widgetBgImage
-            brandingShared.widgetBodyColor = widgetBodyColor
-            brandingShared.widgetFooterColor = widgetFooterColor
-            brandingShared.widgetHeaderColor = widgetHeaderColor
-            brandingShared.widgetFooterTextColor = widgetFooterTextColor
-            brandingShared.widgetFooterPlaceholderColor = widgetFooterPlaceholderColor
-            
-            self?.sucessMethod(client: client, thread: thread)
         }, failure: { (error) in
             print(error.localizedDescription)
             self.getOfflineBrandingData(client: client, thread: thread)
@@ -2632,44 +2586,68 @@ extension ChatMessagesViewController{
         let brandingShared = BrandingSingleton.shared
         let jsonStr = brandingShared.brandingjsonStr
         let jsonResult = Utilities.jsonObjectFromString(jsonString: jsonStr)
-        if let brandingArray = jsonResult as? NSArray {
-            if brandingArray.count > 0{
-                brandingShared.hamburgerOptions = (((brandingArray as AnyObject).object(at: 0) as AnyObject).object(forKey: "hamburgermenu") as Any) as? Dictionary<String, Any>
-            }
-            if brandingArray.count>1{
-                let brandingDic = (((brandingArray as AnyObject).object(at: 1) as AnyObject).object(forKey: "brandingwidgetdesktop") as Any)
-                let jsonDecoder = JSONDecoder()
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: brandingDic as Any , options: .prettyPrinted),
-                      let brandingValues = try? jsonDecoder.decode(BrandingModel.self, from: jsonData) else {
-                    return
-                }
-                
-                brandingShared.brandingInfoModel = brandingValues
-                brandingShared.widgetBorderColor = brandingShared.brandingInfoModel?.widgetBorderColor
-                brandingShared.widgetTextColor = brandingShared.brandingInfoModel?.widgetTextColor
-                brandingShared.buttonInactiveBgColor = brandingShared.brandingInfoModel?.buttonInactiveBgColor
-                brandingShared.buttonInactiveTextColor = brandingShared.brandingInfoModel?.buttonInactiveTextColor
-                brandingShared.widgetBgColor = brandingShared.brandingInfoModel?.widgetBgColor
-                brandingShared.botchatTextColor = brandingShared.brandingInfoModel?.botchatTextColor
-                brandingShared.buttonActiveBgColor = brandingShared.brandingInfoModel?.buttonActiveBgColor
-                brandingShared.buttonActiveTextColor = brandingShared.brandingInfoModel?.buttonActiveTextColor
-                brandingShared.userchatBgColor = brandingShared.brandingInfoModel?.userchatBgColor
-                brandingShared.theme = brandingShared.brandingInfoModel?.theme
-                brandingShared.botName = SDKConfiguration.botConfig.chatBotName
-                brandingShared.botchatBgColor = brandingShared.brandingInfoModel?.botchatBgColor
-                brandingShared.userchatTextColor = brandingShared.brandingInfoModel?.userchatTextColor
-                brandingShared.widgetDividerColor = brandingShared.brandingInfoModel?.widgetDividerColor
-                brandingShared.bankLogo = brandingShared.brandingInfoModel?.bankLogo
-                brandingShared.widgetBgImage = brandingShared.brandingInfoModel?.widgetBgImage
-                brandingShared.widgetBodyColor = brandingShared.brandingInfoModel?.widgetBodyColor
-                brandingShared.widgetFooterColor = brandingShared.brandingInfoModel?.widgetFooterColor
-                brandingShared.widgetHeaderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
-                brandingShared.widgetFooterTextColor = brandingShared.brandingInfoModel?.widgetFooterColor
-                brandingShared.widgetFooterPlaceholderColor = brandingShared.brandingInfoModel?.widgetHeaderColor
-                self.sucessMethod(client: client, thread: thread)
+
+            let jsonDecoder = JSONDecoder()
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonResult as Any , options: .prettyPrinted),
+                  let activeTheme = try? jsonDecoder.decode(ActiveTheme.self, from: jsonData) else {
+                return
             }
             
-        }
+        brandingMapping(activeTheme: activeTheme, client: client, thread: thread)
+    }
+    
+    func brandingMapping(activeTheme: ActiveTheme, client: BotClient?, thread: KREThread?){
+        let widgetBorderColor = activeTheme.widgetHeader?.bordercolor
+        let widgetTextColor = activeTheme.widgetHeader?.fontcolor
+        let buttonInactiveBgColor = activeTheme.buttons?.onHoverButtonColor
+        let buttonInactiveTextColor = activeTheme.buttons?.onHoverFontColor
+        let buttonActiveBgColor = activeTheme.buttons?.defaultButtonColor
+        let buttonActiveTextColor = activeTheme.buttons?.defaultFontColor
+        let widgetBgColor = activeTheme.widgetHeader?.backGroundColor
+        let userchatBgColor = activeTheme.userMessage?.bubbleColor
+        let userchatTextColor = activeTheme.userMessage?.fontcolor
+        let theme = ""
+        let botName = SDKConfiguration.botConfig.chatBotName
+        let botchatBgColor = activeTheme.botMessage?.bubbleColor
+        let botchatTextColor = activeTheme.botMessage?.fontcolor
+         
+        let widgetDividerColor = activeTheme.widgetFooter?.placeHolder
+        let bankLogo = ""
+         var widgetBgImage = ""
+         if let userWidgetBgImage =  activeTheme.widgetBody?.useBackgroundImage, userWidgetBgImage == true{
+             widgetBgImage = activeTheme.widgetBody?.backGroundImage ?? ""
+         }
+        let widgetBodyColor = activeTheme.widgetBody?.backGroundColor
+        let widgetFooterColor = activeTheme.widgetFooter?.backGroundColor
+        let widgetHeaderColor = activeTheme.widgetHeader?.backGroundColor
+        
+        let widgetFooterTextColor = activeTheme.widgetFooter?.fontcolor
+        let widgetFooterPlaceholderColor = activeTheme.widgetFooter?.placeHolder
+        
+        
+        brandingShared.widgetBorderColor = widgetBorderColor
+        brandingShared.widgetTextColor = widgetTextColor
+        brandingShared.buttonInactiveBgColor = buttonInactiveBgColor
+        brandingShared.buttonInactiveTextColor = buttonInactiveTextColor
+        brandingShared.widgetBgColor = widgetBgColor
+        brandingShared.botchatTextColor = botchatTextColor
+        brandingShared.buttonActiveBgColor = buttonActiveBgColor
+        brandingShared.buttonActiveTextColor = buttonActiveTextColor
+        brandingShared.userchatBgColor = userchatBgColor
+        brandingShared.theme = theme
+        brandingShared.botName = botName
+        brandingShared.botchatBgColor = botchatBgColor
+        brandingShared.userchatTextColor = userchatTextColor
+        brandingShared.widgetDividerColor = widgetDividerColor
+        brandingShared.bankLogo = bankLogo
+        brandingShared.widgetBgImage = widgetBgImage
+        brandingShared.widgetBodyColor = widgetBodyColor
+        brandingShared.widgetFooterColor = widgetFooterColor
+        brandingShared.widgetHeaderColor = widgetHeaderColor
+        brandingShared.widgetFooterTextColor = widgetFooterTextColor
+        brandingShared.widgetFooterPlaceholderColor = widgetFooterPlaceholderColor
+        
+        self.sucessMethod(client: client, thread: thread)
     }
     
     // MARK: Sucess Chat Window
