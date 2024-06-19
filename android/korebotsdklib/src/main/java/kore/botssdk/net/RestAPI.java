@@ -3,13 +3,11 @@ package kore.botssdk.net;
 
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import kore.botssdk.models.BotActiveThemeModel;
 import kore.botssdk.models.BotHistory;
 import kore.botssdk.models.BotMetaModel;
-import kore.botssdk.models.BrandingNewModel;
 import kore.botssdk.models.JWTTokenResponse;
 import kore.botssdk.models.KoreLoginResponse;
 import kore.botssdk.models.PdfResponseModel;
@@ -30,6 +28,7 @@ import retrofit2.http.Url;
 /**
  * Copyright (c) 2014 Kore Inc. All rights reserved.
  */
+@SuppressWarnings("UnKnownNullness")
 public interface RestAPI {
 
     String URL_VERSION = "/1.1";
@@ -57,10 +56,6 @@ public interface RestAPI {
     @POST("/api/oAuth/token/jwtgrant")
     Call<RestResponse.BotAuthorization> jwtGrant(@Body HashMap<String,Object> jwtToken);
 
-//    //Getting jwt grant Anonymous
-//    @POST("/api/oAuth/token/jwtgrant/anonymous")
-//    RestResponse.BotAuthorization jwtGrantAnonymous(@Body HashMap<String,Object> jwtToken);
-
     //Getting rtm URL
     @POST("/api/rtm/start")
     Call<RestResponse.RTMUrl> getRtmUrl(@Header("Authorization") String token, @Body HashMap<String, Object> optParameterBotInfo);
@@ -68,9 +63,9 @@ public interface RestAPI {
     @POST("/api/rtm/start")
     Call<RestResponse.RTMUrl> getRtmUrl(@Header("Authorization") String token, @Body HashMap<String, Object> optParameterBotInfo, @Query("isReconnect") boolean isReconnect);
 
-    //Get Market Streams
-//    @GET("/api/users/{userId}/builder/streams")
-//    Call<MarketStreamList> getMarketStreams(@Path("userId") String userId, @Header("Authorization") String token);
+//    Get search results
+    @GET("api/public/stream/{botId}/advancedSearch")
+    Call<ResponseBody> getAdvancedSearch(@Path("botId") String botId, @Header("auth") String token, @Body HashMap<String, Object> jsonObject);
 
     //Subscribe to Push notification
     @POST("/api/users/{userId}/sdknotifications/subscribe")

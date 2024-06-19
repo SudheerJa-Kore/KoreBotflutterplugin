@@ -46,22 +46,27 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() {
+    return _MyHomePageState();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = MethodChannel('kore.botsdk/chatbot');
+  final myController = TextEditingController();
+
   var botConfig = {
-        "clientId": "cs-1e845b00-81ad-5757-a1e7-d0f6fea227e9",
-        "clientSecret": "5OcBSQtH/k6Q/S6A3bseYfOee02YjjLLTNoT1qZDBso=",
-        "botId": "st-b9889c46-218c-58f7-838f-73ae9203488c",
-        "chatBotName": "SDKBot",
-        "identity": "rajasekhar.balla@kore.com",
-        "jwt_server_url":
-            "https://mk2r2rmj21.execute-api.us-east-1.amazonaws.com/dev/",
-        "server_url": "https://bots.kore.ai",
-        "callHistory": false
-      };
+    "clientId": "cs-1e845b00-81ad-5757-a1e7-d0f6fea227e9",
+    "clientSecret": "5OcBSQtH/k6Q/S6A3bseYfOee02YjjLLTNoT1qZDBso=",
+    "botId": "st-b9889c46-218c-58f7-838f-73ae9203488c",
+    "chatBotName": "SDKBot",
+    "identity": "rajasekhar.balla@kore.com",
+    "jwt_server_url":
+        "https://mk2r2rmj21.execute-api.us-east-1.amazonaws.com/dev/",
+    "server_url": "https://bots.kore.ai",
+    "callHistory": false
+  };
+
   Future<void> _callNativemethod() async {
     platform.setMethodCallHandler((handler) async {
       if (handler.method == 'Callbacks') {
@@ -71,20 +76,70 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     try {
-      final String config = await platform.invokeMethod('getChatWindow', botConfig);
+      final String config =
+          await platform.invokeMethod('getChatWindow', botConfig);
+    } on PlatformException catch (e) {}
+  }
+
+  Future<void> botInitialize() async {
+    platform.setMethodCallHandler((handler) async {
+      if (handler.method == 'Callbacks') {
+        // Do your logic here.
+        debugPrint("Event from native ${handler.arguments}");
+      }
+    });
+
+    try {
+      final String config =
+          await platform.invokeMethod('initialize', botConfig);
+    } on PlatformException catch (e) {}
+  }
+
+  Future<void> getSearchResults(searchQuery) async {
+    platform.setMethodCallHandler((handler) async {
+      if (handler.method == 'Callbacks') {
+        // Do your logic here.
+        debugPrint("Event from native ${handler.arguments}");
+      }
+    });
+
+    try {
+      final String config = await platform
+          .invokeMethod('getSearchResults', {"searchQuery": searchQuery});
     } on PlatformException catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
+    botInitialize();
+
     return Material(
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: _callNativemethod,
-              child: const Text('Bot Connect'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              child: ElevatedButton(
+                onPressed: _callNativemethod,
+                child: const Text('Bot Connect'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextFormField(
+                controller: myController,
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter your message',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: ElevatedButton(
+                  onPressed: () => {getSearchResults(myController.text)},
+                  child: const Text('Search Query')),
             ),
           ],
         ),

@@ -9,9 +9,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
-/**
- * Created by Ramachandra Pradeep on 15-Mar-17.
- */
+@SuppressWarnings("UnKnownNullness")
 public interface BotJWTRestAPI {
     String URL_VERSION = "/1.1";
     @Headers({
