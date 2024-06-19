@@ -695,25 +695,25 @@ public class BotChatActivity extends BotAppCompactActivity implements ComposeFoo
             botActiveThemeModel = gson.fromJson(reader, BotActiveThemeModel.class);
             if (botActiveThemeModel != null) {
                 BrandingModel brandingModel = new BrandingModel();
-                brandingModel.setBotchatBgColor(brandingNewDos.getBotMessage().getBubbleColor());
-                brandingModel.setBotchatTextColor(brandingNewDos.getBotMessage().getFontColor());
-                brandingModel.setUserchatBgColor(brandingNewDos.getUserMessage().getBubbleColor());
-                brandingModel.setUserchatTextColor(brandingNewDos.getUserMessage().getFontColor());
+                brandingModel.setBotchatBgColor(botActiveThemeModel.getBotMessage().getBubbleColor());
+                brandingModel.setBotchatTextColor(botActiveThemeModel.getBotMessage().getFontColor());
+                brandingModel.setUserchatBgColor(botActiveThemeModel.getUserMessage().getBubbleColor());
+                brandingModel.setUserchatTextColor(botActiveThemeModel.getUserMessage().getFontColor());
 
-                brandingModel.setButtonActiveBgColor(brandingNewDos.getButtons().getDefaultButtonColor());
-                brandingModel.setButtonActiveTextColor(brandingNewDos.getButtons().getDefaultFontColor());
+                brandingModel.setButtonActiveBgColor(botActiveThemeModel.getButtons().getDefaultButtonColor());
+                brandingModel.setButtonActiveTextColor(botActiveThemeModel.getButtons().getDefaultFontColor());
 
-                brandingModel.setButtonInactiveBgColor(brandingNewDos.getButtons().getOnHoverButtonColor());
-                brandingModel.setButtonInactiveTextColor(brandingNewDos.getButtons().getOnHoverFontColor());
-                brandingModel.setButtonBorderColor(brandingNewDos.getButtons().getBorderColor());
+                brandingModel.setButtonInactiveBgColor(botActiveThemeModel.getButtons().getOnHoverButtonColor());
+                brandingModel.setButtonInactiveTextColor(botActiveThemeModel.getButtons().getOnHoverFontColor());
+                brandingModel.setButtonBorderColor(botActiveThemeModel.getButtons().getBorderColor());
 
                 brandingModel.setBotName(SDKConfiguration.Client.bot_name);
-                brandingModel.setWidgetBodyColor(brandingNewDos.getWidgetBody().getBackgroundColor());
-                brandingModel.setWidgetTextColor(brandingNewDos.getWidgetHeader().getFontColor());
-                brandingModel.setWidgetHeaderColor(brandingNewDos.getWidgetHeader().getBackgroundColor());
-                brandingModel.setWidgetFooterColor(brandingNewDos.getWidgetFooter().getBackgroundColor());
-                brandingModel.setWidgetFooterBorderColor(brandingNewDos.getWidgetFooter().getBorderColor());
-                brandingModel.setWidgetFooterHintColor(brandingNewDos.getWidgetFooter().getPlaceHolder());
+                brandingModel.setWidgetBodyColor(botActiveThemeModel.getWidgetBody().getBackgroundColor());
+                brandingModel.setWidgetTextColor(botActiveThemeModel.getWidgetHeader().getFontColor());
+                brandingModel.setWidgetHeaderColor(botActiveThemeModel.getWidgetHeader().getBackgroundColor());
+                brandingModel.setWidgetFooterColor(botActiveThemeModel.getWidgetFooter().getBackgroundColor());
+                brandingModel.setWidgetFooterBorderColor(botActiveThemeModel.getWidgetFooter().getBorderColor());
+                brandingModel.setWidgetFooterHintColor(botActiveThemeModel.getWidgetFooter().getPlaceHolder());
                 return brandingModel;
             }
         } catch (Exception e) {
@@ -1093,27 +1093,34 @@ public class BotChatActivity extends BotAppCompactActivity implements ComposeFoo
                     brandingNewDos = response.body();
 
                     if (brandingNewDos != null) {
-                        BrandingModel brandingModel = new BrandingModel();
-                        brandingModel.setBotchatBgColor(brandingNewDos.getBotMessage().getBubbleColor());
-                        brandingModel.setBotchatTextColor(brandingNewDos.getBotMessage().getFontColor());
-                        brandingModel.setUserchatBgColor(brandingNewDos.getUserMessage().getBubbleColor());
-                        brandingModel.setUserchatTextColor(brandingNewDos.getUserMessage().getFontColor());
+                        try {
+                            BrandingModel brandingModel = new BrandingModel();
+                            brandingModel.setBotchatBgColor(brandingNewDos.getBotMessage().getBubbleColor());
+                            brandingModel.setBotchatTextColor(brandingNewDos.getBotMessage().getFontColor());
+                            brandingModel.setUserchatBgColor(brandingNewDos.getUserMessage().getBubbleColor());
+                            brandingModel.setUserchatTextColor(brandingNewDos.getUserMessage().getFontColor());
 
-                        brandingModel.setButtonActiveBgColor(brandingNewDos.getButtons().getDefaultButtonColor());
-                        brandingModel.setButtonActiveTextColor(brandingNewDos.getButtons().getDefaultFontColor());
+                            brandingModel.setButtonActiveBgColor(brandingNewDos.getButtons().getDefaultButtonColor());
+                            brandingModel.setButtonActiveTextColor(brandingNewDos.getButtons().getDefaultFontColor());
 
-                        brandingModel.setButtonInactiveBgColor(brandingNewDos.getButtons().getOnHoverButtonColor());
-                        brandingModel.setButtonInactiveTextColor(brandingNewDos.getButtons().getOnHoverFontColor());
-                        brandingModel.setButtonBorderColor(brandingNewDos.getButtons().getBorderColor());
+                            brandingModel.setButtonInactiveBgColor(brandingNewDos.getButtons().getOnHoverButtonColor());
+                            brandingModel.setButtonInactiveTextColor(brandingNewDos.getButtons().getOnHoverFontColor());
+                            brandingModel.setButtonBorderColor(brandingNewDos.getButtons().getBorderColor());
 
-                        brandingModel.setBotName(SDKConfiguration.Client.bot_name);
-                        brandingModel.setWidgetBodyColor(brandingNewDos.getWidgetBody().getBackgroundColor());
-                        brandingModel.setWidgetTextColor(brandingNewDos.getWidgetHeader().getFontColor());
-                        brandingModel.setWidgetHeaderColor(brandingNewDos.getWidgetHeader().getBackgroundColor());
-                        brandingModel.setWidgetFooterColor(brandingNewDos.getWidgetFooter().getBackgroundColor());
-                        brandingModel.setWidgetFooterBorderColor(brandingNewDos.getWidgetFooter().getBorderColor());
-                        brandingModel.setWidgetFooterHintColor(brandingNewDos.getWidgetFooter().getPlaceHolder());
-                        onEvent(brandingModel);
+                            brandingModel.setBotName(SDKConfiguration.Client.bot_name);
+                            brandingModel.setWidgetBodyColor(brandingNewDos.getWidgetBody().getBackgroundColor());
+                            brandingModel.setWidgetTextColor(brandingNewDos.getWidgetHeader().getFontColor());
+                            brandingModel.setWidgetHeaderColor(brandingNewDos.getWidgetHeader().getBackgroundColor());
+                            brandingModel.setWidgetFooterColor(brandingNewDos.getWidgetFooter().getBackgroundColor());
+                            brandingModel.setWidgetFooterBorderColor(brandingNewDos.getWidgetFooter().getBorderColor());
+                            brandingModel.setWidgetFooterHintColor(brandingNewDos.getWidgetFooter().getPlaceHolder());
+                            onEvent(brandingModel);
+                        }
+                        catch (Exception e)
+                        {
+                            onEvent(getBrandingDataFromTxt());
+                        }
+
                     } else {
                         onEvent(getBrandingDataFromTxt());
                     }

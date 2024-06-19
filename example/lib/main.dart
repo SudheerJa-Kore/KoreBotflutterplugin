@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     "clientSecret": "TvctzsjB/iewjdddKi2Ber4PPrYr0LoTi1WUasiMceM=",
     "botId": "st-953e931b-1fe5-5bcc-9bb7-1b9bd4226947",
     "chatBotName": "SDKBot",
-    "identity": "rajasekhar.balla@kore.com",
+    "identity": "example@kore.com",
     "jwt_server_url":
         "https://mk2r2rmj21.execute-api.us-east-1.amazonaws.com/dev/",
     "server_url": "https://platform.kore.ai",
